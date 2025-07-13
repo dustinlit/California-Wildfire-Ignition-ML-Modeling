@@ -13,6 +13,12 @@ This code is an adaptation of code I was responsible for during a team capstone 
 
 **Disclaimer:** I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions.
 
+## Changes in Progress
+- Filtering interaction features for colinearity
+- Addition of `Fire History` engineered feature, adds a rolling average of previous 2 years fires per month. May help improve correlation.
+- Addition of `Days Without Rain` engineered feature, which will place more emphasis on extended droughts
+- General code cleanup and documentation
+   
 Example output:\
 \
 ![Southern California Wildfire Model Predictions](plots/Palisades_predictions.png)
