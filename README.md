@@ -9,7 +9,7 @@ Status: In Progress\
 Last Updated: July 2025
 
 ## Overview
-This code is an adaptation of code I was responsible for during a team capstone project at Arizona State University. The project is now a work in progress that explores the relationship between environmental and weather-related factors and wildfire severity in California. The goal is to predict a custom severity index `Wildfire Potential Destructive Power` — which incorporates structures damaged, structures destroyed, and fatalities.
+This code is an adaptation of code I was responsible for during a team capstone project at Arizona State University. The project is now a work in progress that explores the relationship between environmental and weather-related factors and wildfire severity in California. The goal is to predict a custom severity index `Wildfire Destructive Power Index` — which incorporates structures damaged, structures destroyed, and fatalities.
 
 **Disclaimer:** I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions.
 
@@ -45,7 +45,7 @@ Example output:\
 - Created rolling 7-day averages for environmental variables.
 - Engineered interaction features (e.g., Dryness, ETo_x_Vapor_Pressure).
 - Imputed missing values for stations and derived features.
-\
+
 ### Key Features Used:
 - **Environmental / Weather Variables**
   - `Avg Air Temp (F) 7 Day Avg` – Average air temperature over the past 7 days (°F); represents heat conditions.
@@ -68,7 +68,7 @@ Example output:\
 ## Class Balancing
 *Located in: notebooks/class_balancing.ipynb*
 
-**Target:** `WPDP` Wildlife Potential Destructive Power - categorized into Low, Moderate, High
+**Target:** `WDPI` Wildlife Destructive Power Index - categorized into Low, Moderate, High
 
 **Issues:** Moderate and High Damage wildfire events classes are underrepresented.
 
@@ -134,7 +134,7 @@ Class balancing significantly improved recall for minority classes. \
 - Expand main weather dataset and add land cover, topography, and WUI datasets.
 - Deeper geographical analysis incorporating slope, aspect, and vegetation
 - Try temporal or ensemble models.
-- Consult domain experts to validate assumptions and feature selection.
+- Consult domain experts to validate assumptions, feature selection, and additional indexes.
 
 ---
 ## Installation
