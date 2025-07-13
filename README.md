@@ -6,8 +6,8 @@ Technologies: Python, Pandas, Scikit-learn, XGBoost, GeoPandas, Matplotlib\
 Skills: `Data cleaning` `feature engineering` `supervised machine learning` `model evaluation` `class imbalance handling` \
 `spatial visualization` `exploratory data analysis` `reproducible workflow design` `results communication`\
 Status: In Progress\
-Last Updated: July 2025
-
+Last Updated: July 2025\
+[GITHUB Repository](https://github.com/dustinlit/California_Fire_Severity/tree/main)
 ## Overview
 This code is an adaptation of code I was responsible for during a team capstone project at Arizona State University. The project is now a work in progress that explores the relationship between environmental and weather-related factors and wildfire severity in California. The goal is to predict a custom severity index `Wildfire Destructive Power Index` — which incorporates structures damaged, structures destroyed, and fatalities.
 
