@@ -14,6 +14,8 @@ This code is an adaptation of code I was responsible for during a team capstone 
 **Disclaimer:** I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions.
 
 ## Changes in Progress
+- (currently) Restructuring damage index to represent dollar value with more detailed data from [CAL FIRE Damage Inspection (DINS) Data](https://data.ca.gov/dataset/cal-fire-damage-inspection-dins-data)
+- (currently) Expanding CIMIS weather data to span from 2018 to 2025
 - Filtering interaction features for colinearity
 - Addition of `Fire History` engineered feature, adds a rolling average of previous 2 years fires per month. May help improve correlation.
 - Addition of `Days Without Rain` engineered feature, which will place more emphasis on extended droughts
