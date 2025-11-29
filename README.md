@@ -7,7 +7,8 @@ Technologies: Python, Pandas, Scikit-learn, XGBoost, GeoPandas, Matplotlib\
 Skills: `Data cleaning` `feature engineering` `supervised machine learning` `model evaluation` `class imbalance handling` \
 `spatial visualization` `exploratory data analysis` `reproducible workflow design` `results communication`\
 Status: In Progress\
-Last Updated: November 2025
+Last Updated: November 2025\
+Repository: https://github.com/dustinlit/California_Fire_Severity
 
 ## Overview
 This project is a work in progress that explores the relationship between environmental and weather-related factors and wildfire severity in California. The goal is to predict a custom severity index `Wildfire Potential Destructive Power` — which incorporates structures damaged, structures destroyed, and fatalities.
