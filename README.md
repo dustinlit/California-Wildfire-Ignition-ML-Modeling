@@ -38,12 +38,14 @@ This project is a work in progress that explores the relationship between enviro
 - Test classification models using resampling techniques to handle class imbalance.
 - Create geospatial *interpolation visualizations* to illustrate regional risk patterns.
 - Explore second-degree feature interactions and correlation to improve model features.
+
 ---
+
 Example Output:
 
-<img src="data/maps/IDW_RF.jpg" width="600">
+<img src="data/maps/IDW_RF.jpg" width="500">
 
-![Southern California Wildfire Model Predictions](plots/Palisades_predictions.png)
+<img src="plots/Palisades_predictions.png" width="1000">
 
 ## Project Structure
 
@@ -170,7 +172,7 @@ Feature importance extracted for tree-based models.
 
 Example Output:
 
-<img src="plots/Interpolated.png" alt="Southern California Wildfire Model Predictions" width="500" style="display: block; margin-left: 0;" />
+<img src="plots/Interpolated.png" alt="Southern California Wildfire Model Predictions" width="400" style="display: block; margin-left: 0;" />
 
 ---
 
@@ -180,7 +182,7 @@ Example Output:
 All Models struggle with distinguishing **Moderate** from **High** severity classes.\
 Class balancing significantly improved recall for minority classes.
 
-<img src="plots/class_balance.png" alt="Model Results" width="800" style="display: block; margin-left: 0;" />
+<img src="plots/class_balance.png" alt="Model Results" width="350" style="display: block; margin-left: 0;" />
 
 ---
 
