@@ -3,15 +3,16 @@
 
 Author: Dustin Littlefield\
 Project Type: Data Science & GIS Portfolio\
-Technologies: Python, Pandas, Scikit-learn, XGBoost, GeoPandas, Matplotlib\
-Skills: `Data cleaning` `feature engineering` `supervised machine learning` `model evaluation` `class imbalance handling` \
+Technologies: ArcGIS, Python, Pandas, Scikit-learn, XGBoost, GeoPandas, Matplotlib\
+Skills: `Data cleaning` `feature engineering` `supervised machine learning` `model evaluation` `class imbalance handling` `Geospatial Analysis` \
 `spatial visualization` `exploratory data analysis` `reproducible workflow design` `results communication`\
 Status: In Progress\
 Last Updated: November 2025\
-[Project Github Repository](https://github.com/dustinlit/California_Fire_Severity)
+[Github Repository](https://github.com/dustinlit/California_Fire_Severity)
 
 ## Overview
-This project is a work in progress that explores the relationship between environmental and weather-related factors and wildfire severity in California. The goal is to predict a custom severity index `Wildfire Potential Destructive Power` — which incorporates structures damaged, structures destroyed, and fatalities.
+
+This project is a work in progress that explores the relationship between environmental weather-related factors and the degree of damage caused by wildfires in California. The goal is to predict a custom severity index `Wildfire Potential Destructive Power`, which incorporates structures damaged and destroyed.
 
 **Disclaimer:** I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions.
 
@@ -41,9 +42,12 @@ This project is a work in progress that explores the relationship between enviro
 
 ---
 
-Example Output:
+### Example Results:
 
-<img src="data/maps/IDW_RF.jpg" width="500">
+<p align="center">
+  <img src="data/maps/IDW_RF.jpg" width="600">
+</p>
+</b>
 
 <img src="plots/Palisades_predictions.png" width="1000">
 
@@ -75,21 +79,20 @@ California_Fire_Severity/\
 
 ### Data Sources
 
-**Fire Incident Data** – includes structure and fatality impact measures. \
-**California CIMIS Weather Data** – daily temperature, wind speed, precipitation, humidity. \
+**[CAL FIRE Incident Data](https://www.fire.ca.gov/incidents)** – includes detailed information on structural damages. \
+**[California CIMIS irrigation stations](https://cimis.water.ca.gov/)** – Includes daily weather readings including temperature, wind speed, precipitation, humidity. \
 **California Demographic Data** - population density and mean income by county obtained from 2020 US census, proxy for firefighting resources \
-**GIS Layers** – Californa shapefiles for spatial visualization.
+**Various GIS Layers** – Californa state and regional shapefiles for spatial visualization.
 
 ---
 
 ## Data Processing
 
-*Located in:* 
 > - *notebooks/01_Fire_Damage_Processing.ipynb*
 > - *notebooks/02_Weather_Data_Processing.ipynb*
 > - *notebooks/A_Appendix.pynb*
 
-- ArcGIS, constructed an equally spaced grid of sampling points for overall better coverage.
+- ArcGIS Workflow - constructed an equally spaced grid of sampling points for overall better coverage.
 - Merged detailed fire records with sampling points via intersect spatial join.
 - Imputed missing values for weather stations.
 
@@ -105,49 +108,40 @@ California_Fire_Severity/\
 ---
 
 ## Feature Engineering
-*Located in:* 
+
 > - *notebooks/03_Feature_Engineering.ipynb*
 > - *notebooks/04_Variable_Selection.ipynb*
 > - *notebooks/05_Feature_Interaction_Analysis.pynb*
-- Created rolling averages for environmental variables.
-- Engineered interaction features.
 
-#### Engineered Features Used:
+- Created 7-day rolling averages for relevant environmental variables.
+- Engineered interaction features and composite indexes.
+
 **Derived / Interaction Features**
-- `ETo_x_Vapor_Pressure` – Interaction between evapotranspiration and vapor pressure; models combined dryness effects.
-- `ETo_x_Temp` – Interaction between evapotranspiration and air temperature; highlights hot, dry conditions.
+- `ETo_x_Vapor_Pressure` – models combined dryness effects.
+- `ETo_x_Temp` –  highlights hot, dry conditions.
 - `Vapor_Pressure_x_Temp` – Interaction capturing the combined effect of heat and moisture.
-- `Vapor_Pressure_x_Wind_Speed` – Interaction between wind and atmospheric moisture; affects drying conditions.
+- `Vapor_Pressure_x_Wind_Speed` – affects drying conditions.
 
-**Composite Index**
-- `Dryness` – Custom dryness proxy combining weather variables; designed to approximate vegetation or fuel dryness.
-- `Days Without Rain` - Simple rolling count indicating drought conditions
+**Composite Indexes**
+- `Days Without Rain` - A simple rolling count roughly estimating drought conditions
 - `2 Year Fire History` - Average fires per month in the geographic vicinity in last two years.
 
 ---
 
 ## Class Balancing
-*Located in:* 
 > - *notebooks/06_Class_Balancing.ipynb*
 
-**Target:** *Wildlife Potential Destructive Power* - categorized into Low (0), Moderate(1), High(1)
+Balancing Techniques explored:
+- In-method class balancing
+- Manual **undersampling** of the dominant "Low" class.
+- SMOTE for **oversampling**
 
-**Issues:** Moderate and High Damage wildfire events classes are underrepresented.
-
-Balancing Techniques Used:
-- In method class balancing
-- Manual undersampling of the dominant "Low" class.
-- SMOTE for oversampling
-
-Comparison of model performance across balancing strategies.
+**Issue:** Moderate and High Damage wildfire events are pretty rare so these classes are severely underrepresented in the dataset.
 
 ---
 
 ## Modeling
-*Located in:*
 > - *notebooks/07_modeling_And_Tuning.ipynb*
-
-Models are tuned automatically and the best performing models are selected for final evaluation and visualization.
 
 **Models tested:**
 `Random Forest`
@@ -159,16 +153,15 @@ Models are tuned automatically and the best performing models are selected for f
 `Confusion matrices`
 `Cross-validation`
 
-Feature importance extracted for tree-based models.
+Models are tuned automatically and the best performers are selected for the final evaluation and visualization. Additionaly, **feature importance** is extracted for tree-based models.
 
 ---
 
 ## Visualization
-*Located in:*
 > - *notebooks/08_evaluation_and_visualization.ipynb*
 
-- Maps using GeoPandas, Matplotlib, and Seaborn.
-- IDW interpolation for environmental variables in ArcGIS.
+- Mapping and Plotting using ArcGIS, GeoPandas, Matplotlib, and Seaborn.
+- Raster Workfow and IDW interpolation for environmental variables workflow in ArcGIS.
 
 Example Output:
 
@@ -178,9 +171,12 @@ Example Output:
 
 ## Key Results
 
-**Key Findings:** \
-All Models struggle with distinguishing **Moderate** from **High** severity classes.\
-Class balancing significantly improved recall for minority classes.
+**Key Findings:**
+- All Models struggle with distinguishing **Moderate** from **High** severity classes.\
+- Class balancing improved metrics for minority classes.
+- XGBoost is consistently the better performer.
+
+**F1 Scores:**
 
 <img src="plots/class_balance.png" alt="Model Results" width="350" style="display: block; margin-left: 0;" />
 
@@ -188,8 +184,9 @@ Class balancing significantly improved recall for minority classes.
 
 ## Challenges
 
-**Missing Environmental Data** – Gaps in weather stations required imputation.\
+**Missing Environmental Data** – Gaps in weather readings required imputation.\
 **Weak Correlation** – Environmental features don’t fully explain severity outcomes.\
+**Damage Threshold** - Division of the moderate and high damage levels\
 **Class Imbalance** – Damaging fires are rare; balancing was essential.\
 **Derived Variable Uncertainty** – Proxies like Dryness need validation.\
 **Spatial Generalization** – Models may not perform well across regions.
@@ -197,12 +194,12 @@ Class balancing significantly improved recall for minority classes.
 ---
 
 ## Next Steps / Potential Improvements
-- Add land cover, topography, and WUI datasets.
-- ArcGIS integration.
-- Incorporate emergency response times
-- Time series maps to check models consistency over time
-- Seperate module for up to date processing of new information and real time predictions
-- Consult domain experts to validate assumptions and feature selection.
+> - Add vegetative land cover, topography, and WUI datasets.
+> - Additional ArcGIS integration.
+> - Incorporation of emergency response times
+> - Time series maps to check models consistency over time
+> - Create module for up to date processing of new readings and real time predictions
+> - Consult domain experts to validate assumptions and feature selection.
 
 ---
 
