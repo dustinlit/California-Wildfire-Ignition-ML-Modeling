@@ -1,166 +1,426 @@
-# Predicting Wildfire Potential Destructive Power in California
-
-Author: Dustin Littlefield\
-Project Type: Data Science & GIS Portfolio\
-Technologies: Python, Pandas, Scikit-learn, XGBoost, GeoPandas, Matplotlib\
-Skills: `Data cleaning` `feature engineering` `supervised machine learning` `model evaluation` `class imbalance handling` \
-`spatial visualization` `exploratory data analysis` `reproducible workflow design` `results communication`\
-Status: In Progress\
-Last Updated: July 2025\
-[GITHUB Repository](https://github.com/dustinlit/California_Fire_Severity/tree/main)
-## Overview
-This code is an adaptation of code I was responsible for during a team capstone project at Arizona State University [Optimizing Emergency Response](Optimizing_Emergency_Response.pdf). The project is now a work in progress that explores the relationship between environmental and weather-related factors and wildfire severity in California. The goal is to predict a custom severity index `Wildfire Destructive Power Index`, which incorporates structures damaged, structures destroyed, and fatalities.
-
-**Disclaimer:** I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions.
-
-## Changes in Progress
-- (currently) Restructuring damage index to represent dollar value with more detailed data from [CAL FIRE Damage Inspection (DINS) Data](https://data.ca.gov/dataset/cal-fire-damage-inspection-dins-data)
-- (currently) Expanding CIMIS weather data to span from 2018 to 2025
-- Filtering interaction features for colinearity
-- Addition of `Fire History` engineered feature, adds a rolling average of previous 2 years fires per month. May help improve correlation.
-- Addition of `Days Without Rain` engineered feature, which will place more emphasis on extended droughts
-- General code cleanup and documentation
-   
-Example output:\
-\
-![Southern California Wildfire Model Predictions](plots/Palisades_predictions.png)
-
----
-## Objectives
-- Predict wildfire severity based on environmental and weather data.
-- Test classification models using resampling techniques to handle class imbalance.
-- Create geospatial visualizations to illustrate regional risk patterns.
-- Explore second-degree feature interactions and correlation to improve model features.
-  
----
-
-## Project Structure
-
-![File Structure](plots/file_structure.png)
-
----
-## Data Sources
-
-**Fire Incident Data** – includes structure and fatality impact measures. \
-**California CIMIS Weather Data** – daily temperature, wind speed, precipitation, humidity. \
-**California Demographic Data** - population density and mean income by county, proxy for firefighting resources \
-**GIS Layers** – Shapefiles for spatial visualization.
-
----
-## Data Processing
-*Located in: notebooks/data_processing.ipynb*
-- Merged fire records with weather station summaries by location and time.
-- Created rolling 7-day averages for environmental variables.
-- Engineered interaction features (e.g., Dryness, ETo_x_Vapor_Pressure).
-- Imputed missing values for stations and derived features.
-
-### Key Features Used:
-- **Environmental / Weather Variables**
-  - `Avg Air Temp (F) 7 Day Avg` – Average air temperature over the past 7 days (°F); represents heat conditions.
-  - `Avg Vap Pres (mBars)` – Average vapor pressure; indicates atmospheric moisture.
-  - `Avg Rel Hum (%) 7 Day Avg` – Average relative humidity over 7 days; affects fire ignition and spread.
-  - `Avg Wind Speed (mph) 7 Day Avg` – Average wind speed; higher speeds can drive fire spread.
-  - `Precip (in) 7 Day Avg` – Total precipitation in the past 7 days; influences fuel moisture.
-  - `ETo (in)` – Reference evapotranspiration; approximates water loss from soil and plants.
-<br><br>
-- **Derived / Interaction Features**
-  - `ETo_x_Vapor_Pressure` – Interaction between evapotranspiration and vapor pressure; models combined dryness effects.
-  - `ETo_x_Temp` – Interaction between evapotranspiration and air temperature; highlights hot, dry conditions.
-  - `Vapor_Pressure_x_Temp` – Interaction capturing the combined effect of heat and moisture.
-  - `Vapor_Pressure_x_Wind_Speed` – Interaction between wind and atmospheric moisture; affects drying conditions.
-<br><br>
-- **Composite Index**
-  - `Dryness` – Custom dryness proxy combining weather variables; designed to approximate vegetation or fuel dryness.
-
----
-## Class Balancing
-*Located in: notebooks/class_balancing.ipynb*
-
-**Target:** `WDPI` Wildlife Destructive Power Index - categorized into Low, Moderate, High
-
-**Issues:** Moderate and High Damage wildfire events classes are underrepresented.
-
-Balancing Techniques Used:
-- In method class balancing
-- Manual undersampling of the dominant "Low" class.
-- SMOTE for oversampling
-
-Comparison of model performance across balancing strategies.
-
----
-## Modeling
-*Located in: notebooks/modeling.ipynb*
-
-**Models tested:**
-`Random Forest`
-`K-Nearest Neighbors`
-`XGBoost`
-
-**Metrics evaluated:**
-`F1-score (macro-averaged)`
-`Confusion matrices`
-`Cross-validation`
-
-Feature importance extracted for tree-based models.
-
----
-## GIS & Visualization
-*Located in: notebooks/evaluation_and_visualization.ipynb*
-
-- Maps using GeoPandas, Matplotlib, and Seaborn.
-- IDW interpolation for environmental variables.
-- Severity overlay by county or fire footprint.
-
-Example Output:\
-\
-<img src="plots/Interpolated.png" alt="Southern California Wildfire Model Predictions" width="500" style="display: block; margin-left: 0;" />
-
----
-## Key Results
-
-**Key Findings:** \
-Models struggled with distinguishing Moderate and High severity classes.\
-XGBoost achieved the highest performance overall.\
-Class balancing significantly improved recall for minority classes. \
-\
-**Key Metrics:**
-<br><br>
-
-<img src="plots/sampling_metrics.png" alt="Southern California Wildfire Model Predictions" width="400" style="display: block; margin-left: 0;" />
-
----
-## Challenges
-
-**Missing Environmental Data** – Gaps in weather stations required imputation.\
-**Weak Correlation** – Environmental features don’t fully explain severity outcomes.\
-**Class Imbalance** – Severe fires are rare; balancing was essential.\
-**Derived Variable Uncertainty** – Proxies like Dryness need validation.\
-**Spatial Generalization** – Models may not perform well across regions.
-
----
-## Next Steps / Potential Improvements
-- Expand main weather dataset and add land cover, topography, and WUI datasets.
-- Deeper geographical analysis incorporating slope, aspect, and vegetation
-- Try temporal or ensemble models.
-- Consult domain experts to validate assumptions, feature selection, and additional indexes.
-
----
-## Installation
-To run the project locally:\
-git clone https://github.com/dustinlit/California_fire_severity.git \
-cd wildfire-severity\
-pip install -r requirements.txt
-
----
-## License
-This project is released under the MIT License. \
-See LICENSE for details.
-
-
-
-
-
-
-
-
-
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "d1a4621d",
+   "metadata": {},
+   "source": [
+    "# Mapping the Potential Destructive Power of Wildfires Using Machine Learning"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f2206ff2",
+   "metadata": {},
+   "source": [
+    "*Version 2.0*"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "5fe74246",
+   "metadata": {},
+   "source": [
+    "Author: Dustin Littlefield\\\n",
+    "Project Type: Data Science & GIS Portfolio\\\n",
+    "Technologies: Python, Pandas, Scikit-learn, XGBoost, GeoPandas, Matplotlib\\\n",
+    "Skills: `Data cleaning` `feature engineering` `supervised machine learning` `model evaluation` `class imbalance handling` \\\n",
+    "`spatial visualization` `exploratory data analysis` `reproducible workflow design` `results communication`\\\n",
+    "Status: In Progress\\\n",
+    "Last Updated: November 2025"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "83c914f3",
+   "metadata": {},
+   "source": [
+    "## Overview\n",
+    "This project is a work in progress that explores the relationship between environmental and weather-related factors and wildfire severity in California. The goal is to predict a custom severity index `Wildfire Potential Destructive Power` — which incorporates structures damaged, structures destroyed, and fatalities.\n",
+    "\n",
+    "**Disclaimer:** I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "1e6b93f5",
+   "metadata": {},
+   "source": [
+    "> ### Version 2.0 Features\n",
+    "> 1. Added Detailed fire damage data\n",
+    ">       - CALFIRE damage cost data added\n",
+    ">       - Estimate cost of damage from damage to structures\n",
+    ">       - More accurate target\n",
+    ">       - Attaches significance to fires that cause damage only\n",
+    "> 2. Expanded the dates for weather and damage data\n",
+    ">       - Expanded from 2018-2020 to 2018-2025\n",
+    "> 3. New Features\n",
+    ">       - `Fire History` average fires per month for previous years\n",
+    ">       - `Dryness Indicator` rolling count of days without rain\n",
+    "> 4. Data Handling Optimization\n",
+    ">       - Simplified handling of case study data as references instead of storing separate databases\n",
+    "> 5. Geographical and Temporal Integration\n",
+    ">       - in ArcGIS, constructed a mesh sampling grid in California to ensure even coverage\n",
+    ">       - Buffer spatial join for combining fire damage info with weather data\n",
+    ">       - Incorporated Regionality and Seasonality into models"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "b0d6e0c7",
+   "metadata": {},
+   "source": [
+    "## Objectives\n",
+    "- Predict wildfire damage potential based on environmental, geographical and social data.\n",
+    "- Test classification models using resampling techniques to handle class imbalance.\n",
+    "- Create geospatial *interpolation visualizations* to illustrate regional risk patterns.\n",
+    "- Explore second-degree feature interactions and correlation to improve model features.\n",
+    "---"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "e2715b42",
+   "metadata": {},
+   "source": [
+    "Example Output:"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "fe0c5228",
+   "metadata": {},
+   "source": [
+    "<img src=\"data/maps/IDW_RF.jpg\" width=\"600\">"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "0084941b",
+   "metadata": {},
+   "source": [
+    "![Southern California Wildfire Model Predictions](plots/Palisades_predictions.png)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "34f5d902",
+   "metadata": {},
+   "source": [
+    "## Project Structure"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "0eaab31c",
+   "metadata": {
+    "vscode": {
+     "languageId": "plaintext"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "California_Fire_Severity/\n",
+    "├── data/ \n",
+    "├── notebooks/ \n",
+    "│ ├── 01_Fire_Damage_Processing.ipynb \n",
+    "│ ├── 02_Weather_Data_Processing.ipynb \n",
+    "│ ├── 03_Feature_Engineering.ipynb \n",
+    "│ ├── 04_Variable_Selection.ipynb \n",
+    "│ ├── 05_Feature_Interaction_Analysis.ipynb \n",
+    "│ ├── 06_Class_Balancing.ipynb \n",
+    "│ ├── 07_Modeling_and_Tuning.ipynb \n",
+    "│ ├── 08_Evaluation_and_Visualization.ipynb \n",
+    "│ ├── A_Appendix.ipynb \n",
+    "├── plots/ \n",
+    "│ ├── Palisades_predictions.png \n",
+    "│ ├── Interpolated.png \n",
+    "│ ├── sampling_metrics.png \n",
+    "│ └── file_structure.png \n",
+    "├── src/ \n",
+    "├── Optimizing_Emergency_Response.pdf \n",
+    "├── README.ipynb \n",
+    "└── README.md"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "b463cf8a",
+   "metadata": {},
+   "source": [
+    "---\n",
+    "\n",
+    "### Data Sources\n",
+    "\n",
+    "**Fire Incident Data** – includes structure and fatality impact measures. \\\n",
+    "**California CIMIS Weather Data** – daily temperature, wind speed, precipitation, humidity. \\\n",
+    "**California Demographic Data** - population density and mean income by county obtained from 2020 US census, proxy for firefighting resources \\\n",
+    "**GIS Layers** – Californa shapefiles for spatial visualization."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "4898bec3",
+   "metadata": {},
+   "source": [
+    "---"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "ba0ce393",
+   "metadata": {},
+   "source": [
+    "## Data Processing\n",
+    "\n",
+    "*Located in:* \n",
+    "> - *notebooks/01_Fire_Damage_Processing.ipynb*\n",
+    "> - *notebooks/02_Weather_Data_Processing.ipynb*\n",
+    "> - *notebooks/A_Appendix.pynb*\n",
+    "\n",
+    "- ArcGIS, constructed an equally spaced grid of sampling points for overall better coverage.\n",
+    "- Merged detailed fire records with sampling points via intersect spatial join.\n",
+    "- Imputed missing values for weather stations.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "c92178d5",
+   "metadata": {},
+   "source": [
+    "#### Key Factors Used:\n",
+    "**Environmental / Weather Variables**\n",
+    "- `Avg Air Temp (F)` – represents heat conditions.\n",
+    "- `Avg Vap Pres (mBars)` – Average vapor pressure; indicates atmospheric moisture.\n",
+    "- `Avg Rel Hum (%)` – affects fire ignition and spread.\n",
+    "- `Avg Wind Speed (mph)` – higher speeds can drive fire spread.\n",
+    "- `Precip (in) 7 Day Avg` – Total precipitation in the past 7 days; influences fuel moisture.\n",
+    "- `ETo (in)` – Reference evapotranspiration; approximates water loss from soil and plants."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "1ad9cb0b",
+   "metadata": {},
+   "source": [
+    "---"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "726b57de",
+   "metadata": {},
+   "source": [
+    "## Feature Engineering\n",
+    "*Located in:* \n",
+    "> - *notebooks/03_Feature_Engineering.ipynb*\n",
+    "> - *notebooks/04_Variable_Selection.ipynb*\n",
+    "> - *notebooks/05_Feature_Interaction_Analysis.pynb*\n",
+    "- Created rolling averages for environmental variables.\n",
+    "- Engineered interaction features."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "2ca06c5d",
+   "metadata": {},
+   "source": [
+    "#### Engineered Features Used:\n",
+    "**Derived / Interaction Features**\n",
+    "- `ETo_x_Vapor_Pressure` – Interaction between evapotranspiration and vapor pressure; models combined dryness effects.\n",
+    "- `ETo_x_Temp` – Interaction between evapotranspiration and air temperature; highlights hot, dry conditions.\n",
+    "- `Vapor_Pressure_x_Temp` – Interaction capturing the combined effect of heat and moisture.\n",
+    "- `Vapor_Pressure_x_Wind_Speed` – Interaction between wind and atmospheric moisture; affects drying conditions.\n",
+    "\n",
+    "**Composite Index**\n",
+    "- `Dryness` – Custom dryness proxy combining weather variables; designed to approximate vegetation or fuel dryness.\n",
+    "- `Days Without Rain` - Simple rolling count indicating drought conditions\n",
+    "- `2 Year Fire History` - Average fires per month in the geographic vicinity in last two years.\n",
+    "\n",
+    "---"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7f56f06a",
+   "metadata": {},
+   "source": [
+    "## Class Balancing"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "61502ad4",
+   "metadata": {},
+   "source": [
+    "*Located in:* \n",
+    "> - *notebooks/06_Class_Balancing.ipynb*\n",
+    "\n",
+    "**Target:** *Wildlife Potential Destructive Power* - categorized into Low (0), Moderate(1), High(1)\n",
+    "\n",
+    "**Issues:** Moderate and High Damage wildfire events classes are underrepresented.\n",
+    "\n",
+    "Balancing Techniques Used:\n",
+    "- In method class balancing\n",
+    "- Manual undersampling of the dominant \"Low\" class.\n",
+    "- SMOTE for oversampling\n",
+    "\n",
+    "Comparison of model performance across balancing strategies.\n",
+    "\n",
+    "---"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "1a702d6d",
+   "metadata": {},
+   "source": [
+    "## Modeling\n",
+    "*Located in:*\n",
+    "> - *notebooks/07_modeling_And_Tuning.ipynb*\n",
+    "\n",
+    "Models are tuned automatically and the best performing models are selected for final evaluation and visualization.\n",
+    "\n",
+    "**Models tested:**\n",
+    "`Random Forest`\n",
+    "`K-Nearest Neighbors`\n",
+    "`XGBoost`\n",
+    "\n",
+    "**Metrics evaluated:**\n",
+    "`F1-score (macro-averaged)`\n",
+    "`Confusion matrices`\n",
+    "`Cross-validation`\n",
+    "\n",
+    "Feature importance extracted for tree-based models.\n",
+    "\n",
+    "---"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "c22d125e",
+   "metadata": {},
+   "source": [
+    "## Visualization\n",
+    "*Located in:*\n",
+    "> - *notebooks/08_evaluation_and_visualization.ipynb*\n",
+    "\n",
+    "- Maps using GeoPandas, Matplotlib, and Seaborn.\n",
+    "- IDW interpolation for environmental variables in ArcGIS.\n",
+    "\n",
+    "Example Output:"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8b893672",
+   "metadata": {},
+   "source": [
+    "<img src=\"plots/Interpolated.png\" alt=\"Southern California Wildfire Model Predictions\" width=\"500\" style=\"display: block; margin-left: 0;\" />\n",
+    "\n",
+    "---"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "9c4f9387",
+   "metadata": {},
+   "source": [
+    "## Key Results\n",
+    "\n",
+    "**Key Findings:** \\\n",
+    "All Models struggle with distinguishing **Moderate** from **High** severity classes.\\\n",
+    "Class balancing significantly improved recall for minority classes.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "6cd216e3",
+   "metadata": {},
+   "source": [
+    "<img src=\"plots/class_balance.png\" alt=\"Model Results\" width=\"500\" style=\"display: block; margin-left: 0;\" />\n",
+    "\n",
+    "---"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "9525bae9",
+   "metadata": {},
+   "source": [
+    "## Challenges\n",
+    "\n",
+    "**Missing Environmental Data** – Gaps in weather stations required imputation.\\\n",
+    "**Weak Correlation** – Environmental features don’t fully explain severity outcomes.\\\n",
+    "**Class Imbalance** – Damaging fires are rare; balancing was essential.\\\n",
+    "**Derived Variable Uncertainty** – Proxies like Dryness need validation.\\\n",
+    "**Spatial Generalization** – Models may not perform well across regions.\n",
+    "\n",
+    "---"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "9ef2ec61",
+   "metadata": {},
+   "source": [
+    "## Next Steps / Potential Improvements\n",
+    "- Add land cover, topography, and WUI datasets.\n",
+    "- ArcGIS integration.\n",
+    "- Incorporate emergency response times\n",
+    "- Time series maps to check models consistency over time\n",
+    "- Seperate module for up to date processing of new information and real time predictions\n",
+    "- Consult domain experts to validate assumptions and feature selection.\n",
+    "\n",
+    "---"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "054f676d",
+   "metadata": {},
+   "source": [
+    "## Installation\n",
+    "To run the project locally:\\\n",
+    "git clone https://github.com/dustinlit/wildfire-severity.git \\\n",
+    "cd wildfire-severity\\\n",
+    "pip install -r requirements.txt\n",
+    "\n",
+    "---"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "3109cb73",
+   "metadata": {},
+   "source": [
+    "## License\n",
+    "This project is released under the MIT License.\n",
+    "See LICENSE for details."
+   ]
+  }
+ ],
+ "metadata": {
+  "hide_input": false,
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.10"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
