@@ -79,10 +79,10 @@ California_Fire_Severity/\
 
 ### Data Sources
 
-**[CAL FIRE Incident Data](https://www.fire.ca.gov/incidents)** – includes detailed information on structural damages. \
-**[California CIMIS irrigation stations](https://cimis.water.ca.gov/)** – Includes daily weather readings including temperature, wind speed, precipitation, humidity. \
-**California Demographic Data** - population density and mean income by county obtained from 2020 US census, proxy for firefighting resources \
-**Various GIS Layers** – Californa state and regional shapefiles for spatial visualization.
+**[CAL FIRE Incident Data](https://www.fire.ca.gov/incidents)** – Detailed information on structures damaged or destroyed separated per wildfire event. \
+**[California CIMIS irrigation stations](https://cimis.water.ca.gov/)** – Daily weather readings from over a hundred weather stations around California. \
+**California Demographic Data** - population and income data obtained from the 2020 US census, used as rough proxy for firefighting resources \
+**Various GIS Layers** – Californa state and regional shapefiles to support spatial analysis and visualization.
 
 ---
 
@@ -92,11 +92,11 @@ California_Fire_Severity/\
 > - *notebooks/02_Weather_Data_Processing.ipynb*
 > - *notebooks/A_Appendix.pynb*
 
-- ArcGIS Workflow - constructed an equally spaced grid of sampling points for overall better coverage.
-- Merged detailed fire records with sampling points via intersect spatial join.
-- Imputed missing values for weather stations.
+- Implemented programmatic workflows alongside manual validation to refine and standardize multiple datasets.
+- ArcGIS workflow – constructed a systematic lattice of sampling points to optimize spatial coverage.
+- Merged detailed fire records with sampling points via an intersect spatial join.
+- Imputed missing values as needed for weather readings.
 
-#### Key Factors Used:
 **Environmental / Weather Variables**
 - `Avg Air Temp (F)` – represents heat conditions.
 - `Avg Vap Pres (mBars)` – Average vapor pressure; indicates atmospheric moisture.
@@ -161,7 +161,7 @@ Models are tuned automatically and the best performers are selected for the fina
 > - *notebooks/08_evaluation_and_visualization.ipynb*
 
 - Mapping and Plotting using ArcGIS, GeoPandas, Matplotlib, and Seaborn.
-- Raster Workfow and IDW interpolation for environmental variables workflow in ArcGIS.
+- Raster data and IDW interpolation created in ArcGIS.
 
 Example Output:
 
@@ -172,7 +172,7 @@ Example Output:
 ## Key Results
 
 **Key Findings:**
-- All Models struggle with distinguishing **Moderate** from **High** severity classes.\
+- All Models struggle with distinguishing **Moderate** from **High** severity classes.
 - Class balancing improved metrics for minority classes.
 - XGBoost is consistently the better performer.
 
