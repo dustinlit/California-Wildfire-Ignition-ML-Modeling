@@ -14,7 +14,9 @@ Last Updated: November 2025\
 
 This project is a work in progress that explores the relationship between environmental weather-related factors and the degree of damage caused by wildfires in California. The goal is to predict a custom severity index `Wildfire Potential Destructive Power`, which incorporates structures damaged and destroyed.
 
-**Disclaimer:** I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions.
+> ## **Disclaimer:** 
+> - **This is a *work in progress* for training purposes only. Results do not currently reflect reality or claim to. Any results are unvalidated.**
+> - **I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions.**
 
 > ### Version 2.0 Features
 > 1. Added Detailed fire damage data
@@ -201,6 +203,21 @@ Example Output:
 > - Create module for up to date processing of new readings and real time predictions
 > - Consult domain experts to validate assumptions and feature selection.
 
+> ## Ideas
+> - Number of `fire stations` in each buffered area
+> - Average road distance from fire stations from each point in the buffered region
+> - Normalize Total Damage as `Damage per Acre`
+> - Refine population density to be in buffered sample areas instead of county
+> - Land use layer, more accurate buliding density
+> - `WUI` https://gis.data.ca.gov/datasets/CALFIRE-Forestry::wildland-urban-interface/explore?location=34.403601%2C-118.894358%2C9.95
+> - Firefighting Facility Locations https://gis.data.ca.gov/datasets/8e72bb9b01954c83bf910cef4174bb3a_0/explore?location=37.091088%2C-119.278900%2C6.50
+> - California `Vegetation` https://gis.data.ca.gov/maps/35b4d77128264b3bacd31d9685f974b7/explore?location=36.236024%2C-120.809531%2C13&path=
+> - NDVI - Historical Sattelite Data
+> - `Slppe and Aspect` South Facing Slopes
+> - LANDFIRE - https://landfire.gov/data
+> - `Time since last fire`
+>- California State Responsibility Areas https://gis.data.ca.gov/maps/5ac1dae3cb2544629a845d9a19e83991/about
+> - More Detailed `Census Block or Tract Data`
 ---
 
 ## Installation
