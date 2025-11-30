@@ -95,9 +95,15 @@ California_Fire_Severity/\
 > - *notebooks/A_Appendix.pynb*
 
 - Implemented programmatic workflows alongside manual validation to refine and standardize multiple datasets.
-- ArcGIS workflow – constructed a systematic lattice of sampling points to optimize spatial coverage.
 - Merged detailed fire records with sampling points via an intersect spatial join.
 - Imputed missing values as needed for weather readings.
+- ArcGIS workflow – constructed a systematic lattice of sampling points to optimize spatial coverage.\
+#### **Mesh Network:**
+
+<p align="center">
+  <img src="data/maps/mesh.jpg" width="500">
+</p>
+</b>
 
 **Environmental / Weather Variables**
 - `Avg Air Temp (F)` – represents heat conditions.
@@ -218,6 +224,7 @@ Example Output:
 > - `Time since last fire`
 >- California State Responsibility Areas https://gis.data.ca.gov/maps/5ac1dae3cb2544629a845d9a19e83991/about
 > - More Detailed `Census Block or Tract Data`
+
 ---
 
 ## Installation
