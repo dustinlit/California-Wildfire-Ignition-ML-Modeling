@@ -12,7 +12,7 @@ Last Updated: November 2025\
 
 ## Overview
 
-This project is a work in progress that explores the relationship between environmental weather-related factors and the degree of damage caused by wildfires in California. The goal is to predict a custom severity index `Wildfire Potential Destructive Power`, which incorporates structures damaged and destroyed.
+This project is a work in progress that explores the relationship between environmental weather-related factors and the degree of damage caused by wildfires in California. The main objective is to **practice handling real world data through geospatial data science**. The goal is to predict a custom severity index `Wildfire Potential Destructive Power`, which incorporates structures damaged and destroyed.
 
 > ## **Disclaimer:** 
 > - **This is a *work in progress* for training purposes only. Results do not currently reflect reality or claim to. Any results are unvalidated.**
@@ -209,21 +209,54 @@ Example Output:
 > - Create module for up to date processing of new readings and real time predictions
 > - Consult domain experts to validate assumptions and feature selection.
 
-> ## Ideas
-> - Number of `fire stations` in each buffered area
-> - Average road distance from fire stations from each point in the buffered region
-> - Normalize Total Damage as `Damage per Acre`
-> - Refine population density to be in buffered sample areas instead of county
-> - Land use layer, more accurate buliding density
-> - `WUI` https://gis.data.ca.gov/datasets/CALFIRE-Forestry::wildland-urban-interface/explore?location=34.403601%2C-118.894358%2C9.95
-> - Firefighting Facility Locations https://gis.data.ca.gov/datasets/8e72bb9b01954c83bf910cef4174bb3a_0/explore?location=37.091088%2C-119.278900%2C6.50
-> - California `Vegetation` https://gis.data.ca.gov/maps/35b4d77128264b3bacd31d9685f974b7/explore?location=36.236024%2C-120.809531%2C13&path=
-> - NDVI - Historical Sattelite Data
-> - `Slppe and Aspect` South Facing Slopes
-> - LANDFIRE - https://landfire.gov/data
-> - `Time since last fire`
->- California State Responsibility Areas https://gis.data.ca.gov/maps/5ac1dae3cb2544629a845d9a19e83991/about
-> - More Detailed `Census Block or Tract Data`
+> ## Additional Data Ideas
+> - Add **Fire** Data:
+>   - Integrate all fires including those with no damage
+>   - `Time since last fire`
+> - Add **Population** Data: 
+>     - More Detailed `Census Block or Tract Data`
+> - **WUI**: 
+>     - https://gis.data.ca.gov/datasets/CALFIRE-Forestry::wildland-urban-interface/explore?location=34.403601%2C-118.894358%2C9.95
+> - **Firefighting Facility** Locations:
+>     - https://gis.data.ca.gov/datasets/8e72bb9b01954c83bf910cef4174bb3a_0/explore?location=37.091088%2C-119.278900%2C6.50
+> - **Vegetation**:
+>     - https://gis.data.ca.gov/maps/35b4d77128264b3bacd31d9685f974b7/explore?location=36.236024%2C-120.809531%2C13&path=
+> - **NDVI**:
+>     - https://www.ncei.noaa.gov/products/climate-data-records/normalized-difference-vegetation-index
+> - Add **TOPOGRAPHY** detail: 
+>     - Slope, Aspect, Hillshade, South Facing Slopes
+> - **LANDFIRE**:
+>     - https://landfire.gov/data
+> - **California State Responsibility Areas**:
+>     -  https://gis.data.ca.gov/maps/5ac1dae3cb2544629a845d9a19e83991/about
+> - **CDEC** Data:
+>   - https://flowwest.github.io/CDECRetrieve/articles/CDECRetrieve.html
+>   - https://data.ca.gov/dataset/national-hydrography-data-nhd-and-3dhp/resource/a189d4e0-9115-4441-9b82-42a0237f2a77
+>   - https://cdec.water.ca.gov/dynamicapp/wsSensorData
+>
+> - **Road** Data: 
+>     - https://gisdata-caltrans.opendata.arcgis.com/datasets/2d56e65de89c418780056651640291e8_0/about
+> - **Fleet** info:
+>    - https://data.ca.gov/dataset/california-state-fleet
+> - **Land Ownership**: 
+>    - https://gis.data.ca.gov/datasets/f73858e200634ca888b19ca8c78e3aed_0/explore
+> - **Power Lines**: 
+>    - https://cecgis-caenergy.opendata.arcgis.com/datasets/CAEnergy::california-electric-transmission-lines-1/explore
+> - **Structure** Data: 
+>    - https://data.ca.gov/dataset/structure
+> - **Building Footprints**:
+>   - https://www.arcgis.com/home/item.html?id=ef9920eec29b427eb79cc2143c055389
+>   - https://datadryad.org/dataset/doi:10.7280/D16387
+> - **Fire Hazard Zones**: 
+>    - https://data.ca.gov/dataset/fire-hazard-severity-zone-viewer
+> - **Fuel Treatment**: 
+>   - https://data.ca.gov/dataset/fuels-treatment-effectiveness-reporting-dashboard
+>   - https://data.ca.gov/dataset/cal-fire-fuels-reduction-projects-main-application
+> - **Improved Weather Data**: 
+>     - https://www.climatologylab.org/gridmet.html
+
+
+
 
 ---
 
