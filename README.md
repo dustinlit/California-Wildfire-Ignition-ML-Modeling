@@ -1,24 +1,29 @@
 # Mapping the Potential Destructive Power of Wildfires Using Machine Learning
-*Version 2.0*
+*Version 3.0*
 
 Author: Dustin Littlefield\
 Project Type: Data Science & GIS Portfolio\
-Technologies: ArcGIS, Python, Pandas, Scikit-learn, XGBoost, GeoPandas, Matplotlib\
-Skills: `Data cleaning` `feature engineering` `supervised machine learning` `model evaluation` `class imbalance handling` `Geospatial Analysis` \
+Technologies: Python, Pandas, Scikit-learn, XGBoost, GeoPandas, Matplotlib\
+Skills: `Data cleaning` `feature engineering` `supervised machine learning` `model evaluation` `class imbalance handling` \
 `spatial visualization` `exploratory data analysis` `reproducible workflow design` `results communication`\
 Status: In Progress\
 Last Updated: November 2025\
 [Github Repository](https://github.com/dustinlit/California_Fire_Severity)
 
 ## Overview
+This project is a work in progress that explores the relationship between environmental and weather-related factors and wildfire severity in California. The goal is to predict a custom severity index `Wildfire Potential Destructive Power` — which incorporates structures damaged, structures destroyed, and fatalities.
 
-This project is a work in progress that explores the relationship between environmental weather-related factors and the degree of damage caused by wildfires in California. The main objective is to **practice handling real world data through geospatial data science**. The goal is to predict a custom severity index `Wildfire Potential Destructive Power`, which incorporates structures damaged and destroyed.
+**Disclaimer:** I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions.
 
-> ## **Disclaimer:** 
-> - **This is a *work in progress* for training purposes only. Results do not currently reflect reality or claim to. Any results are unvalidated.**
-> - **I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions.**
+ ### Version 3.0 Changelog
+> 1. New more accurate and complete weather data from **gridMET Climatology Lab**
+> 2. Integration of **Wildland Urban Interface** and **California Eco regions**.
+> 2. Replaced `KNN` model with a `Neural Network` for a simpler data workflow.
+> 3. ArcGIS Pro integration for data preparation and prediction interpolation
+> 4. Added more accurate Census Block data. Population stats calculated as buffer zone around sampling points.
 
-> ### Version 2.0 Features
+
+### Version 2.0 Changelog
 > 1. Added Detailed fire damage data
 >       - CALFIRE damage cost data added
 >       - Estimate cost of damage from damage to structures
@@ -42,31 +47,33 @@ This project is a work in progress that explores the relationship between enviro
 - Create geospatial *interpolation visualizations* to illustrate regional risk patterns.
 - Explore second-degree feature interactions and correlation to improve model features.
 
----
+<img src="plots/wildfires.png" width="600">
 
-### Example Results:
+#### Example ArcGIS Output:
 
-<p align="center">
-  <img src="data/maps/IDW_RF.jpg" width="600">
-</p>
-</b>
+<img src="data/maps/interpolation.jpg" width="1600">
 
-<img src="plots/Palisades_predictions.png" width="1000">
+#### Example Python Output:
+
+<img src="plots/pred.png" width="1400">
 
 ## Project Structure
 
 California_Fire_Severity/\
 ├── data/\
 ├── notebooks/\
-│ ├── 01_Fire_Damage_Processing.ipynb\
-│ ├── 02_Weather_Data_Processing.ipynb\
+│ ├── 01_Data_Exploration_Processing.ipynb\
+│ ├── 02_Data_Merging.ipynb\
 │ ├── 03_Feature_Engineering.ipynb\
 │ ├── 04_Variable_Selection.ipynb\
 │ ├── 05_Feature_Interaction_Analysis.ipynb\
 │ ├── 06_Class_Balancing.ipynb\
 │ ├── 07_Modeling_and_Tuning.ipynb\
 │ ├── 08_Evaluation_and_Visualization.ipynb\
-│ ├── A_Appendix.ipynb\
+│ ├── A_Appendix_Sampling_Points.ipynb\
+│ ├── B_Appendix_Wildfires.ipynb\
+│ ├── C_Appendix_Gridmet_Combination.ipynb\
+│ ├── D_Appendix_Gridmet_Extraction.ipynb\
 ├── plots/\
 │ ├── Palisades_predictions.png\
 │ ├── Interpolated.png\
@@ -81,97 +88,119 @@ California_Fire_Severity/\
 
 ### Data Sources
 
-**[CAL FIRE Incident Data](https://www.fire.ca.gov/incidents)** – Detailed information on structures damaged or destroyed separated per wildfire event. \
-**[California CIMIS irrigation stations](https://cimis.water.ca.gov/)** – Daily weather readings from over a hundred weather stations around California. \
-**California Demographic Data** - population and income data obtained from the 2020 US census, used as rough proxy for firefighting resources \
-**Various GIS Layers** – Californa state and regional shapefiles to support spatial analysis and visualization.
+> **Fire Incident Data**:
+> - *CAL FIRE Damage Inspection (DINS)* Data: <https://data.ca.gov/dataset/cal-fire-damage-inspection-dins-data>'
+> - *Calfire Incident* Data: <https://www.fire.ca.gov/incidents>\
+
+> **Weather Data**:
+> - *gridMET* - <https://www.climatologylab.org/gridmet.html>
+
+> **California Demographic Data** 
+> - *U.S. Census Bureau, Department of Commerce*: Population <https://catalog.data.gov/dataset/tiger-line-shapefile-current-state-california-2020-census-block>
+
+> **Wildlife Urban Interface**: 
+> - *California Department of Forestry and Fire Protection*: <https://gis.data.ca.gov/datasets/CALFIRE-Forestry::wildland-urban-interface/explore?location=34.403601%2C-118.894358%2C9.95>
+> - *California Department of Fish and Wildlife*: <https://data.ca.gov/dataset/cdfw-regions>
 
 ---
 
 ## Data Processing
 
-> - *notebooks/01_Fire_Damage_Processing.ipynb*
-> - *notebooks/02_Weather_Data_Processing.ipynb*
-> - *notebooks/A_Appendix.pynb*
+**Raw Data Processed in:**
+> - *notebooks/A_Appendix_Sampling_Points.ipynb*
+> - *notebooks/B_Appendix_Wildfires.ipynb*
+> - *notebooks/C_Appendix_Gridmet_Combination.pynb*
+> - *notebooks/D_Appendix_Gridmet_Extraction.pynb*
 
-- Implemented programmatic workflows alongside manual validation to refine and standardize multiple datasets.
-- Merged detailed fire records with sampling points via an intersect spatial join.
-- Imputed missing values as needed for weather readings.
-- ArcGIS workflow – constructed a systematic lattice of sampling points to optimize spatial coverage.\
-#### **Mesh Network:**
+#### **Key Variables Used**:
+Environmental / Weather Variables:
+- `Air Temperature`-	Maximum air temperature at 2 meters above ground (Kelvin)
+- `Vapor Pressure Deficit` - kPa Difference between saturation vapor pressure and actual vapor pressure (kPa); indicates atmospheric drying power
+- `Relative Humidity`	-Maximum daily relative humidity (%) at 2 meters
+- `Wind Speed` - Daily wind speed (m/s) at 10 meters
+- `Actual Evapotranspiration`	- Estimated evapotranspiration from actual vegetation (mm/day)
+- `Palmer Drought Severity Index`	- Long-term drought index combining temperature and precipitation to measure dryness
+- `Standardized Precipitation Index` - Short-term precipitation deficit; captures recent drying of fine fuels
+
+Fire Danger Indicators:
+- `Burning_Index`	- Fire danger index derived from temperature, humidity, wind, and fuel moisture; higher values indicate higher fire potential
+- `Energy_Release_Component` - Estimated energy release per unit area (MJ/m²); relates to potential fire intensity
+- `Dead_Fuel_Moisture` - Moisture content of medium-size dead fuels (%) affecting fire spread
+
+Mesh Network Data:
+- `Interface`, `Intermix`, and `Influence` Areas - From WUI, average area of each zone within 36KM Buffer radius around sampling points
+- `Total_Population` and `Population_Density` - Population statistics within 36KM Buffer radius around sampling points
+- `Total_Housing` and `Housing_Density` - Housing statistics within 36KM Buffer radius around sampling points
+- `Eco_Regions` - regions generally representing the varied climate and vegetative regions in California
+
+#### **ArcGIS Mesh Network:**
 
 <p align="center">
   <img src="data/maps/mesh.jpg" width="500">
 </p>
 </b>
 
-**Environmental / Weather Variables**
-- `Avg Air Temp (F)` – represents heat conditions.
-- `Avg Vap Pres (mBars)` – Average vapor pressure; indicates atmospheric moisture.
-- `Avg Rel Hum (%)` – affects fire ignition and spread.
-- `Avg Wind Speed (mph)` – higher speeds can drive fire spread.
-- `Precip (in) 7 Day Avg` – Total precipitation in the past 7 days; influences fuel moisture.
-- `ETo (in)` – Reference evapotranspiration; approximates water loss from soil and plants.
-
 ---
 
 ## Feature Engineering
-
+*Located in:* 
 > - *notebooks/03_Feature_Engineering.ipynb*
 > - *notebooks/04_Variable_Selection.ipynb*
-> - *notebooks/05_Feature_Interaction_Analysis.pynb*
+- Created rolling averages for environmental variables.
+- Created 2-year averages of fires per month per county
 
-- Created 7-day rolling averages for relevant environmental variables.
-- Engineered interaction features and composite indexes.
-
-**Derived / Interaction Features**
-- `ETo_x_Vapor_Pressure` – models combined dryness effects.
-- `ETo_x_Temp` –  highlights hot, dry conditions.
-- `Vapor_Pressure_x_Temp` – Interaction capturing the combined effect of heat and moisture.
-- `Vapor_Pressure_x_Wind_Speed` – affects drying conditions.
-
-**Composite Indexes**
-- `Days Without Rain` - A simple rolling count roughly estimating drought conditions
-- `2 Year Fire History` - Average fires per month in the geographic vicinity in last two years.
+Engineered Data: 
+- `Average_Fires_per_Month` - Historical 2 year rolling average count of fires per county
 
 ---
 
 ## Class Balancing
+*Located in:* 
 > - *notebooks/06_Class_Balancing.ipynb*
 
-Balancing Techniques explored:
-- In-method class balancing
-- Manual **undersampling** of the dominant "Low" class.
-- SMOTE for **oversampling**
+**Target:** *Wildlife Potential Destructive Power* - categorized into Low (0), Moderate(1), High(1)
 
-**Issue:** Moderate and High Damage wildfire events are pretty rare so these classes are severely underrepresented in the dataset.
+**Issues:** Moderate and High Damage wildfire events classes are underrepresented.
+
+Balancing Techniques Used:
+- In method class balancing
+- Random UnderSampler for the dominant "Low" class.
+- SMOTE for oversampling
+
+Automatic comparison and selection of class balancing strategies.
+
+<img src="plots/class_balance_v3.jpg" alt="Model Results" width="500" style="display: block; margin-left: 0;" />
 
 ---
 
 ## Modeling
+*Located in:*
 > - *notebooks/07_modeling_And_Tuning.ipynb*
 
+Models are tuned automatically and the best performing models are selected for final evaluation and visualization.
+
 **Models tested:**
-`Random Forest`
-`K-Nearest Neighbors`
-`XGBoost`
+- `Random Forest` from scikit-learn
+- `Neural Network` from scikit-learn
+- `XGBoost` from XGBoost
 
 **Metrics evaluated:**
 `F1-score (macro-averaged)`
 `Confusion matrices`
 `Cross-validation`
 
-Models are tuned automatically and the best performers are selected for the final evaluation and visualization. Additionaly, **feature importance** is extracted for tree-based models.
+Feature importance extracted for tree-based models.
 
 ---
 
 ## Visualization
+*Located in:*
 > - *notebooks/08_evaluation_and_visualization.ipynb*
 
-- Mapping and Plotting using ArcGIS, GeoPandas, Matplotlib, and Seaborn.
-- Raster data and IDW interpolation created in ArcGIS.
+- Maps using GeoPandas, Matplotlib, and Seaborn.
+- IDW interpolation for environmental variables in ArcGIS.
 
-Example Output:
+Example Python Output:
 
 <img src="plots/Interpolated.png" alt="Southern California Wildfire Model Predictions" width="400" style="display: block; margin-left: 0;" />
 
@@ -179,84 +208,33 @@ Example Output:
 
 ## Key Results
 
-**Key Findings:**
-- All Models struggle with distinguishing **Moderate** from **High** severity classes.
-- Class balancing improved metrics for minority classes.
-- XGBoost is consistently the better performer.
+## Key Results
 
-**F1 Scores:**
+**Key Findings:** \
+All Models struggle with distinguishing **Moderate** from **High** severity classes.\
+Class balancing significantly improved recall for minority classes.
 
-<img src="plots/class_balance.png" alt="Model Results" width="350" style="display: block; margin-left: 0;" />
+Conclusions:
+- Weather Variables rank low on model importance suggesting a more complicated relationship with wildfire severity
+- Population Indicators play a key role in prediciting wildfire severity
 
 ---
 
 ## Challenges
 
-**Missing Environmental Data** – Gaps in weather readings required imputation.\
-**Weak Correlation** – Environmental features don’t fully explain severity outcomes.\
-**Damage Threshold** - Division of the moderate and high damage levels\
-**Class Imbalance** – Damaging fires are rare; balancing was essential.\
-**Derived Variable Uncertainty** – Proxies like Dryness need validation.\
-**Spatial Generalization** – Models may not perform well across regions.
+> **Weak Correlation** – Environmental features don’t fully explain severity outcomes.\
+> **Class Imbalance** – Damaging fires are rare; balancing was essential.\
+> **Limited Processing Power** - Limits the granularity of the sampling mesh and increases modeling time due to larger datasets.\
+> **Data Incompatability** - Interpreting some more complex factors like reservoir levels and response times is complicated due to missing and spatially uncorrelated data.
 
 ---
 
 ## Next Steps / Potential Improvements
-> - Add vegetative land cover, topography, and WUI datasets.
-> - Additional ArcGIS integration.
-> - Incorporation of emergency response times
-> - Time series maps to check models consistency over time
-> - Create module for up to date processing of new readings and real time predictions
-> - Consult domain experts to validate assumptions and feature selection.
-
-> ## Additional Data Ideas
-> - Add **Fire** Data:
->   - Integrate all fires including those with no damage
->   - `Time since last fire`
-> - Add **Population** Data: 
->     - More Detailed `Census Block or Tract Data`
-> - **WUI**: 
->     - https://gis.data.ca.gov/datasets/CALFIRE-Forestry::wildland-urban-interface/explore?location=34.403601%2C-118.894358%2C9.95
-> - **Firefighting Facility** Locations:
->     - https://gis.data.ca.gov/datasets/8e72bb9b01954c83bf910cef4174bb3a_0/explore?location=37.091088%2C-119.278900%2C6.50
-> - **Vegetation**:
->     - https://gis.data.ca.gov/maps/35b4d77128264b3bacd31d9685f974b7/explore?location=36.236024%2C-120.809531%2C13&path=
-> - **NDVI**:
->     - https://www.ncei.noaa.gov/products/climate-data-records/normalized-difference-vegetation-index
-> - Add **TOPOGRAPHY** detail: 
->     - Slope, Aspect, Hillshade, South Facing Slopes
-> - **LANDFIRE**:
->     - https://landfire.gov/data
-> - **California State Responsibility Areas**:
->     -  https://gis.data.ca.gov/maps/5ac1dae3cb2544629a845d9a19e83991/about
-> - **CDEC** Data:
->   - https://flowwest.github.io/CDECRetrieve/articles/CDECRetrieve.html
->   - https://data.ca.gov/dataset/national-hydrography-data-nhd-and-3dhp/resource/a189d4e0-9115-4441-9b82-42a0237f2a77
->   - https://cdec.water.ca.gov/dynamicapp/wsSensorData
->
-> - **Road** Data: 
->     - https://gisdata-caltrans.opendata.arcgis.com/datasets/2d56e65de89c418780056651640291e8_0/about
-> - **Fleet** info:
->    - https://data.ca.gov/dataset/california-state-fleet
-> - **Land Ownership**: 
->    - https://gis.data.ca.gov/datasets/f73858e200634ca888b19ca8c78e3aed_0/explore
-> - **Power Lines**: 
->    - https://cecgis-caenergy.opendata.arcgis.com/datasets/CAEnergy::california-electric-transmission-lines-1/explore
-> - **Structure** Data: 
->    - https://data.ca.gov/dataset/structure
-> - **Building Footprints**:
->   - https://www.arcgis.com/home/item.html?id=ef9920eec29b427eb79cc2143c055389
->   - https://datadryad.org/dataset/doi:10.7280/D16387
-> - **Fire Hazard Zones**: 
->    - https://data.ca.gov/dataset/fire-hazard-severity-zone-viewer
-> - **Fuel Treatment**: 
->   - https://data.ca.gov/dataset/fuels-treatment-effectiveness-reporting-dashboard
->   - https://data.ca.gov/dataset/cal-fire-fuels-reduction-projects-main-application
-> - **Improved Weather Data**: 
->     - https://www.climatologylab.org/gridmet.html
-
-
-
+- Arcpy integration.
+- Incorporate emergency response times and reservoir data
+- Time series maps to check models consistency over time
+- Seperate module for up to date processing of new information and real time predictions
+- Consult domain experts to validate assumptions and feature selection.
 
 ---
 
