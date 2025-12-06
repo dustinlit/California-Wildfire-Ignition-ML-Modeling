@@ -119,6 +119,9 @@ Fire Danger Indicators:
 - `Energy_Release_Component` - Estimated energy release per unit area (MJ/m²); relates to potential fire intensity
 - `Dead_Fuel_Moisture` - Moisture content of medium-size dead fuels (%) affecting fire spread
 
+Temporal Variables:
+ - `Season`,`Month`,`Year`
+
 Mesh Network Data:
 - `Interface`, `Intermix`, and `Influence` Areas - From WUI, average area of each zone within 36KM Buffer radius around sampling points
 - `Total_Population` and `Population_Density` - Population statistics within 36KM Buffer radius around sampling points
@@ -135,11 +138,10 @@ Mesh Network Data:
 *Located in:* 
 > - *notebooks/03_Feature_Engineering.ipynb*
 > - *notebooks/04_Variable_Selection.ipynb*
-- Created rolling averages for environmental variables.
-- Created 2-year averages of fires per month per county
 
 Engineered Data: 
 - `Average_Fires_per_Month` - Historical 2 year rolling average count of fires per county
+- `7-day_Lagged_Weather` - rolling 7 day average for key weather variables
 
 ## Class Balancing
 *Located in:* 
