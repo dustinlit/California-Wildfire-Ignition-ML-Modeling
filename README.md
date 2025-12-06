@@ -3,11 +3,11 @@
 
 Author: Dustin Littlefield\
 Project Type: Data Science & GIS Portfolio\
-Technologies: Python, Pandas, Scikit-learn, XGBoost, GeoPandas, Matplotlib\
+Technologies: ArcGIS, Python, Pandas, Scikit-learn, XGBoost, GeoPandas, Matplotlib\
 Skills: `Data cleaning` `feature engineering` `supervised machine learning` `model evaluation` `class imbalance handling` \
 `spatial visualization` `exploratory data analysis` `reproducible workflow design` `results communication`\
 Status: In Progress\
-Last Updated: November 2025\
+Last Updated: December 2025\
 [Github Repository](https://github.com/dustinlit/California_Fire_Severity)
 
 ## Overview
@@ -15,7 +15,7 @@ This project is a work in progress that explores the relationship between enviro
 
 **Disclaimer:** I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions.
 
- ### Version 3.0 Changelog
+### Version 3.0 Changelog
 > 1. New more accurate and complete weather data from **gridMET Climatology Lab**
 > 2. Integration of **Wildland Urban Interface** and **California Eco regions**.
 > 2. Replaced `KNN` model with a `Neural Network` for a simpler data workflow.
@@ -53,10 +53,6 @@ This project is a work in progress that explores the relationship between enviro
 
 <img src="data/maps/interpolation.jpg" width="1600">
 
-#### Example Python Output:
-
-<img src="plots/pred.png" width="1400">
-
 ## Project Structure
 
 California_Fire_Severity/\
@@ -84,8 +80,6 @@ California_Fire_Severity/\
 ├── README.ipynb\
 └── README.md
 
----
-
 ### Data Sources
 
 > **Fire Incident Data**:
@@ -101,8 +95,6 @@ California_Fire_Severity/\
 > **Wildlife Urban Interface**: 
 > - *California Department of Forestry and Fire Protection*: <https://gis.data.ca.gov/datasets/CALFIRE-Forestry::wildland-urban-interface/explore?location=34.403601%2C-118.894358%2C9.95>
 > - *California Department of Fish and Wildlife*: <https://data.ca.gov/dataset/cdfw-regions>
-
----
 
 ## Data Processing
 
@@ -138,9 +130,6 @@ Mesh Network Data:
 <p align="center">
   <img src="data/maps/mesh.jpg" width="500">
 </p>
-</b>
-
----
 
 ## Feature Engineering
 *Located in:* 
@@ -151,8 +140,6 @@ Mesh Network Data:
 
 Engineered Data: 
 - `Average_Fires_per_Month` - Historical 2 year rolling average count of fires per county
-
----
 
 ## Class Balancing
 *Located in:* 
@@ -170,8 +157,6 @@ Balancing Techniques Used:
 Automatic comparison and selection of class balancing strategies.
 
 <img src="plots/class_balance_v3.jpg" alt="Model Results" width="500" style="display: block; margin-left: 0;" />
-
----
 
 ## Modeling
 *Located in:*
@@ -191,8 +176,6 @@ Models are tuned automatically and the best performing models are selected for f
 
 Feature importance extracted for tree-based models.
 
----
-
 ## Visualization
 *Located in:*
 > - *notebooks/08_evaluation_and_visualization.ipynb*
@@ -204,10 +187,6 @@ Example Python Output:
 
 <img src="plots/Interpolated.png" alt="Southern California Wildfire Model Predictions" width="400" style="display: block; margin-left: 0;" />
 
----
-
-## Key Results
-
 ## Key Results
 
 **Key Findings:** \
@@ -218,16 +197,12 @@ Conclusions:
 - Weather Variables rank low on model importance suggesting a more complicated relationship with wildfire severity
 - Population Indicators play a key role in prediciting wildfire severity
 
----
-
 ## Challenges
 
 > **Weak Correlation** – Environmental features don’t fully explain severity outcomes.\
 > **Class Imbalance** – Damaging fires are rare; balancing was essential.\
 > **Limited Processing Power** - Limits the granularity of the sampling mesh and increases modeling time due to larger datasets.\
 > **Data Incompatability** - Interpreting some more complex factors like reservoir levels and response times is complicated due to missing and spatially uncorrelated data.
-
----
 
 ## Next Steps / Potential Improvements
 - Arcpy integration.
@@ -236,15 +211,11 @@ Conclusions:
 - Seperate module for up to date processing of new information and real time predictions
 - Consult domain experts to validate assumptions and feature selection.
 
----
-
 ## Installation
 To run the project locally:\
 git clone https://github.com/dustinlit/wildfire-severity.git \
 cd wildfire-severity\
 pip install -r requirements.txt
-
----
 
 ## License
 This project is released under the MIT License.
