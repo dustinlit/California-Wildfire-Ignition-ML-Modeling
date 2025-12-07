@@ -83,18 +83,18 @@ California_Fire_Severity/\
 ### Data Sources
 
 > **Fire Incident Data**:
-> - *CAL FIRE Damage Inspection (DINS)* Data: <https://data.ca.gov/dataset/cal-fire-damage-inspection-dins-data>'
-> - *Calfire Incident* Data: <https://www.fire.ca.gov/incidents>\
+ - *CAL FIRE Damage Inspection (DINS)* Data: <https://data.ca.gov/dataset/cal-fire-damage-inspection-dins-data>'
+ - *Calfire Incident* Data: <https://www.fire.ca.gov/incidents>\
 
 > **Weather Data**:
-> - *gridMET* - <https://www.climatologylab.org/gridmet.html>
+ - *gridMET* - <https://www.climatologylab.org/gridmet.html>
 
 > **California Demographic Data** 
-> - *U.S. Census Bureau, Department of Commerce*: Population <https://catalog.data.gov/dataset/tiger-line-shapefile-current-state-california-2020-census-block>
+ - *U.S. Census Bureau, Department of Commerce*: Population <https://catalog.data.gov/dataset/tiger-line-shapefile-current-state-california-2020-census-block>
 
 > **Wildlife Urban Interface**: 
-> - *California Department of Forestry and Fire Protection*: <https://gis.data.ca.gov/datasets/CALFIRE-Forestry::wildland-urban-interface/explore?location=34.403601%2C-118.894358%2C9.95>
-> - *California Department of Fish and Wildlife*: <https://data.ca.gov/dataset/cdfw-regions>
+- *California Department of Forestry and Fire Protection*: <https://gis.data.ca.gov/datasets/CALFIRE-Forestry::wildland-urban-interface/explore?location=34.403601%2C-118.894358%2C9.95>
+- *California Department of Fish and Wildlife*: <https://data.ca.gov/dataset/cdfw-regions>
 
 ## Data Processing
 
@@ -158,7 +158,7 @@ Balancing Techniques Used:
 
 Automatic comparison and selection of class balancing strategies.
 
-<img src="plots/class_balance_v3.jpg" alt="Model Results" width="500" style="display: block; margin-left: 0;" />
+<img src="plots/class_balance_v3.png" alt="Model Results" width="400" style="display: block; margin-left: 0;" />
 
 ## Modeling
 *Located in:*
@@ -187,14 +187,14 @@ Feature importance extracted for tree-based models.
 
 ### Metrics for real world case study: `Palisades Fire` - 01/07/2025:
 
-<img src="plots/Metrics.png" alt="Model Metrics for Case Study" width="600" style="display: block; margin-left: 0;" />
+<img src="plots/Metrics.png" alt="Model Metrics for Case Study" width="500" style="display: block; margin-left: 0;" />
 
 ## **Feature Importances** for Tree models:
 
-<img src="plots/RF_top.png" alt="Model Metrics for Case Study" width="500" style="display: block; margin-left: 0;" />
+<img src="plots/RF_top.png" alt="Model Metrics for Case Study" width="400" style="display: block; margin-left: 0;" />
 
 
-<img src="plots/XGB_top.png" alt="Model Metrics for Case Study" width="420" style="display: block; margin-left: 0;" />
+<img src="plots/XGB_top.png" alt="Model Metrics for Case Study" width="320" style="display: block; margin-left: 0;" />
 
 Conclusions:
 -`Year` is a leading factor in both tree models. Suggesting that fire severity is increasing, maybe due to climate change.
@@ -214,8 +214,7 @@ Example Python Output:
 <img src="plots/results.png" alt="California 01072025" width="1500" style="display: block; margin-left: 0;" />
 ---
 
-<img src="plots/Interpolated.png" alt="Southern California Wildfire Model Predictions Interpolated" width="500" style="display: block; margin-left: 0;" />
----
+<img src="plots/Interpolated.png" alt="Southern California Wildfire Model Predictions Interpolated" width="400" style="display: block; margin-left: 0;" />
 
 ## Key Results
 
