@@ -178,6 +178,30 @@ Models are tuned automatically and the best performing models are selected for f
 
 Feature importance extracted for tree-based models.
 
+## Model Metrics
+
+**Key Findings:** 
+- All Models struggle with distinguishing **Moderate** from **High** severity classes.
+- Tree models performed comparably, may need further tuning
+- Neural Network currently struggles
+
+### Metrics for real world case study: `Palisades Fire` - 01/07/2025:
+
+<img src="plots/Metrics.png" alt="Model Metrics for Case Study" width="600" style="display: block; margin-left: 0;" />
+
+## **Feature Importances** for Tree models:
+
+<img src="plots/RF_top.png" alt="Model Metrics for Case Study" width="500" style="display: block; margin-left: 0;" />
+
+
+<img src="plots/XGB_top.png" alt="Model Metrics for Case Study" width="420" style="display: block; margin-left: 0;" />
+
+Conclusions:
+-`Year` is a leading factor in both tree models. Suggesting that fire severity is increasing, maybe due to climate change.
+- Most **weather** Variables rank low on model importance suggesting a more complicated relationship with wildfire severity
+- **Population** stats play a key role in prediciting wildfire severity
+- More data may be neccessary for better correllations
+
 ## Visualization
 *Located in:*
 > - *notebooks/08_evaluation_and_visualization.ipynb*
@@ -187,7 +211,11 @@ Feature importance extracted for tree-based models.
 
 Example Python Output:
 
-<img src="plots/Interpolated.png" alt="Southern California Wildfire Model Predictions" width="400" style="display: block; margin-left: 0;" />
+<img src="plots/results.png" alt="California 01072025" width="1500" style="display: block; margin-left: 0;" />
+---
+
+<img src="plots/Interpolated.png" alt="Southern California Wildfire Model Predictions Interpolated" width="500" style="display: block; margin-left: 0;" />
+---
 
 ## Key Results
 
