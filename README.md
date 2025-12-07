@@ -10,15 +10,45 @@ Status: In Progress\
 Last Updated: December 2025\
 [Github Repository](https://github.com/dustinlit/California_Fire_Severity)
 
+**Disclaimer:** I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions.
+
 ## Overview
-This project is a work in progress that explores the relationship between environmental and weather-related factors and wildfire severity in California. The goal is to predict a custom severity index `Wildfire Potential Destructive Power` — which incorporates structures damaged, structures destroyed, and fatalities.
+This project is a work in progress that explores the relationship between wildfire severity and environmental, geographical, social and temporal factors in the state of California. The goal is to predict a custom severity index `Wildfire Potential Destructive Power` — which incorporates structures damaged, structures destroyed and acres burned as degrees of fire severity.
+
+## Objectives
+- Predict wildfire damage potential based on environmental, geographical and social data.
+- Extrapolate statewide wildfire coverage by integrating daily weather data and fire records through spatial analysis of a mesh network of buffered points across California.
+- Compare several multi-classification modelling techniques including `XGBoost`,`Random Forest`, and a `Neural Network`.
+- Compare class balancing techniques between `RandomUnderSampler`, `SMOTE`, and unbalanced and measure thier effect on model performance.
+- Utilize interpolation techniques to create geospatial visualizations that illustrate local and regional risk patterns.
+- Explore relationships between key factors with wilfire severity and model importance.
+
+## Key Initial Insights:
+- In the mesh network, there were a total of **$57,203$** incidents of wildfires detected between $01/01/2018$ and $12/31/2024$ thoughout the state.
+- **$13,925$** of these were *high* risk incidents causing significant property damage or acreage burned.
+- Wildfire events appear to be increasing over time. `Year` is a strong contributor to the models.
+- Human factors weigh heavily in the models, `Population` and `Housing` density contribute substantially to the random forest model (the best performer).
+- Regional factors like `WUI interface` and `WUI intermix` zones contribute reasonably as well.
+- Surprising to me, weather factors alone are poor predictors of fire severity.
+- `Tree` based models appear to capture the complicated relationships best.
+
+<img src="plots/RF_top.png" alt="Model Metrics for Case Study" width="400" style="display: block; margin-left: 0;" />
+
+<img src="data/maps/interpolation.jpg" width="1200">
+
+## Initial Challenges
+- **Dataset size** - The addition of higher granularity and additional data is leading to ***prohibitively large and unwieldy processor times*** on current hardware. It has become a balancing act to trim the dataset for efficient workflow without overly affecting model performance.
+- **Heavy Class Imbalance** - Damaging wildfire events are rare compared to days with no significant events. The low risk class is composed of $389,137$ data points compared to the $13,925$ members of the high risk class. `Undersampling` the majority class works best for balancing, while oversampling tends to ***add too much noise*** to the models.
+- **Messy Real World Data** - Data with large gaps, data without handy relevant spatial fields, data in which you have to wrangle random mistakes. Some days definitely feel like a rodeo as many promising avenues become dead ends due to the potential time cost or complications.
+- 
+
 
 **Disclaimer:** I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions.
 
 ### Version 3.0 Changelog
-> 1. New more accurate and complete weather data from **gridMET Climatology Lab**
-> 2. Integration of **Wildland Urban Interface** and **California Eco regions**.
-> 2. Replaced `KNN` model with a `Neural Network` for a simpler data workflow.
+> 1. Incorporated more accurate and complete raster weather data from **gridMET Climatology Lab**
+> 2. Integrated **Wildland Urban Interface** and **California Eco regions**.
+> 2. Replaced the `KNN` model with a `Neural Network` for a simpler data workflow.
 > 3. ArcGIS Pro integration for data preparation and prediction interpolation
 > 4. Added more accurate Census Block data. Population stats calculated as buffer zone around sampling points.
 
@@ -41,17 +71,8 @@ This project is a work in progress that explores the relationship between enviro
 >       - Buffer spatial join for combining fire damage info with weather data
 >       - Incorporated Regionality and Seasonality into models
 
-## Objectives
-- Predict wildfire damage potential based on environmental, geographical and social data.
-- Test classification models using resampling techniques to handle class imbalance.
-- Create geospatial *interpolation visualizations* to illustrate regional risk patterns.
-- Explore second-degree feature interactions and correlation to improve model features.
 
 <img src="plots/wildfires.png" width="600">
-
-#### Example ArcGIS Output:
-
-<img src="data/maps/interpolation.jpg" width="1600">
 
 ## Project Structure
 
@@ -83,18 +104,20 @@ California_Fire_Severity/\
 ### Data Sources
 
 > **Fire Incident Data**:
- - *CAL FIRE Damage Inspection (DINS)* Data: <https://data.ca.gov/dataset/cal-fire-damage-inspection-dins-data>'
- - *Calfire Incident* Data: <https://www.fire.ca.gov/incidents>\
+ - **Wildfire damage data**: *CAL FIRE Damage Inspection (DINS)* <https://data.ca.gov/dataset/cal-fire-damage-inspection-dins-data>'
+ - **Wildfire incidents**: *Calfire Incidents* <https://www.fire.ca.gov/incidents>\
 
-> **Weather Data**:
- - *gridMET* - <https://www.climatologylab.org/gridmet.html>
+> **Environmental Data**:
+ - **Daily weather readings**: *gridMET* <https://www.climatologylab.org/gridmet.html>
 
-> **California Demographic Data** 
- - *U.S. Census Bureau, Department of Commerce*: Population <https://catalog.data.gov/dataset/tiger-line-shapefile-current-state-california-2020-census-block>
+> **California Demographic Data** :
+ - **Population statistics**: *U.S. Census Bureau, Department of Commerce* <https://catalog.data.gov/dataset/tiger-line-shapefile-current-state-california-2020-census-block>
 
 > **Wildlife Urban Interface**: 
-- *California Department of Forestry and Fire Protection*: <https://gis.data.ca.gov/datasets/CALFIRE-Forestry::wildland-urban-interface/explore?location=34.403601%2C-118.894358%2C9.95>
-- *California Department of Fish and Wildlife*: <https://data.ca.gov/dataset/cdfw-regions>
+- **WUI layer**: *California Department of Forestry and Fire Protection* <https://gis.data.ca.gov/datasets/CALFIRE-Forestry::wildland-urban-interface/explore?location=34.403601%2C-118.894358%2C9.95>
+- **CDFW regions**: *California Department of Fish and Wildlife* <https://data.ca.gov/dataset/cdfw-regions>
+- **Eco Regions** - *USDA Forestry Service*
+<https://data.fs.usda.gov/geodata/edw/datasets.php?dsetCategory=biota>
 
 ## Data Processing
 
@@ -214,7 +237,7 @@ Example Python Output:
 <img src="plots/results.png" alt="California 01072025" width="1500" style="display: block; margin-left: 0;" />
 ---
 
-<img src="plots/Interpolated.png" alt="Southern California Wildfire Model Predictions Interpolated" width="400" style="display: block; margin-left: 0;" />
+
 
 ## Key Results
 
