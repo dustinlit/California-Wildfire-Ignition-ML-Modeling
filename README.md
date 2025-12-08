@@ -24,8 +24,8 @@ This project is a work in progress that explores the relationship between wildfi
 - Explore relationships between key factors with wilfire severity and model importance.
 
 ## Key Initial Insights:
-- In the mesh network, there were a total of **$57,203$** incidents of wildfires detected between $01/01/2018$ and $12/31/2024$ thoughout the state.
-- **$13,925$** of these were *high* risk incidents causing significant property damage or acreage burned.
+- In the mesh network, there were a total of **57,203** incidents of wildfires detected between 01/01/2018 and 12/31/2024 thoughout the state.
+- **13,925** of these were *high* risk incidents causing significant property damage or acreage burned.
 - Wildfire events appear to be increasing over time. `Year` is a strong contributor to the models.
 - Human factors weigh heavily in the models, `Population` and `Housing` density contribute substantially to the random forest model (the best performer).
 - Regional factors like `WUI interface` and `WUI intermix` zones contribute reasonably as well.
@@ -39,11 +39,7 @@ This project is a work in progress that explores the relationship between wildfi
 ## Initial Challenges
 - **Dataset size** - The addition of higher granularity and additional data is leading to ***prohibitively large and unwieldy processor times*** on current hardware. It has become a balancing act to trim the dataset for efficient workflow without overly affecting model performance.
 - **Heavy Class Imbalance** - Damaging wildfire events are rare compared to days with no significant events. The low risk class is composed of $389,137$ data points compared to the $13,925$ members of the high risk class. `Undersampling` the majority class works best for balancing, while oversampling tends to ***add too much noise*** to the models.
-- **Messy Real World Data** - Data with large gaps, data without handy relevant spatial fields, data in which you have to wrangle random mistakes. Some days definitely feel like a rodeo as many promising avenues become dead ends due to the potential time cost or complications.
-- 
-
-
-**Disclaimer:** I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions.
+- **Messy Real World Data** - Data with large gaps, data without handy relevant spatial fields, data in which you have to wrangle random mistakes. Some days feel like a rodeo, so many promising avenues become dead ends due to the potential time sink.
 
 ### Version 3.0 Changelog
 > 1. Incorporated more accurate and complete raster weather data from **gridMET Climatology Lab**
@@ -55,15 +51,12 @@ This project is a work in progress that explores the relationship between wildfi
 
 ### Version 2.0 Changelog
 > 1. Added Detailed fire damage data
->       - CALFIRE damage cost data added
->       - Estimate cost of damage from damage to structures
->       - More accurate target
->       - Attaches significance to fires that cause damage only
+>       - CALFIRE damage cost data added, 
+>       - Estimation of damage directly from structures
 > 2. Expanded the dates for weather and damage data
 >       - Expanded from 2018-2020 to 2018-2025
 > 3. New Features
 >       - `Fire History` average fires per month for previous years
->       - `Dryness Indicator` rolling count of days without rain
 > 4. Data Handling Optimization
 >       - Simplified handling of case study data as references instead of storing separate databases
 > 5. Geographical and Temporal Integration
@@ -105,21 +98,19 @@ California_Fire_Severity/\
 
 > **Fire Incident Data**:
  - **Wildfire damage data**: *CAL FIRE Damage Inspection (DINS)* <https://data.ca.gov/dataset/cal-fire-damage-inspection-dins-data>'
- - **Wildfire incidents**: *Calfire Incidents* <https://www.fire.ca.gov/incidents>\
+ - **Wildfire incidents**: *Calfire Incidents* <https://www.fire.ca.gov/incidents>
 
 > **Environmental Data**:
  - **Daily weather readings**: *gridMET* <https://www.climatologylab.org/gridmet.html>
 
 > **California Demographic Data** :
- - **Population statistics**: *U.S. Census Bureau, Department of Commerce* <https://catalog.data.gov/dataset/tiger-line-shapefile-current-state-california-2020-census-block>
-
+ - **Census Tract Data**: *U.S. Census Bureau, Department of Commerce* <https://catalog.data.gov/dataset/tiger-line-shapefile-2021-state-california-census-tracts>
+ - **2024 American Community Survey 5 year Median Income Data** *U.S. Census Bureau, Department of Commerce* <https://data.census.gov/table/ACSST1Y2024.S1903?q=California+Income&g=010XX00US$1500000_040XX00US06$1400000,06$1500000>
 > **Wildlife Urban Interface**: 
 - **WUI layer**: *California Department of Forestry and Fire Protection* <https://gis.data.ca.gov/datasets/CALFIRE-Forestry::wildland-urban-interface/explore?location=34.403601%2C-118.894358%2C9.95>
 - **CDFW regions**: *California Department of Fish and Wildlife* <https://data.ca.gov/dataset/cdfw-regions>
 - **Eco Regions** - *USDA Forestry Service*
 <https://data.fs.usda.gov/geodata/edw/datasets.php?dsetCategory=biota>
-
-## Data Processing
 
 **Raw Data Processed in:**
 > - *notebooks/A_Appendix_Sampling_Points.ipynb*
@@ -127,9 +118,9 @@ California_Fire_Severity/\
 > - *notebooks/C_Appendix_Gridmet_Combination.pynb*
 > - *notebooks/D_Appendix_Gridmet_Extraction.pynb*
 
-#### **Key Variables Used**:
+## Key Factors:
 Environmental / Weather Variables:
-- `Air Temperature`-	Maximum air temperature at 2 meters above ground (Kelvin)
+- `Air Temperature`-	Daily aximum and minimum air temperature at 2 meters above ground (Kelvin)
 - `Vapor Pressure Deficit` - kPa Difference between saturation vapor pressure and actual vapor pressure (kPa); indicates atmospheric drying power
 - `Relative Humidity`	-Maximum daily relative humidity (%) at 2 meters
 - `Wind Speed` - Daily wind speed (m/s) at 10 meters

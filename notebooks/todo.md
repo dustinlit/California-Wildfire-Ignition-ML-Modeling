@@ -18,6 +18,8 @@ Background
 - https://hal.science/hal-05240719v1/file/Modelling_California_wildfires_final.pdf
 
 Census Tract Data: https://catalog.data.gov/dataset/tiger-line-shapefile-2021-state-california-census-tracts
+
+
 ACS 5 year 2023 median income data https://data.census.gov/table/ACSST1Y2024.S1903?q=California+Income&g=010XX00US$1500000_040XX00US06$1400000,06$1500000
 
 Modeling
