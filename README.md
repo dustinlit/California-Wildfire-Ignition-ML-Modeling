@@ -235,6 +235,7 @@ Sampling Grid Data:
       <td>none</td>
       <td>Region</td>
     </tr>
+    <tr>
       <th>9</th>
       <td>dominant_section_description</td>
       <td>Section Description</td>
@@ -243,6 +244,7 @@ Sampling Grid Data:
       <td>none</td>
       <td>Region</td>
     </tr>
+    <tr>
       <th>11</th>
       <td>dominant_section_percent</td>
       <td>Dominant Section Percent</td>
@@ -314,6 +316,7 @@ Sampling Grid Data:
       <td>meters</td>
       <td>Elevation</td>
     </tr>
+    <tr>
       <th>22</th>
       <td>slope_max</td>
       <td>Slope Max</td>
