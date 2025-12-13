@@ -1,5 +1,5 @@
 # Mapping the Potential Destructive Power of Wildfires Using Machine Learning
-*Version 3.0*
+*Version 4.0*
 
 Author: Dustin Littlefield\
 Project Type: Data Science & GIS Portfolio\
@@ -40,6 +40,14 @@ This project is a work in progress that explores the relationship between wildfi
 - **Dataset size** - The addition of higher granularity and additional data is leading to ***prohibitively large and unwieldy processor times*** on current hardware. It has become a balancing act to trim the dataset for efficient workflow without overly affecting model performance.
 - **Heavy Class Imbalance** - Damaging wildfire events are rare compared to days with no significant events. The low risk class is composed of $389,137$ data points compared to the $13,925$ members of the high risk class. `Undersampling` the majority class works best for balancing, while oversampling tends to ***add too much noise*** to the models.
 - **Messy Real World Data** - Data with large gaps, data without handy relevant spatial fields, data in which you have to wrangle random mistakes. Some days feel like a rodeo, so many promising avenues become dead ends due to the potential time sink.
+### Version 4.0 Changelog
+> 1. New Datasets
+>     - Detailed Elevation data (slope,aspect, northness, eastness)
+>     - Infrastructure data (roads, power lines)
+>     - Land Cover data
+> 2. Refined ArcGIS worklow
+> 3. Changed samples from points to a grid structure to ensure even coverage of the state with minimal overlap.
+> 4. Replaced Neural Network with LightGBM tree model
 
 ### Version 3.0 Changelog
 > 1. Incorporated more accurate and complete raster weather data from **gridMET Climatology Lab**
@@ -136,17 +144,16 @@ Fire Danger Indicators:
 Temporal Variables:
  - `Season`,`Month`,`Year`
 
-Mesh Network Data:
+Sampling Grid Data:
 - `Interface`, `Intermix`, and `Influence` Areas - From WUI, average area of each zone within 36KM Buffer radius around sampling points
-- `Total_Population` and `Population_Density` - Population statistics within 36KM Buffer radius around sampling points
-- `Total_Housing` and `Housing_Density` - Housing statistics within 36KM Buffer radius around sampling points
+- `Total_Population`,`Population_Density`,`Total_Housing`,`Housing_Density` - Population and housing statistics within 36KM Buffer radius around sampling points
 - `Eco_Regions` - regions generally representing the varied climate and vegetative regions in California
-
+- `Slope`,`Aspect` Derived from high resolution USGS daily rasters 
+- `Land Cover` Derived from land cover raster
+- `Roads`,`Power Lines`
 #### **ArcGIS Mesh Network:**
 
-<p align="center">
-  <img src="data/maps/mesh.jpg" width="500">
-</p>
+<img src="../data/maps/grids.png" width="400">
 
 ## Feature Engineering
 *Located in:* 
@@ -157,7 +164,7 @@ Engineered Data:
 - `Average_Fires_per_Month` - Historical 2 year rolling average count of fires per county
 - `7-day_Lagged_Weather` - rolling 7 day average for key weather variables
 
-## Class Balancing
+## Class Balancing (Updating)
 *Located in:* 
 > - *notebooks/06_Class_Balancing.ipynb*
 
@@ -182,7 +189,7 @@ Models are tuned automatically and the best performing models are selected for f
 
 **Models tested:**
 - `Random Forest` from scikit-learn
-- `Neural Network` from scikit-learn
+- `Light GBM` from scikit-learn
 - `XGBoost` from XGBoost
 
 **Metrics evaluated:**
@@ -199,24 +206,24 @@ Feature importance extracted for tree-based models.
 - Tree models performed comparably, may need further tuning
 - Neural Network currently struggles
 
-### Metrics for real world case study: `Palisades Fire` - 01/07/2025:
+### Metrics for real world case study: `Palisades Fire` - 01/07/2025: (Updating)
 
 <img src="plots/Metrics.png" alt="Model Metrics for Case Study" width="500" style="display: block; margin-left: 0;" />
 
-## **Feature Importances** for Tree models:
+## **Feature Importances** for Tree models: (Updating)
 
 <img src="plots/RF_top.png" alt="Model Metrics for Case Study" width="400" style="display: block; margin-left: 0;" />
 
 
 <img src="plots/XGB_top.png" alt="Model Metrics for Case Study" width="320" style="display: block; margin-left: 0;" />
 
-Conclusions:
--`Year` is a leading factor in both tree models. Suggesting that fire severity is increasing, maybe due to climate change.
+## Conclusions:
+- `Year` is a leading factor in both tree models. Suggesting that fire severity is increasing, maybe due to climate change.
 - Most **weather** Variables rank low on model importance suggesting a more complicated relationship with wildfire severity
 - **Population** stats play a key role in prediciting wildfire severity
 - More data may be neccessary for better correllations
 
-## Visualization
+## Visualization (updating)
 *Located in:*
 > - *notebooks/08_evaluation_and_visualization.ipynb*
 
@@ -228,18 +235,6 @@ Example Python Output:
 <img src="plots/results.png" alt="California 01072025" width="1500" style="display: block; margin-left: 0;" />
 ---
 
-
-
-## Key Results
-
-**Key Findings:** \
-All Models struggle with distinguishing **Moderate** from **High** severity classes.\
-Class balancing significantly improved recall for minority classes.
-
-Conclusions:
-- Weather Variables rank low on model importance suggesting a more complicated relationship with wildfire severity
-- Population Indicators play a key role in prediciting wildfire severity
-
 ## Challenges
 
 > **Weak Correlation** – Environmental features don’t fully explain severity outcomes.\
@@ -248,6 +243,7 @@ Conclusions:
 > **Data Incompatability** - Interpreting some more complex factors like reservoir levels and response times is complicated due to missing and spatially uncorrelated data.
 
 ## Next Steps / Potential Improvements
+- Hot Spot analysis of daily NDVI raster data (in process)
 - Arcpy integration.
 - Incorporate emergency response times and reservoir data
 - Time series maps to check models consistency over time
