@@ -153,6 +153,7 @@ Sampling Grid Data:
 - `Slope`,`Aspect` Derived from high resolution USGS daily rasters 
 - `Land Cover` Derived from land cover raster
 - `Roads`,`Power Lines`
+
  ## ArcGIS Mesh Network:
 
  - Constructed in ArcGIS pro 3.4
