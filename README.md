@@ -153,9 +153,249 @@ Sampling Grid Data:
 - `Slope`,`Aspect` Derived from high resolution USGS daily rasters 
 - `Land Cover` Derived from land cover raster
 - `Roads`,`Power Lines`
-#### **ArcGIS Mesh Network:**
+ ## ArcGIS Mesh Network:
 
-<img src="../data/maps/grids.png" width="400">
+ - Constructed in ArcGIS pro 3.4
+
+<img src="data/maps/grids.png" width="400" style="display: block; margin-left: 0;" />
+
+### Key Fields
+<br>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Field Name</th>
+      <th>Alias</th>
+      <th>Data Type</th>
+      <th>Description</th>
+      <th>Units</th>
+      <th>Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>Influence_Zone</td>
+      <td>Influence Zone</td>
+      <td>Double</td>
+      <td>Total amount io influence areas within each grid</td>
+      <td>square meters</td>
+      <td>WUI</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>interface_zone</td>
+      <td>Interface</td>
+      <td>Double</td>
+      <td>Total amount io interface areas within each grid</td>
+      <td>square meters</td>
+      <td>WUI</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>intermix_zone</td>
+      <td>Intermix</td>
+      <td>Double</td>
+      <td>Total amount io intermix areas within each grid</td>
+      <td>square meters</td>
+      <td>WUI</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>dominant_province_description</td>
+      <td>Province Description</td>
+      <td>Text</td>
+      <td>Ecoregion province that makes up the most area in each grid</td>
+      <td>none</td>
+      <td>Region</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>dominant_province_percent</td>
+      <td>Dominant Province Percent</td>
+      <td>Double</td>
+      <td>Percentage of ecoregion province that makes up the most area in each grid</td>
+      <td>none</td>
+      <td>Region</td>
+    </tr>
+      <th>9</th>
+      <td>dominant_section_description</td>
+      <td>Section Description</td>
+      <td>Text</td>
+      <td>Ecoregion section that makes up the most area in each grid</td>
+      <td>none</td>
+      <td>Region</td>
+    </tr>
+      <th>11</th>
+      <td>dominant_section_percent</td>
+      <td>Dominant Section Percent</td>
+      <td>Double</td>
+      <td>Total area of ecoregion section that makes up the most area in each grid</td>
+      <td>square meters</td>
+      <td>Region</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>forest_percent</td>
+      <td>Forest Percent</td>
+      <td>Long</td>
+      <td>Percent of forest land in each grid</td>
+      <td>none</td>
+      <td>Fuel</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>developed_percent</td>
+      <td>Developed Percent</td>
+      <td>Long</td>
+      <td>Percent of developed land in each grid</td>
+      <td>none</td>
+      <td>Fuel</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>other_percent</td>
+      <td>Other Percent</td>
+      <td>Long</td>
+      <td>Percent of other (water,desert) land in each grid</td>
+      <td>none</td>
+      <td>Fuel</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>shrub_grass_percent</td>
+      <td>Shrub/Grass Percent</td>
+      <td>Long</td>
+      <td>Percent of shrub/grasslands land in each grid</td>
+      <td>none</td>
+      <td>Fuel</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>wetlands_percent</td>
+      <td>Wetlands Percent</td>
+      <td>Long</td>
+      <td>Percent of wetlands land in each grid</td>
+      <td>none</td>
+      <td>Fuel</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>elevation_range</td>
+      <td>Elevation Range</td>
+      <td>Double</td>
+      <td>Difference between the minimum and maximum elevation in each grid</td>
+      <td>meters</td>
+      <td>Elevation</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>elevation_mean</td>
+      <td>Elevation Mean</td>
+      <td>Double</td>
+      <td>Average elevation in each grid</td>
+      <td>meters</td>
+      <td>Elevation</td>
+    </tr>
+      <th>22</th>
+      <td>slope_max</td>
+      <td>Slope Max</td>
+      <td>Double</td>
+      <td>Maximum slope in each grid</td>
+      <td>degrees</td>
+      <td>Elevation</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>slope_mean</td>
+      <td>Slope Mean</td>
+      <td>Double</td>
+      <td>Average slope in each grid</td>
+      <td>degrees</td>
+      <td>Elevation</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>northness_mean</td>
+      <td>Northness Mean</td>
+      <td>Double</td>
+      <td>How strongly the slopes in the grid faces north (-1 to 1)</td>
+      <td>none</td>
+      <td>Elevation</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>eastness_mean</td>
+      <td>Eastness Mean</td>
+      <td>Double</td>
+      <td>How strongly the slopes in the grid faces east (-1 to 1)</td>
+      <td>none</td>
+      <td>Elevation</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>median_income</td>
+      <td>Mean Median Income</td>
+      <td>Double</td>
+      <td>Median income in each grid</td>
+      <td>dollars</td>
+      <td>Social</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>road_density</td>
+      <td>Road Density</td>
+      <td>Double</td>
+      <td>Total density of roads in each grid</td>
+      <td>1/meters</td>
+      <td>Infrastructure</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>power_line_density</td>
+      <td>Density of Power Lines</td>
+      <td>Double</td>
+      <td>Total density of power lines in each grid</td>
+      <td>1/meters</td>
+      <td>Infrastructure</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>total_housing</td>
+      <td>Total Housing</td>
+      <td>Double</td>
+      <td>Count of all housing units in each grid</td>
+      <td>house</td>
+      <td>Social</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>population_density</td>
+      <td>Population Density</td>
+      <td>Double</td>
+      <td>Density of population in each grid</td>
+      <td>peopl/square meter</td>
+      <td>Social</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 ## Feature Engineering
 *Located in:* 
