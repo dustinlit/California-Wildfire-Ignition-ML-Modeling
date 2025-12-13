@@ -119,8 +119,7 @@ California_Fire_Severity/\
 > **Wildlife Urban Interface**: 
 - **WUI layer**: *California Department of Forestry and Fire Protection* <https://gis.data.ca.gov/datasets/CALFIRE-Forestry::wildland-urban-interface/explore?location=34.403601%2C-118.894358%2C9.95>
 - **CDFW regions**: *California Department of Fish and Wildlife* <https://data.ca.gov/dataset/cdfw-regions>
-- **Eco Regions** - *USDA Forestry Service*
-<https://data.fs.usda.gov/geodata/edw/datasets.php?dsetCategory=biota>
+- **Eco Regions** - *USDA Forestry Service* <https://data.fs.usda.gov/geodata/edw/datasets.php?dsetCategory=biota>
 
 **Raw Data Processed in:**
 > - *notebooks/A_Appendix_Sampling_Points.ipynb*
@@ -154,13 +153,15 @@ Sampling Grid Data:
 - `Land Cover` Derived from land cover raster
 - `Roads`,`Power Lines`
 
- ## ArcGIS Mesh Network:
+
+ ## ArcGIS Sampling Grid:
+
 
  - Constructed in ArcGIS pro 3.4
 
 <img src="data/maps/grids.png" width="400" style="display: block; margin-left: 0;" />
 
-### Key Fields
+### Key Fields in Grids
 <br>
 
 <div>
