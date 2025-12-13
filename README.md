@@ -17,8 +17,8 @@ This project is a work in progress that explores the relationship between wildfi
 
 ## Objectives
 - Predict wildfire damage potential based on environmental, geographical and social data.
-- Extrapolate statewide wildfire coverage by integrating daily weather data and fire records through spatial analysis of a mesh network of buffered points across California.
-- Compare several multi-classification modelling techniques including `XGBoost`,`Random Forest`, and a `Neural Network`.
+- Extrapolate statewide wildfire coverage by integrating daily weather data and fire records through spatial analysis of a grid network across California.
+- Compare several multi-classification modelling techniques including `XGBoost`,`Random Forest`, and  `Light GBM`.
 - Compare class balancing techniques between `RandomUnderSampler`, `SMOTE`, and unbalanced and measure thier effect on model performance.
 - Utilize interpolation techniques to create geospatial visualizations that illustrate local and regional risk patterns.
 - Explore relationships between key factors with wilfire severity and model importance.
@@ -39,15 +39,17 @@ This project is a work in progress that explores the relationship between wildfi
 ## Initial Challenges
 - **Dataset size** - The addition of higher granularity and additional data is leading to ***prohibitively large and unwieldy processor times*** on current hardware. It has become a balancing act to trim the dataset for efficient workflow without overly affecting model performance.
 - **Heavy Class Imbalance** - Damaging wildfire events are rare compared to days with no significant events. The low risk class is composed of $389,137$ data points compared to the $13,925$ members of the high risk class. `Undersampling` the majority class works best for balancing, while oversampling tends to ***add too much noise*** to the models.
-- **Messy Real World Data** - Data with large gaps, data without handy relevant spatial fields, data in which you have to wrangle random mistakes. Some days feel like a rodeo, so many promising avenues become dead ends due to the potential time sink.
+- **Messy Real World Data** - Data with large gaps, data without spatial fields or too low resolution, data in which you have to wrangle random mistakes. Some days feel like a rodeo, so many promising avenues become dead ends due to the potential time sink.
+- **Fire Complexity** - Damaging fires often persist for many days. Utilizing fire ignition dates alone is insufficient to predict the potential for damage. Researching incomplete containment dates make incorporating burn days time consuming.
+- **Spatial Granularity** - Hardware limits the resolution at which regions can be analyzed. Overgeneralization of data, like slope and aspect, occurs frequently and makes widespread prediction more difficult.
 ### Version 4.0 Changelog
 > 1. New Datasets
->     - Detailed Elevation data (slope,aspect, northness, eastness)
->     - Infrastructure data (roads, power lines)
->     - Land Cover data
-> 2. Refined ArcGIS worklow
+>     - Detailed Elevation incorporated (slope, aspect, northness, eastness)
+>     - Infrastructure data (road density, power line density)
+>     - Land Cover raster data
+> 2. New refined and detailed ArcGIS worklow
 > 3. Changed samples from points to a grid structure to ensure even coverage of the state with minimal overlap.
-> 4. Replaced Neural Network with LightGBM tree model
+> 4. Replaced Neural Network with LightGBM tree model due to consistent poor performance (may be due to hardware limitations)
 
 ### Version 3.0 Changelog
 > 1. Incorporated more accurate and complete raster weather data from **gridMET Climatology Lab**
