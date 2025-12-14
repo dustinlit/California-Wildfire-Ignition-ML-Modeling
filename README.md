@@ -47,7 +47,9 @@ This project is a work in progress that explores the relationship between wildfi
 - **Messy Real World Data** - Data with large gaps, data without spatial fields or too low resolution, data in which you have to wrangle random mistakes. Some days feel like a rodeo, so many promising avenues become dead ends due to the potential time sink.
 - **Fire Complexity** - Damaging fires often persist for many days. Utilizing fire ignition dates alone is insufficient to predict the potential for damage. Researching incomplete containment dates make incorporating burn days time consuming.
 - **Spatial Granularity** - Hardware limits the resolution at which regions can be analyzed. Overgeneralization of data, like slope and aspect, occurs frequently and makes widespread prediction more difficult.
+
 ### Version 4.0 Changelog
+
 > 1. New Datasets
 >     - Detailed Elevation incorporated (slope, aspect, northness, eastness)
 >     - Infrastructure data (road density, power line density)
@@ -57,9 +59,10 @@ This project is a work in progress that explores the relationship between wildfi
 > 4. Replaced Neural Network with LightGBM tree model due to consistent poor performance (may be due to hardware limitations)
 > 5. Incorporated interaction features modeling `Slope x Wind`, `Human x Environment`, `Wind Speed x Dryness`
 > 6. Added spatial features to modeling. `centroid location`, `latitude`, `longitude`
- > 7. Added one hot encoding of regional and temporal fields. `Seasons`, `Eco Regions`   
+> 7. Added one hot encoding of regional and temporal fields. `Seasons`, `Eco Regions`   
 
 ### Version 3.0 Changelog
+
 > 1. Incorporated more accurate and complete raster weather data from **gridMET Climatology Lab**
 > 2. Integrated **Wildland Urban Interface** and **California Eco regions**.
 > 2. Replaced the `KNN` model with a `Neural Network` for a simpler data workflow.
@@ -68,6 +71,7 @@ This project is a work in progress that explores the relationship between wildfi
 
 
 ### Version 2.0 Changelog
+
 > 1. Added Detailed fire damage data
 >       - CALFIRE damage cost data added, 
 >       - Estimation of damage directly from structures
@@ -112,22 +116,32 @@ California_Fire_Severity/\
 ### Data Sources
 
 > **Fire Incident Data**:
+
  - **Wildfire damage data**: *CAL FIRE Damage Inspection (DINS)* <https://data.ca.gov/dataset/cal-fire-damage-inspection-dins-data>'
  - **Wildfire incidents**: *Calfire Incidents* <https://www.fire.ca.gov/incidents>
 
 > **Environmental Data**:
+
 - **Daily weather readings**: *gridMET* <https://www.climatologylab.org/gridmet.html>
 - **Land Cover**: *USGS* <https://data.cnra.ca.gov/dataset/nlcd-2021-land-cover-california-subset/resource/6dab6b30-88ae-4aec-af8c-c22d52593c75>
+
 > **California Demographic Data** :
+
  - **Census Tract Data**: *U.S. Census Bureau, Department of Commerce* <https://catalog.data.gov/dataset/tiger-line-shapefile-2021-state-california-census-tracts>
  - **2024 American Community Survey 5 year Median Income Data** *U.S. Census Bureau, Department of Commerce* <https://data.census.gov/table/ACSST1Y2024.S1903?q=California+Income&g=010XX00US$1500000_040XX00US06$1400000,06$1500000>
+
 > **Wildlife Urban Interface**: 
+
 - **WUI layer**: *California Department of Forestry and Fire Protection* <https://gis.data.ca.gov/datasets/CALFIRE-Forestry::wildland-urban-interface/explore?location=34.403601%2C-118.894358%2C9.95>
 - **CDFW regions**: *California Department of Fish and Wildlife* <https://data.ca.gov/dataset/cdfw-regions>
 - **Eco Regions** - *USDA Forestry Service* <https://data.fs.usda.gov/geodata/edw/datasets.php?dsetCategory=biota>
+
 > **Elevation**: 
+
 - **1/3 arc-second DEMs**: *USGS National Map* <https://apps.nationalmap.gov/downloader/>
+
 > **Infrastructure**: 
+
 - **All Public Roads**: *CalTrans* <https://apps.nationalmap.gov/downloader/>
 - **Transmission lines**: *California Energy Commission (CEC)* <https://www.arcgis.com/home/item.html?id=aaa6321660eb40bbb55755d5cfb64107>
 
