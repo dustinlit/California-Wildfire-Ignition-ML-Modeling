@@ -153,7 +153,7 @@ California_Fire_Severity/\
 
 ## Key Factors:
 Environmental / Weather Variables:
-- `Air Temperature`-	Daily aximum and minimum air temperature at 2 meters above ground (Kelvin)
+- `Air Temperature`-	Daily maximum and minimum air temperature at 2 meters above ground (Kelvin)
 - `Vapor Pressure Deficit` - kPa Difference between saturation vapor pressure and actual vapor pressure (kPa); indicates atmospheric drying power
 - `Relative Humidity`	-Maximum daily relative humidity (%) at 2 meters
 - `Wind Speed` - Daily wind speed (m/s) at 10 meters
@@ -166,8 +166,8 @@ Fire Danger Indicators:
 - `Energy_Release_Component` - Estimated energy release per unit area (MJ/m²); relates to potential fire intensity
 - `Dead_Fuel_Moisture` - Moisture content of medium-size dead fuels (%) affecting fire spread
 
-Temporal Variables:
- - `Season`,`Month`,`Year`
+Temporal and Spatial Variables:
+ - `Season`,`Year`,`Centroid Location`
 
 Sampling Grid Data:
 - `Interface`, `Intermix`, and `Influence` Areas - From WUI, average area of each zone within 36KM Buffer radius around sampling points
@@ -177,8 +177,8 @@ Sampling Grid Data:
 - `Land Cover` Derived from land cover raster
 - `Roads`,`Power Lines`
 
- ## ArcGIS Sampling Grid:
- - Constructed in ArcGIS pro 3.4
+## ArcGIS Sampling Grid:
+
 
 <img src="data/maps/grids.png" width="400" style="display: block; margin-left: 0;" />
 
