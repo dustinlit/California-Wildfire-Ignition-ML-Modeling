@@ -12,6 +12,8 @@ Last Updated: December 2025\
 
 **Disclaimer:** I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions.
 
+<img src="data/maps/IDW_RF.jpg" width="1000">
+
 ## Overview
 This project is a work in progress that explores the relationship between wildfire severity and environmental, geographical, social and temporal factors in the state of California. The goal is to predict a custom severity index `Wildfire Potential Destructive Power` — which incorporates structures damaged, structures destroyed and acres burned as degrees of fire severity.
 
