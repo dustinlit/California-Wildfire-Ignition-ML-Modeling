@@ -23,27 +23,32 @@ This project is a work in progress that explores the relationship between wildfi
 ## Objectives
 - Predict wildfire damage potential based on environmental, geographical and social data.
 - Extrapolate statewide wildfire coverage by integrating daily weather data and fire records through spatial analysis of a grid network across California.
+- Analyze daily time series data spanning **5 years** of California wildfire history and weather.
+- Integrate **spatial analysis** using ArcGIS to aid in constructiong the dataset and interpreting the results.
 - Compare several multi-classification modelling techniques including `XGBoost`,`Random Forest`, and  `Light GBM`.
 - Compare class balancing techniques between `RandomUnderSampler`, `SMOTE`, and unbalanced and measure thier effect on model performance.
 - Utilize interpolation techniques to create geospatial visualizations that illustrate local and regional risk patterns.
-- Explore relationships between key factors with wilfire severity and model importance.
+- Analyze and identify important relationships between wilfire severity and risk factors.
 
 ## Key Initial Insights:
-- In the mesh network, there were a total of **57,203** incidents of wildfires detected between 01/01/2018 and 12/31/2024 thoughout the state.
-- **13,925** of these were *high* risk incidents causing significant property damage or acreage burned.
+- In the grid network, there were a total of **132,810** incidents of wildfires detected between 01/01/2018 and 12/31/2024 thoughout the state.
+- **24,890** of these were *high* risk incidents causing significant property damage or acreage burned.
+- Models are currently performing with an **85% F1 score** with tree based models like `XGBoost` capturing the complicated relationships the best.
 - Wildfire events appear to be increasing over time. `Year` is a strong contributor to the models.
 - Human factors weigh heavily in the models, `Population` and `Housing` density contribute substantially to the random forest model (the best performer).
 - Regional factors like `WUI interface` and `WUI intermix` zones contribute reasonably as well.
 - Surprising to me, weather factors alone are poor predictors of fire severity.
-- `Tree` based models appear to capture the complicated relationships best.
 
+Example Results:
 <img src="plots/RF_top.png" alt="Model Metrics for Case Study" width="400" style="display: block; margin-left: 0;" />
+
+<br>
 
 <img src="data/maps/interpolation.jpg" width="1200">
 
 ## Initial Challenges
-- **Dataset size** - The addition of higher granularity and additional data is leading to ***prohibitively large and unwieldy processor times*** on current hardware. It has become a balancing act to trim the dataset for efficient workflow without overly affecting model performance.
-- **Heavy Class Imbalance** - Damaging wildfire events are rare compared to days with no significant events. The low risk class is composed of $389,137$ data points compared to the $13,925$ members of the high risk class. `Undersampling` the majority class works best for balancing, while oversampling tends to ***add too much noise*** to the models.
+- **Dataset size** - The additional datasets and higher spatial granularity are leading to ***prohibitively large and unwieldy processor times*** on current hardware. It has become a balancing act to trim the dataset for efficient workflow without overly affecting model performance.
+- **Heavy Class Imbalance** - Damaging wildfire events are rare compared to days with no significant events. The low risk class composes **78%** of the total data points compared to the high risk class which is only **4%** of the data. `Undersampling` the majority class works best for balancing, while oversampling tends to *add too much noise* to the models.
 - **Messy Real World Data** - Data with large gaps, data without spatial fields or too low resolution, data in which you have to wrangle random mistakes. Some days feel like a rodeo, so many promising avenues become dead ends due to the potential time sink.
 - **Fire Complexity** - Damaging fires often persist for many days. Utilizing fire ignition dates alone is insufficient to predict the potential for damage. Researching incomplete containment dates make incorporating burn days time consuming.
 - **Spatial Granularity** - Hardware limits the resolution at which regions can be analyzed. Overgeneralization of data, like slope and aspect, occurs frequently and makes widespread prediction more difficult.
@@ -59,7 +64,8 @@ This project is a work in progress that explores the relationship between wildfi
 > 4. Replaced Neural Network with LightGBM tree model due to consistent poor performance (may be due to hardware limitations)
 > 5. Incorporated interaction features modeling `Slope x Wind`, `Human x Environment`, `Wind Speed x Dryness`
 > 6. Added spatial features to modeling. `centroid location`, `latitude`, `longitude`
-> 7. Added one hot encoding of regional and temporal fields. `Seasons`, `Eco Regions`   
+> 7. Added one hot encoding of regional and temporal fields. `Seasons`, `Eco Regions`
+> 8. Expanded the target to take into account the `Days Burned` of each fire, since fire spread and damage do not only take place on the day of ignition.
 
 ### Version 3.0 Changelog
 
