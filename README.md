@@ -113,7 +113,7 @@ California_Fire_Severity/\
 ├── README.ipynb\
 └── README.md
 
-### Data Sources
+## Data Sources
 
 > **Fire Incident Data**:
 
