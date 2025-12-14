@@ -146,10 +146,10 @@ California_Fire_Severity/\
 - **Transmission lines**: *California Energy Commission (CEC)* <https://www.arcgis.com/home/item.html?id=aaa6321660eb40bbb55755d5cfb64107>
 
 **Raw Data Processing in:**
-> - *notebooks/A_Appendix_Sampling_Grids.ipynb*
-> - *notebooks/B_Appendix_Wildfires.ipynb*
-> - *notebooks/C_Appendix_Gridmet_Combination.pynb*
-> - *notebooks/D_Appendix_Gridmet_Extraction.pynb*
+> - [*notebooks/A_Appendix_Sampling_Grids.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/A_Appendix_Sampling_Grids.ipynb)
+> - [*notebooks/B_Appendix_Wildfires.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/B_Appendix_Wildfires.ipynb)
+> - [*notebooks/C_Appendix_Gridmet_Combination.pynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/C_Appendix_Gridmet_Combination.ipynb_)
+> - [*notebooks/D_Appendix_Gridmet_Extraction.pynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/D_Appendix_Gridmet_Extraction.ipynb)
 
 ## Key Factors:
 Environmental / Weather Variables:
@@ -176,6 +176,10 @@ Sampling Grid Data:
 - `Slope`,`Aspect` Derived from high resolution USGS daily rasters 
 - `Land Cover` Derived from land cover raster
 - `Roads`,`Power Lines`
+
+**Data Exploration:**
+> - [*notebooks/01_Data_Exploration.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/01_Data_Exploration.ipynb)
+> - [*notebooks/02_Data_Merging.pynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/02_Data_Merging.ipynb)
 
 ## ArcGIS Sampling Grid:
 
@@ -425,8 +429,8 @@ Sampling Grid Data:
 
 ## Feature Engineering
 *Located in:* 
-> - *notebooks/03_Feature_Engineering.ipynb*
-> - *notebooks/04_Variable_Selection.ipynb*
+> - [*notebooks/03_Feature_Engineering.pynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/03_Feature_Engineering.ipynb)
+> - [*notebooks/04_Variable_Selection.pynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_Variable_Selection.ipynb)
 
 Engineered Data:
 - `Santa_Ana_Score` - Winds x dryness score to represent the influence of these winds.
@@ -435,7 +439,7 @@ Engineered Data:
 
 ## Class Balancing (Updating)
 *Located in:* 
-> - *notebooks/06_Class_Balancing.ipynb*
+> - [*notebooks/06_Class_Balancing.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/06_Class_Balancing.ipynb)
 
 **Target:** *Wildlife Potential Destructive Power* - categorized into Low (0), Moderate(1), High(1)
 
@@ -452,7 +456,7 @@ Automatic comparison and selection of class balancing strategies.
 
 ## Modeling
 *Located in:*
-> - *notebooks/07_modeling_And_Tuning.ipynb*
+> - [*notebooks/07_modeling_And_Tuning.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/07_Modeling_and_Tuning.ipynb)
 
 Models are tuned automatically and the best performing models are selected for final evaluation and visualization.
 
@@ -496,7 +500,7 @@ Feature importance extracted for tree-based models.
 
 ## Visualization (updating)
 *Located in:*
-> - *notebooks/08_evaluation_and_visualization.ipynb*
+> - [*notebooks/08_evaluation_and_visualization.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/08_Evaluation_and_Visualization.ipynb)
 
 - Maps using GeoPandas, Matplotlib, and Seaborn.
 - IDW interpolation for environmental variables in ArcGIS.
