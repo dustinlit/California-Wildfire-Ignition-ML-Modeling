@@ -50,6 +50,9 @@ This project is a work in progress that explores the relationship between wildfi
 > 2. New refined and detailed ArcGIS worklow
 > 3. Changed samples from points to a grid structure to ensure even coverage of the state with minimal overlap.
 > 4. Replaced Neural Network with LightGBM tree model due to consistent poor performance (may be due to hardware limitations)
+> 5. Incorporated interaction features modeling `Slope x Wind`, `Human x Environment`, `Wind Speed x Dryness`
+> 6. Added spatial features to modeling. `centroid location`, `latitude`, `longitude`
+ > 7. Added one hot encoding of regional and temporal fields. `Seasons`, `Eco Regions`   
 
 ### Version 3.0 Changelog
 > 1. Incorporated more accurate and complete raster weather data from **gridMET Climatology Lab**
@@ -82,7 +85,7 @@ This project is a work in progress that explores the relationship between wildfi
 California_Fire_Severity/\
 ├── data/\
 ├── notebooks/\
-│ ├── 01_Data_Exploration_Processing.ipynb\
+│ ├── 01_Data_Exploration.ipynb\
 │ ├── 02_Data_Merging.ipynb\
 │ ├── 03_Feature_Engineering.ipynb\
 │ ├── 04_Variable_Selection.ipynb\
@@ -90,7 +93,7 @@ California_Fire_Severity/\
 │ ├── 06_Class_Balancing.ipynb\
 │ ├── 07_Modeling_and_Tuning.ipynb\
 │ ├── 08_Evaluation_and_Visualization.ipynb\
-│ ├── A_Appendix_Sampling_Points.ipynb\
+│ ├── A_Appendix_Sampling_Grids.ipynb\
 │ ├── B_Appendix_Wildfires.ipynb\
 │ ├── C_Appendix_Gridmet_Combination.ipynb\
 │ ├── D_Appendix_Gridmet_Extraction.ipynb\
@@ -111,8 +114,8 @@ California_Fire_Severity/\
  - **Wildfire incidents**: *Calfire Incidents* <https://www.fire.ca.gov/incidents>
 
 > **Environmental Data**:
- - **Daily weather readings**: *gridMET* <https://www.climatologylab.org/gridmet.html>
-
+- **Daily weather readings**: *gridMET* <https://www.climatologylab.org/gridmet.html>
+- **Land Cover**: *USGS* <https://data.cnra.ca.gov/dataset/nlcd-2021-land-cover-california-subset/resource/6dab6b30-88ae-4aec-af8c-c22d52593c75>
 > **California Demographic Data** :
  - **Census Tract Data**: *U.S. Census Bureau, Department of Commerce* <https://catalog.data.gov/dataset/tiger-line-shapefile-2021-state-california-census-tracts>
  - **2024 American Community Survey 5 year Median Income Data** *U.S. Census Bureau, Department of Commerce* <https://data.census.gov/table/ACSST1Y2024.S1903?q=California+Income&g=010XX00US$1500000_040XX00US06$1400000,06$1500000>
@@ -120,9 +123,14 @@ California_Fire_Severity/\
 - **WUI layer**: *California Department of Forestry and Fire Protection* <https://gis.data.ca.gov/datasets/CALFIRE-Forestry::wildland-urban-interface/explore?location=34.403601%2C-118.894358%2C9.95>
 - **CDFW regions**: *California Department of Fish and Wildlife* <https://data.ca.gov/dataset/cdfw-regions>
 - **Eco Regions** - *USDA Forestry Service* <https://data.fs.usda.gov/geodata/edw/datasets.php?dsetCategory=biota>
+> **Elevation**: 
+- **1/3 arc-second DEMs**: *USGS National Map* <https://apps.nationalmap.gov/downloader/>
+> **Infrastructure**: 
+- **All Public Roads**: *CalTrans* <https://apps.nationalmap.gov/downloader/>
+- **Transmission lines**: *California Energy Commission (CEC)* <https://www.arcgis.com/home/item.html?id=aaa6321660eb40bbb55755d5cfb64107>
 
-**Raw Data Processed in:**
-> - *notebooks/A_Appendix_Sampling_Points.ipynb*
+**Raw Data Processing in:**
+> - *notebooks/A_Appendix_Sampling_Grids.ipynb*
 > - *notebooks/B_Appendix_Wildfires.ipynb*
 > - *notebooks/C_Appendix_Gridmet_Combination.pynb*
 > - *notebooks/D_Appendix_Gridmet_Extraction.pynb*
@@ -153,10 +161,7 @@ Sampling Grid Data:
 - `Land Cover` Derived from land cover raster
 - `Roads`,`Power Lines`
 
-
  ## ArcGIS Sampling Grid:
-
-
  - Constructed in ArcGIS pro 3.4
 
 <img src="data/maps/grids.png" width="400" style="display: block; margin-left: 0;" />
@@ -407,7 +412,8 @@ Sampling Grid Data:
 > - *notebooks/03_Feature_Engineering.ipynb*
 > - *notebooks/04_Variable_Selection.ipynb*
 
-Engineered Data: 
+Engineered Data:
+- `Santa_Ana_Score` - Winds x dryness score to represent the influence of these winds.
 - `Average_Fires_per_Month` - Historical 2 year rolling average count of fires per county
 - `7-day_Lagged_Weather` - rolling 7 day average for key weather variables
 
@@ -446,6 +452,7 @@ Models are tuned automatically and the best performing models are selected for f
 
 Feature importance extracted for tree-based models.
 
+
 ## Model Metrics
 
 **Key Findings:** 
@@ -457,15 +464,16 @@ Feature importance extracted for tree-based models.
 
 <img src="plots/Metrics.png" alt="Model Metrics for Case Study" width="500" style="display: block; margin-left: 0;" />
 
-## **Feature Importances** for Tree models: (Updating)
+## **Feature Importances** for Tree models:
 
-<img src="plots/RF_top.png" alt="Model Metrics for Case Study" width="400" style="display: block; margin-left: 0;" />
+<img src="plots/RF_top.png" alt="Model Metrics for Case Study" width="500" style="display: block; margin-left: 0;" />
 
 
-<img src="plots/XGB_top.png" alt="Model Metrics for Case Study" width="320" style="display: block; margin-left: 0;" />
+<img src="plots/XGB_top.png" alt="Model Metrics for Case Study" width="500" style="display: block; margin-left: 0;" />
 
 ## Conclusions:
-- `Year` is a leading factor in both tree models. Suggesting that fire severity is increasing, maybe due to climate change.
+- **Historical** trends featured heavily in the Random Forest model.
+- **Regional** and **Human** data had the most influence in the XGBoost model.
 - Most **weather** Variables rank low on model importance suggesting a more complicated relationship with wildfire severity
 - **Population** stats play a key role in prediciting wildfire severity
 - More data may be neccessary for better correllations
@@ -482,15 +490,9 @@ Example Python Output:
 <img src="plots/results.png" alt="California 01072025" width="1500" style="display: block; margin-left: 0;" />
 ---
 
-## Challenges
-
-> **Weak Correlation** – Environmental features don’t fully explain severity outcomes.\
-> **Class Imbalance** – Damaging fires are rare; balancing was essential.\
-> **Limited Processing Power** - Limits the granularity of the sampling mesh and increases modeling time due to larger datasets.\
-> **Data Incompatability** - Interpreting some more complex factors like reservoir levels and response times is complicated due to missing and spatially uncorrelated data.
-
 ## Next Steps / Potential Improvements
 - Hot Spot analysis of daily NDVI raster data (in process)
+- Spatial correlation examination with Morans I.
 - Arcpy integration.
 - Incorporate emergency response times and reservoir data
 - Time series maps to check models consistency over time
