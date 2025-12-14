@@ -22,13 +22,13 @@ This project is a work in progress that explores the relationship between wildfi
 
 ## Objectives
 - Predict wildfire damage potential based on environmental, geographical and social data.
-- Extrapolate statewide wildfire coverage by integrating daily weather data and fire records through spatial analysis of a grid network across California.
+- Extrapolate statewide wildfire coverage by integrating daily weather data and fire records through analysis of a grid network across California.
 - Analyze daily time series data spanning **5 years** of California wildfire history and weather.
-- Integrate **spatial analysis** using ArcGIS to aid in constructiong the dataset and interpreting the results.
-- Compare several multi-classification modelling techniques including `XGBoost`,`Random Forest`, and  `Light GBM`.
-- Compare class balancing techniques between `RandomUnderSampler`, `SMOTE`, and unbalanced and measure thier effect on model performance.
-- Utilize interpolation techniques to create geospatial visualizations that illustrate local and regional risk patterns.
-- Analyze and identify important relationships between wilfire severity and risk factors.
+- Integrate ArcGIS for **spatial analysis**, results interpretation, and to aid in the construction of the dataset.
+- Compare several multi-classification modelling techniques with a focus on tree models like `XGBoost`,`Random Forest`, and  `Light GBM`.
+- Compare class balancing techniques between `RandomUnderSampler`, `SMOTE`, and unbalanced and measure their effect on model performance.
+- Utilize interpolation techniques on results to create geospatial visualizations that illustrate local and regional risk patterns as they evolve over time.
+- Analyze and identify the most important relationships between wilfire severity and risk factors.
 
 ## Key Initial Insights:
 - In the grid network, there were a total of **132,810** incidents of wildfires detected between 01/01/2018 and 12/31/2024 thoughout the state.
@@ -37,7 +37,7 @@ This project is a work in progress that explores the relationship between wildfi
 - Wildfire events appear to be increasing over time. `Year` is a strong contributor to the models.
 - Human factors weigh heavily in the models, `Population` and `Housing` density contribute substantially to the random forest model (the best performer).
 - Regional factors like `WUI interface` and `WUI intermix` zones contribute reasonably as well.
-- Surprising to me, weather factors alone are poor predictors of fire severity.
+- Standalone weather factors are poor predictors of fire severity.
 
 Example Results:
 <img src="plots/RF_top.png" alt="Model Metrics for Case Study" width="400" style="display: block; margin-left: 0;" />
@@ -48,9 +48,9 @@ Example Results:
 
 ## Initial Challenges
 - **Dataset size** - The additional datasets and higher spatial granularity are leading to ***prohibitively large and unwieldy processor times*** on current hardware. It has become a balancing act to trim the dataset for efficient workflow without overly affecting model performance.
-- **Heavy Class Imbalance** - Damaging wildfire events are rare compared to days with no significant events. The low risk class composes **78%** of the total data points compared to the high risk class which is only **4%** of the data. `Undersampling` the majority class works best for balancing, while oversampling tends to *add too much noise* to the models.
+- **Heavy Class Imbalance** - Damaging wildfire events are rare compared to days with no significant events. The low risk class composes **78%** of the total data points compared to the high risk class which is only **4%** of the data. `Undersampling` the majority class works best for balancing, while oversampling the minority class tends to *add too much noise* to the models.
 - **Messy Real World Data** - Data with large gaps, data without spatial fields or too low resolution, data in which you have to wrangle random mistakes. Some days feel like a rodeo, so many promising avenues become dead ends due to the potential time sink.
-- **Fire Complexity** - Damaging fires often persist for many days. Utilizing fire ignition dates alone is insufficient to predict the potential for damage. Researching incomplete containment dates make incorporating burn days time consuming.
+- **Fire Complexity** - Damaging fires often persist for many days. Utilizing fire ignition dates alone is insufficient to predict the potential for damage.
 - **Spatial Granularity** - Hardware limits the resolution at which regions can be analyzed. Overgeneralization of data, like slope and aspect, occurs frequently and makes widespread prediction more difficult.
 
 ### Version 4.0 Changelog
