@@ -2,8 +2,7 @@
 
 <div class="title-wrap">
   <h1 class="title-main">Spatial Data Science Approaches to Wildfire Severity Modeling</h1>
-  <hr class="title-rule">
-  <h2 class="title-sub">A GIS‑Driven, Tree‑Based Machine Learning Analysis of California Wildfire</h2>
+  <h2 class="title-sub" style="font-style: italic;">A GIS‑Driven, Tree‑Based Machine Learning Analysis of California Wildfire</h2>
   <br>
 </div>
 
@@ -102,14 +101,15 @@ Example Results:
 California_Fire_Severity/\
 ├── data/\
 ├── notebooks/\
-│ ├── [01_Data_Exploration.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/01_Data_Exploration.ipynb)\
-│ ├── [02_Data_Merging.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/02_Data_Merging.ipynb)\
-│ ├── [03_Feature_Engineering.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/03_Feature_Engineering.ipynb)\
-│ ├── [04_Variable_Selection.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_Variable_Selection.ipynb)\
-│ ├── [05_Feature_Interaction_Analysis.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/05_%20Subset_and_Split.ipynb)\
-│ ├── [06_Class_Balancing.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/06_Class_Balancing.ipynb)\
-│ ├── [07_Modeling_and_Tuning.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/07_Modeling_and_Tuning.ipynb)\
-│ ├── [08_Evaluation_and_Visualization.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/08_Evaluation_and_Visualization.ipynb)\
+|
+│ ├──[ 01_Data_Exploration.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/01_Data_Exploration.ipynb)\
+│ ├──[ 02_Data_Merging.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/02_Data_Merging.ipynb)\
+│ ├──[ 03_Feature_Engineering.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/03_Feature_Engineering.ipynb)\
+│ ├──[ 04_Variable_Selection.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_Variable_Selection.ipynb)\
+│ ├──[ 05_Feature_Interaction_Analysis.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/05_%20Subset_and_Split.ipynb)\
+│ ├──[ 06_Class_Balancing.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/06_Class_Balancing.ipynb)\
+│ ├──[ 07_Modeling_and_Tuning.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/07_Modeling_and_Tuning.ipynb)\
+│ ├──[ 08_Evaluation_and_Visualization.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/08_Evaluation_and_Visualization.ipynb)\
 │ ├── [09_Full_Set_Validation.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/09_Full_Set_Validation.ipynb)\
 │ ├── [10_Other_Models.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/10_Other_Models.ipynb)\
 │ ├── [11_Feature_Ablation.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/11_Feature_Ablation.ipynb)\
