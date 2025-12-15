@@ -8,7 +8,6 @@
   A GIS‑Driven, Tree‑Based Machine Learning Analysis of California Wildfires
 </h2>
 </div>
-<br>
 
 **Author**: Dustin Littlefield\
 **Project Type**: `Spatial Data Science`, `Natural Resources`, `Wildfire Analysis`\
@@ -27,13 +26,13 @@ This project is a work in progress that explores the relationship between wildfi
 
 
 ## Objectives
-- Predict wildfire damage potential based on environmental, geographical and social data.
+- Predict wildfire potential dmaging impacts based on environmental, geographical and social data.
 - Extrapolate statewide wildfire coverage by integrating daily weather data and fire records through analysis of a grid network across California.
-- Analyze daily time series data spanning **5 years** of California wildfire history and weather.
+- Analyze daily time series data spanning **6 years** of California wildfire history and weather.
 - Integrate ArcGIS for **spatial analysis**, results interpretation, and to aid in the construction of the dataset.
 - Compare several multi-classification modelling techniques with a focus on tree models like `XGBoost`,`Random Forest`, and  `Light GBM`.
-- Compare class balancing techniques between `RandomUnderSampler`, `SMOTE`, and unbalanced and measure their effect on model performance.
-- Utilize interpolation techniques on results to create geospatial visualizations that illustrate local and regional risk patterns as they evolve over time.
+- Compare class balancing techniques like `RandomUnderSampler`, `SMOTE`, with unbalanced performance.
+- Utilize interpolation techniques to create geospatial visualizations that illustrate local and regional wildfire risk patterns as they evolve over time.
 - Analyze and identify the most important relationships between wilfire severity and risk factors.
 
 ## Key Initial Insights:
@@ -47,12 +46,12 @@ This project is a work in progress that explores the relationship between wildfi
 
 ## Lessons Learned
 The main journey of this project has always been to learn more about spatial data science, to practice and expand my ArcGIS skills, and get more practical coding experience. While I have learned tremendously in all of these areas, there are some notable areas that i didnt anticipate when undertaking a project of this scale.  
-- **Identifying and Preventing** ***Data Leakage***
-  - I initially believed I understood how to avoid data leaks, but I have learned that they can be subtle and deceptive. I have learned to question those 'finally nailed it' moments. These are all too often followed by the sudden realization of an apparent leak. Now, I approach sudden performance bumps with caution and double check after doing any feature engineering or introduction of new data.
- - **Maintaining a Cohesive Project Structure**
-  - This project began as one notebook page, soon expanded to five, and has now grown into 12 modules, 4 appendices, and multiple source files. As the project scales, handling and passing data throughout these modules has become more complex and sometimes bugs or changes became more difficult to trace. I learned that consistent organization and clear communication of inputs and outputs for each module are essential to keeping the workflow efficient and the structure sustainable.
-- **Knowing When to Document and Analyze Variables**
-  - There is no argument that both of these are crucial to a project. I have spent many hours documenting variables and structures that appeared complete, only to have to be completely revised. I now reserve detailed documentation for when a module is closer to completion, while maintaining a simple, consistent style during active coding. This approach ensures clarity for myself and others throughout development, while avoiding wasted effort on documentation that may need to be rewritten as the project evolves.
+#### 1. **Identifying and Preventing** ***Data Leakage***
+I initially believed I understood how to avoid data leaks, but I have learned that they can be subtle and deceptive. I have learned to question those 'finally nailed it' moments. These are all too often followed by the sudden realization of an apparent leak. Now, I approach sudden performance bumps with caution and double check after doing any feature engineering or introduction of new data.
+#### 2. **Maintaining a Cohesive Project Structure**
+This project began as one notebook page, soon expanded to five, and has now grown into 12 modules, 4 appendices, and multiple source files. As the project scales, handling and passing data throughout these modules has become more complex and sometimes bugs or changes became more difficult to trace. I learned that consistent organization and clear communication of inputs and outputs for each module are essential to keeping the workflow efficient and the structure sustainable.
+#### 3. **Knowing When to Document and Analyze Variables**
+There is no argument that both of these are crucial to a project. I have spent many hours documenting variables and structures that appeared complete, only to have to be completely revised. I now reserve detailed documentation for when a module is closer to completion, while maintaining a simple, consistent style during active coding. This approach ensures clarity for myself and others throughout development, while avoiding wasted effort on documentation that may need to be rewritten as the project evolves.
 
 
 Example Results:
