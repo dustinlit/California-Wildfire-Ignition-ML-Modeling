@@ -98,34 +98,34 @@ Example Results:
 
 ## Project Structure
 
-California_Fire_Severity/<br>
-├── data/<br>
-├── notebooks/<br>
-│   ├── [01_Data_Exploration.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/01_Data_Exploration.ipynb)<br>
-│   ├── [02_Data_Merging.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/02_Data_Merging.ipynb)<br>
-│   ├── [03_Feature_Engineering.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/03_Feature_Engineering.ipynb)<br>
-│   ├── [04_Variable_Selection.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_Variable_Selection.ipynb)<br>
-│   ├── [05_Feature_Interaction_Analysis.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/05_%20Subset_and_Split.ipynb)<br>
-│   ├── [06_Class_Balancing.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/06_Class_Balancing.ipynb)<br>
-│   ├── [07_Modeling_and_Tuning.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/07_Modeling_and_Tuning.ipynb)<br>
-│   ├── [08_Evaluation_and_Visualization.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/08_Evaluation_and_Visualization.ipynb)<br>
-│   ├── [09_Full_Set_Validation.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/09_Full_Set_Validation.ipynb)<br>
-│   ├── [10_Other_Models.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/10_Other_Models.ipynb)<br>
-│   ├── [11_Feature_Ablation.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/11_Feature_Ablation.ipynb)<br>
-│   ├── [12_Final_Stats.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/12_Final_Stats.ipynb)<br>
-│   ├── [A_Appendix_Sampling_Grids.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/A_Appendix_Sampling_Grids.ipynb)<br>
-│   ├── [B_Appendix_Wildfires.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/B_Appendix_Wildfires.ipynb)<br>
-│   ├── [C_Appendix_Gridmet_Combination.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/C_Appendix_Gridmet_Combination.ipynb)<br>
-│ ├── [D_Appendix_Gridmet_Extraction.ipynb](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/D_Appendix_Gridmet_Extraction.ipynb)<br>
-├── plots/<br>
-│ ├── Palisades_predictions.png<br>
-│ ├── Interpolated.png<br>
-│ ├── sampling_metrics.png<br>
-│ └── file_structure.png<br>
-├── src/<br>
-├── Optimizing_Emergency_Response.pdf<br>
-├── README.ipynb<br>
-└── README.md
+<ul>
+  <li>California_Fire_Severity/
+    <ul>
+      <li>data/</li>
+      <li>notebooks/
+        <ul>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/01_Data_Exploration.ipynb">01_Data_Exploration.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/02_Data_Merging.ipynb">02_Data_Merging.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/03_Feature_Engineering.ipynb">03_Feature_Engineering.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_Variable_Selection.ipynb">04_Variable_Selection.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/05_%20Subset_and_Split.ipynb">05_Feature_Interaction_Analysis.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/06_Class_Balancing.ipynb">06_Class_Balancing.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/07_Modeling_and_Tuning.ipynb">07_Modeling_and_Tuning.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/08_Evaluation_and_Visualization.ipynb">08_Evaluation_and_Visualization.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/09_Full_Set_Validation.ipynb">09_Full_Set_Validation.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/10_Other_Models.ipynb">10_Other_Models.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/11_Feature_Ablation.ipynb">11_Feature_Ablation.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/12_Final_Stats.ipynb">12_Final_Stats.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/A_Appendix_Sampling_Grids.ipynb">A_Appendix_Sampling_Grids.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/B_Appendix_Wildfires.ipynb">B_Appendix_Wildfires.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/C_Appendix_Gridmet_Combination.ipynb">C_Appendix_Gridmet_Combination.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/D_Appendix_Gridmet_Extraction.ipynb">C_Appendix_Gridmet_Extraction.ipynb</a></li>
+        </ul>
+      </li>
+      <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/README.md">README.md</a></li>
+    </ul>
+  </li>
+</ul>
 
 ## Data Sources
 
