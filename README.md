@@ -35,7 +35,7 @@ This project is a work in progress that explores the relationship between wildfi
 - Utilize interpolation techniques to create geospatial visualizations that illustrate local and regional wildfire risk patterns as they evolve over time.
 - Analyze and identify the most important relationships between wilfire severity and risk factors.
 
-## Key Initial Insights:
+## Key Initial Insights
 - In the grid network, there were a total of **132,810** incidents of wildfires detected between 01/01/2018 and 12/31/2024 thoughout the state.
 - **24,890** of these were *high* risk incidents causing significant property damage or acreage burned.
 - Models are currently performing with an **85% F1 score** with tree based models like `XGBoost` capturing the complicated relationships the best.
@@ -44,17 +44,24 @@ This project is a work in progress that explores the relationship between wildfi
 - Regional factors like `WUI interface` and `WUI intermix` zones contribute reasonably as well.
 - Standalone weather factors are poor predictors of fire severity.
 
+## Early Results
+<img src="plots/RF_top.png" alt="Model Metrics for Case Study" width="400" style="display: block; margin-left: 0;" />
+
+<br>
+
+<img src="data/maps/interpolation.jpg" width="1200">
+
 ## Lessons Learned
 The main journey of this project has always been to learn more about spatial data science, to practice and expand my ArcGIS skills, and get more practical coding experience. While I have learned tremendously in all of these areas, there are some notable areas that i didnt anticipate when undertaking a project of this scale.  
-#### 1. **Identifying and Preventing** ***Data Leakage***
+#### **Identifying and Preventing** ***Data Leakage***
 I initially believed I understood how to avoid data leaks, but I have learned that they can be subtle and deceptive. I have learned to question those 'finally nailed it' moments. These are all too often followed by the sudden realization of an apparent leak. Now, I approach sudden performance bumps with caution and double check after doing any feature engineering or introduction of new data.
-#### 2. **Maintaining a Cohesive Project Structure**
+#### **Maintaining a Cohesive Project Structure**
 This project began as one notebook page, soon expanded to five, and has now grown into 12 modules, 4 appendices, and multiple source files. As the project scales, handling and passing data throughout these modules has become more complex and sometimes bugs or changes became more difficult to trace. I learned that consistent organization and clear communication of inputs and outputs for each module are essential to keeping the workflow efficient and the structure sustainable.
-#### 3. **Knowing When to Document and Analyze Variables**
+#### **Knowing When to Document and Analyze Variables**
 There is no argument that both of these are crucial to a project. I have spent many hours documenting variables and structures that appeared complete, only to have to be completely revised. I now reserve detailed documentation for when a module is closer to completion, while maintaining a simple, consistent style during active coding. This approach ensures clarity for myself and others throughout development, while avoiding wasted effort on documentation that may need to be rewritten as the project evolves.
 
 
-Example Results:
+## Example Results
 <img src="plots/RF_top.png" alt="Model Metrics for Case Study" width="400" style="display: block; margin-left: 0;" />
 
 <br>
@@ -71,9 +78,9 @@ Example Results:
 ### Version 4.0 Changelog
 
 > 1. New Datasets
->     - Detailed Elevation incorporated (slope, aspect, northness, eastness)
->     - Infrastructure data (road density, power line density)
->     - Land Cover raster data
+>   - Detailed Elevation incorporated (slope, aspect, northness, eastness)
+>   - Infrastructure data (road density, power line density)
+>   - Land Cover raster data
 > 2. New refined and detailed ArcGIS worklow
 > 3. Changed samples from points to a grid structure to ensure even coverage of the state with minimal overlap.
 > 4. Replaced Neural Network with LightGBM tree model due to consistent poor performance (may be due to hardware limitations)
@@ -176,7 +183,7 @@ Example Results:
 > - [*notebooks/C_Appendix_Gridmet_Combination.pynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/C_Appendix_Gridmet_Combination.ipynb_)
 > - [*notebooks/D_Appendix_Gridmet_Extraction.pynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/D_Appendix_Gridmet_Extraction.ipynb)
 
-## Key Factors:
+## Key Features
 Environmental / Weather Variables:
 - `Air Temperature`-	Daily maximum and minimum air temperature at 2 meters above ground (Kelvin)
 - `Vapor Pressure Deficit` - kPa Difference between saturation vapor pressure and actual vapor pressure (kPa); indicates atmospheric drying power
@@ -206,7 +213,7 @@ Sampling Grid Data:
 > - [*notebooks/01_Data_Exploration.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/01_Data_Exploration.ipynb)
 > - [*notebooks/02_Data_Merging.pynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/02_Data_Merging.ipynb)
 
-## ArcGIS Sampling Grid:
+## ArcGIS Sampling Grid
 
 
 <img src="data/maps/grids.png" width="400" style="display: block; margin-left: 0;" />
@@ -460,9 +467,11 @@ Sampling Grid Data:
 Engineered Data:
 - `Santa_Ana_Score` - Winds x dryness score to represent the influence of these winds.
 - `Average_Fires_per_Month` - Historical 2 year rolling average count of fires per county
-- `7-day_Lagged_Weather` - rolling 7 day average for key weather variables
+- `7-day_Lagged_Weather` - Rolling 7 day average for key weather variables
+- `Wind Slope Interactions` - South-facing slopes dry faster, and strong winds drive flames uphill, intensifying wildfire spread.
 
-## Class Balancing (Updating)
+
+## Class Balancing
 *Located in:* 
 > - [*notebooks/06_Class_Balancing.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/06_Class_Balancing.ipynb)
 
@@ -478,6 +487,7 @@ Balancing Techniques Used:
 Automatic comparison and selection of class balancing strategies.
 
 <img src="plots/class_balance_v3.png" alt="Model Results" width="400" style="display: block; margin-left: 0;" />
+
 
 ## Modeling
 *Located in:*
