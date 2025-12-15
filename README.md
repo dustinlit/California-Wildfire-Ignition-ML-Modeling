@@ -533,7 +533,7 @@ Feature importance extracted for tree-based models.
 
 Current Full Set Validation Output:
 
-<img src="data/maps/full_set.png" alt="California 01072025" width="1500" style="display: block; margin-left: 0;" />
+<img src="data/maps/full_set.png" alt="California 01072025" width="2000" style="display: block; margin-left: 0;" />
 ---
 
 ## Next Steps / Potential Improvements
