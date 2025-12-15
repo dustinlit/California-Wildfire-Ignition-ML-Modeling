@@ -45,6 +45,16 @@ This project is a work in progress that explores the relationship between wildfi
 - Regional factors like `WUI interface` and `WUI intermix` zones contribute reasonably as well.
 - Standalone weather factors are poor predictors of fire severity.
 
+## Lessons Learned
+The main journey of this project has always been to learn more about spatial data science, to practice and expand my ArcGIS skills, and get more practical coding experience. While I have learned tremendously in all of these areas, there are some notable areas that i didnt anticipate when undertaking a project of this scale.  
+- **Identifying and Preventing** ***Data Leakage***
+  - I initially believed I understood how to avoid data leaks, but I have learned that they can be subtle and deceptive. I have learned to question those 'finally nailed it' moments. These are all too often followed by the sudden realization of an apparent leak. Now, I approach sudden performance bumps with caution and double check after doing any feature engineering or introduction of new data.
+ - **Maintaining a Cohesive Project Structure**
+  - This project began as one notebook page, soon expanded to five, and has now grown into 12 modules, 4 appendices, and multiple source files. As the project scales, handling and passing data throughout these modules has become more complex and sometimes bugs or changes became more difficult to trace. I learned that consistent organization and clear communication of inputs and outputs for each module are essential to keeping the workflow efficient and the structure sustainable.
+- **Knowing When to Document and Analyze Variables**
+  - There is no argument that both of these are crucial to a project. I have spent many hours documenting variables and structures that appeared complete, only to have to be completely revised. I now reserve detailed documentation for when a module is closer to completion, while maintaining a simple, consistent style during active coding. This approach ensures clarity for myself and others throughout development, while avoiding wasted effort on documentation that may need to be rewritten as the project evolves.
+
+
 Example Results:
 <img src="plots/RF_top.png" alt="Model Metrics for Case Study" width="400" style="display: block; margin-left: 0;" />
 
@@ -492,11 +502,11 @@ Feature importance extracted for tree-based models.
 ## Model Metrics
 
 **Key Findings:** 
-- All Models struggle with distinguishing **Moderate** from **High** severity classes.
-- Tree models performed comparably, may need further tuning
-- Neural Network currently struggles
+- All models are struggling with distinguishing **Moderate** severity classes. May need to tweak definition or separate into more categories.
+- XGBooost and Random Forest performed comparably, may need further tuning
+- Light GBM currently struggles
 
-### Metrics for real world case study: `Palisades Fire` - 01/07/2025: (Updating)
+### Metrics for real world case study: `Palisades Fire` - 01/07/2025:
 
 <img src="plots/Metrics.png" alt="Model Metrics for Case Study" width="500" style="display: block; margin-left: 0;" />
 
@@ -514,16 +524,16 @@ Feature importance extracted for tree-based models.
 - **Population** stats play a key role in prediciting wildfire severity
 - More data may be neccessary for better correllations
 
-## Visualization (updating)
+## Visualization
 *Located in:*
 > - [*notebooks/08_evaluation_and_visualization.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/08_Evaluation_and_Visualization.ipynb)
 
 - Maps using GeoPandas, Matplotlib, and Seaborn.
 - IDW interpolation for environmental variables in ArcGIS.
 
-Example Python Output:
+Current Full Set Validation Output:
 
-<img src="plots/results.png" alt="California 01072025" width="1500" style="display: block; margin-left: 0;" />
+<img src="data/maps/full_set.png" alt="California 01072025" width="1500" style="display: block; margin-left: 0;" />
 ---
 
 ## Next Steps / Potential Improvements
