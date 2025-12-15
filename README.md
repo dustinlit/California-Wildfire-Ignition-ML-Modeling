@@ -45,13 +45,19 @@ This project is a work in progress that explores the relationship between wildfi
 - Standalone weather factors are poor predictors of fire severity.
 
 ## Early Results
-<img src="plots/RF_top.png" alt="Model Metrics for Case Study" width="400" style="display: block; margin-left: 0;" />
-
-<br>
 
 <img src="data/maps/interpolation.jpg" width="1200">
 
-## Lessons Learned
+<br>
+
+## Initial Project Challenges
+- **Dataset size** - The additional datasets and higher spatial granularity are leading to ***prohibitively large and unwieldy processor times*** on current hardware. It has become a balancing act to trim the dataset for efficient workflow without overly affecting model performance.
+- **Heavy Class Imbalance** - Damaging wildfire events are rare compared to days with no significant events. The low risk class composes **78%** of the total data points compared to the high risk class which is only **4%** of the data. `Undersampling` the majority class works best for balancing, while oversampling the minority class tends to *add too much noise* to the models.
+- **Messy Real World Data** - Data with large gaps, data without spatial fields or too low resolution, data in which you have to wrangle random mistakes. Some days feel like a rodeo, so many promising avenues become dead ends due to the potential time sink.
+- **Fire Complexity** - Damaging fires often persist for many days. Utilizing fire ignition dates alone is insufficient to predict the potential for damage.
+- **Spatial Granularity** - Hardware limits the resolution at which regions can be analyzed. Overgeneralization of data, like slope and aspect, occurs frequently and makes widespread prediction more difficult.
+
+## Personal Lessons Learned
 The main journey of this project has always been to learn more about spatial data science, to practice and expand my ArcGIS skills, and get more practical coding experience. While I have learned tremendously in all of these areas, there are some notable areas that i didnt anticipate when undertaking a project of this scale.  
 #### **Identifying and Preventing** ***Data Leakage***
 I initially believed I understood how to avoid data leaks, but I have learned that they can be subtle and deceptive. I have learned to question those 'finally nailed it' moments. These are all too often followed by the sudden realization of an apparent leak. Now, I approach sudden performance bumps with caution and double check after doing any feature engineering or introduction of new data.
@@ -59,21 +65,6 @@ I initially believed I understood how to avoid data leaks, but I have learned th
 This project began as one notebook page, soon expanded to five, and has now grown into 12 modules, 4 appendices, and multiple source files. As the project scales, handling and passing data throughout these modules has become more complex and sometimes bugs or changes became more difficult to trace. I learned that consistent organization and clear communication of inputs and outputs for each module are essential to keeping the workflow efficient and the structure sustainable.
 #### **Knowing When to Document and Analyze Variables**
 There is no argument that both of these are crucial to a project. I have spent many hours documenting variables and structures that appeared complete, only to have to be completely revised. I now reserve detailed documentation for when a module is closer to completion, while maintaining a simple, consistent style during active coding. This approach ensures clarity for myself and others throughout development, while avoiding wasted effort on documentation that may need to be rewritten as the project evolves.
-
-
-## Example Results
-<img src="plots/RF_top.png" alt="Model Metrics for Case Study" width="400" style="display: block; margin-left: 0;" />
-
-<br>
-
-<img src="data/maps/interpolation.jpg" width="1200">
-
-## Initial Challenges
-- **Dataset size** - The additional datasets and higher spatial granularity are leading to ***prohibitively large and unwieldy processor times*** on current hardware. It has become a balancing act to trim the dataset for efficient workflow without overly affecting model performance.
-- **Heavy Class Imbalance** - Damaging wildfire events are rare compared to days with no significant events. The low risk class composes **78%** of the total data points compared to the high risk class which is only **4%** of the data. `Undersampling` the majority class works best for balancing, while oversampling the minority class tends to *add too much noise* to the models.
-- **Messy Real World Data** - Data with large gaps, data without spatial fields or too low resolution, data in which you have to wrangle random mistakes. Some days feel like a rodeo, so many promising avenues become dead ends due to the potential time sink.
-- **Fire Complexity** - Damaging fires often persist for many days. Utilizing fire ignition dates alone is insufficient to predict the potential for damage.
-- **Spatial Granularity** - Hardware limits the resolution at which regions can be analyzed. Overgeneralization of data, like slope and aspect, occurs frequently and makes widespread prediction more difficult.
 
 ### Version 4.0 Changelog
 
