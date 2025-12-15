@@ -8,17 +8,15 @@
   A GIS‑Driven, Tree‑Based Machine Learning Analysis of California Wildfires
 </h2>
 </div>
+<br>
 
-
-*Author*: Dustin Littlefield\
-*Project Type*: Data Science & GIS Portfolio\
-*Technologies*: ArcGIS, Python, Pandas, Scikit-learn, XGBoost, GeoPandas, Matplotlib\
-*Skills*: `Data cleaning` `feature engineering` `supervised machine learning` `model evaluation` `class imbalance handling` \
-`spatial visualization` `exploratory data analysis` `reproducible workflow design` `results communication`\
-*Last Updated: December 2025*\
+**Author**: Dustin Littlefield\
+**Project Type**: `Spatial Data Science`, `Natural Resources`, `Wildfire Analysis`\
+**Technologies**: `ArcGIS` `Python` `Pandas` `Scikit-learn` `XGBoost` `Random Forest` `GeoPandas` `Matplotlib`\
+**Last Updated:** December 2025\
 [Github Repository](https://github.com/dustinlit/California_Fire_Severity)
 
-**Disclaimer:** I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions.
+> **Disclaimer:** I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions.
 
 ## Overview
 This project is a work in progress that explores the relationship between wildfire severity and environmental, geographical, social and temporal factors in the state of California. The goal is to predict a custom severity index `Wildfire Potential Destructive Power` — which incorporates structures damaged, structures destroyed and acres burned as degrees of fire severity.
