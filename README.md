@@ -1,10 +1,14 @@
 <link rel="stylesheet" href="notebooks/styles.css">
 
 <div class="title-wrap">
-  <h1 class="title-main">Spatial Data Science Approaches to Wildfire Severity Modeling</h1>
-  <h2 class="title-sub" style="font-style: italic;">A GIS‑Driven, Tree‑Based Machine Learning Analysis of California Wildfire</h2>
-  <br>
+  <h1 class="title-main" style="font-weight: bold; font-size: 2.5rem; margin-bottom: 0.2rem;">
+  Spatial Data Science Approaches to Wildfire Severity Modeling
+</h1>
+<h2 class="title-sub" style="font-style: italic; font-size: 1.4rem; margin-top: 0rem; margin-bottom: 0.2rem;">
+  A GIS‑Driven, Tree‑Based Machine Learning Analysis of California Wildfire 
+</h2>
 </div>
+
 
 *Author*: Dustin Littlefield\
 *Project Type*: Data Science & GIS Portfolio\
@@ -20,7 +24,7 @@
 This project is a work in progress that explores the relationship between wildfire severity and environmental, geographical, social and temporal factors in the state of California. The goal is to predict a custom severity index `Wildfire Potential Destructive Power` — which incorporates structures damaged, structures destroyed and acres burned as degrees of fire severity.
 
 
-<img src="plots/wildfires.png" width="600">
+<img src="plots/wildfires.png" width="800">
 
 
 
