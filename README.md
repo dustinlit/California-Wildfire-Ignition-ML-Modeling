@@ -505,12 +505,18 @@ Models are tuned automatically and the best performing models are selected for f
 <br>
 <img src="output/SHAP_RF.jpg" alt="Model Metrics for Case Study" width="800" style="display: block; margin-left: 0;" />
 
-## Conclusions:
-- **Historical** trends featured heavily in the Random Forest model.
-- **Regional** and **Human** data had the most influence in the XGBoost model.
-- Most **weather** Variables rank low on model importance suggesting a more complicated relationship with wildfire severity
-- **Population** stats play a key role in prediciting wildfire severity
-- More data may be neccessary for better correllations
+## Fire Damage:
+- **Wildland Urban Interface**, **Humans**, **Infrastructure** features contribute the most in both fire ignition models.
+- **1000-hour Dead Fuel Moisture** is the highest performing weather feature. Dryness is the driving factor for ignition.
+
+## Fire Spread:
+- **Wildland Urban Interface** and **Human** features are the main contributors to both models.
+- **Heat** and **Dryness** weather factors play key roles
+
+## Fire Damage:
+- The interaction of **Roads** and **Forests** has high signifigance in both models. May be due to fires started by cars in dry conditions. 
+- **Dryness** features are the top climate driver. 
+
 
 ## Visualization
 *Located in:*
