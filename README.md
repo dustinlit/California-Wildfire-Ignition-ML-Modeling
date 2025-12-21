@@ -18,7 +18,7 @@
 > **Disclaimer:** I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions.
 
 ## Overview
-This project explores the relationship between wildfire severity and environmental, geographical, social and temporal factors in the state of California. The target is to model and predict wildfire **ignition, spread, and damage** and identify which factors contribute the most to each aspect.
+The goal of this project is to use machine learning to analyze how environmental, geographical, social, and temporal factors influence wildfire severity across California. Specifically, the project aims to model and predict wildfire ignition, spread, and damage, and to determine which factors contribute most to each stage of wildfire behavior.
 
 
 <img src="plots/wildfires.png" width="800">
@@ -30,18 +30,18 @@ This project explores the relationship between wildfire severity and environment
 - Extrapolate statewide wildfire coverage by integrating daily weather data and fire records through analysis of a grid network across California.
 - Analyze daily time series data spanning **6 years** of California wildfire history and weather.
 - Integrate ArcGIS for **spatial analysis**, results interpretation, and to aid in the construction of the dataset.
-- Compare several multi-classification modeling techniques with a focus on tree models like `XGBoost`,`Random Forest`, and  `Light GBM`.
+- Compare several multi-classification modeling techniques with a focus on tree models like `XGBoost` and `Random Forest`.
 - Compare class balancing techniques like `RandomUnderSampler`, `SMOTE`, with unbalanced performance.
 - Utilize interpolation techniques to create geospatial visualizations that illustrate local and regional wildfire risk patterns and key factors as they evolve over time.
-- Analyze and identify the most important relationships between wilfire severity and risk factors.
+- Use `SHAP` and `Feature Ablation` to Analyze and identify the most important relationships between wilfire severity and risk factors.
 
 ## Key Initial Insights
 - In the grid network, there were a total of **132,810** incidents of wildfires detected between 01/01/2018 and 12/31/2024 thoughout the state.
 - **24,890** of these were *high* risk incidents causing significant property damage or acreage burned.
-- Models are currently hanging around **70% F1 score** for tree based models like `XGBoost` and `Random Forest`. Modest performance given the extreme low resolution of the grid and varied regional differences in climate.
-- Human factors weigh heavily in the models, `Population` and `Housing` density contribute substantially to the fire ignition models.
+- The current tree‑based models, XGBoost and Random Forest, are achieving F1 scores of around 70%. This is a reasonable but modest level of performance, likely constrained by the coarse spatial resolution of the grid and the substantial regional variability in California’s climate.
+- Human factors weigh heavily in the models. Notably, `Population` and `Housing` density contribute substantially to the fire ignition models.
 - Regional factors like `WUI interface` and `WUI intermix` zones contribute reasonably as well.
-- Standalone weather factors appear to be have significant influence on fire spread and damage, while having less effect on fire ignition.
+- Standalone weather variables appear to have a strong influence on fire spread and damage, but a comparatively smaller effect on ignition.
 
 ## Early Results
 
@@ -54,7 +54,7 @@ This project explores the relationship between wildfire severity and environment
 - **Heavy Class Imbalance** - Damaging wildfire events are rare compared to days with no significant events. The low risk class composes **78%** of the total data points compared to the high risk class which is only **4%** of the data. `Undersampling` the majority class works best for balancing, while oversampling the minority class tends to *add too much noise* to the models.
 - **Messy Real World Data** - Data with large gaps, data without spatial fields or too low resolution, data in which you have to wrangle random mistakes. Some days feel like a rodeo, so many promising avenues become dead ends due to the potential time sink.
 - **Fire Complexity** - Damaging fires often persist for many days. Utilizing fire ignition dates alone is insufficient to predict the potential for damage.
-- **Spatial Granularity** - Hardware limits the resolution at which regions can be analyzed. Overgeneralization of data, like slope and aspect, occurs frequently and makes widespread prediction more difficult.
+- **Spatial Granularity** - Current hardware limits the resolution at which regions can be analyzed. Overgeneralization of data, like slope and aspect, occurs frequently and makes widespread prediction more difficult.
 
 ## Personal Lessons Learned
 The main journey of this project has always been to learn more about spatial data science, practice and expand my `ArcGIS` skills, and get more practical `python` coding experience. While I have grown tremendously in all of these areas, there are some notable areas that i didnt anticipate when undertaking a project of this scale.  
@@ -194,8 +194,8 @@ There is no argument that documentation and analysis are crucial parts to a proj
 - `Interface`, `Intermix`, and `Influence` Areas - From WUI, average area of each zone within 36KM Buffer radius around sampling points
 - `Total_Population`,`Population_Density`,`Total_Housing`,`Housing_Density` - Population and housing statistics within 36KM Buffer radius around sampling points
 - `Eco_Regions` - regions generally representing the varied climate and vegetative regions in California
-- `Slope`,`Aspect` Derived from high resolution USGS daily rasters 
-- `Land Cover` Derived from land cover raster
+- `Slope`,`Aspect` - Derived from high resolution USGS daily rasters 
+- `Land Cover` - Derived from California land cover raster
 - `Roads`,`Power Lines`
 
 **Data Exploration:**
@@ -464,9 +464,10 @@ Engineered Data:
 *Located in:* 
 > - [*notebooks/06_Class_Balancing.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/06_Class_Balancing.ipynb)
 
-**Targets:** *Wildlife Ignition Risk* and *Wildfire Spread Risk*  are categorized into Low (0), Moderate(1), High(2), while due to limited events *Wildfire Damage Risk* is classified to two categories Low (0) and High(1).
+**Targets:** **Wildfire Ignition Risk** and **Wildfire Spread Risk** are classified into three categories: **Low (0)**, **Moderate (1)**, and **High (2)**. Due to the smaller number of recorded events, **Wildfire Damage Risk** is modeled using a binary classification with **Low (0)** and **High (1)** 
+categories.
 
-**Issues:** Tn all three models, the majority class vastly outnumbers both other categories. While most notably, high damaging wildfire events are severely underrepresented in the full dataset. 
+**Issues:** Tn all three models, the majority class vastly outnumbers both other categories. Notably, high damaging wildfire events are severely underrepresented in the full dataset. 
 
 Balancing techniques tested:
 - In method class balancing
@@ -494,8 +495,8 @@ Models are tuned automatically and the best performing models are selected for f
 ## Model Metrics
 
 **Key Findings:** 
-- All models are struggle distinguishing the **Moderate** severity class. The line between classes seems arbitrary and requires validation from subject experts to increase performance.
-- 
+- All models are struggle distinguishing the **Moderate** severity class. The division of classes seems arbitrary and requires validation from subject experts to increase performance.
+
 
 ## SHAP Feature Influence:
 
@@ -536,7 +537,7 @@ Models are tuned automatically and the best performing models are selected for f
 ## Next Steps / Potential Improvements
 - Hot Spot analysis of daily NDVI raster data (in process)
 - Spatial correlation examination with Morans I.
-- Arcpy integration.
+- ArcGIS online integration.
 - Incorporate emergency response times and reservoir data
 - Time series maps to check models consistency over time
 - Seperate module for up to date processing of new information and real time predictions
