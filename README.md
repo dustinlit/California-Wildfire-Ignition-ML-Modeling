@@ -497,12 +497,12 @@ Models are tuned automatically and the best performing models are selected for f
 - All models are struggle distinguishing the **Moderate** severity class. The line between classes seems arbitrary and requires validation from subject experts to increase performance.
 - 
 
-## **Feature Importances**:
+## SHAP Feature Influence:
 
-<img src="plots/RF_top.png" alt="Model Metrics for Case Study" width="500" style="display: block; margin-left: 0;" />
-
-
-<img src="plots/XGB_top.png" alt="Model Metrics for Case Study" width="500" style="display: block; margin-left: 0;" />
+<img src="output/SHAP_XGN.jpg" alt="Model Metrics for Case Study" width="800" style="display: block; margin-left: 0;" />
+<br>
+<br>
+<img src="output/SHAP_RF.jpg" alt="Model Metrics for Case Study" width="800" style="display: block; margin-left: 0;" />
 
 ## Conclusions:
 - **Historical** trends featured heavily in the Random Forest model.
@@ -518,9 +518,19 @@ Models are tuned automatically and the best performing models are selected for f
 - Maps using GeoPandas, Matplotlib, and Seaborn.
 - IDW interpolation for environmental variables in ArcGIS.
 
-Current Full Set Validation Output:
+## **Wildfire *Ignition* Predictions:**
 
-<img src="data/maps/full_set.png" alt="California 01072025" width="2000" style="display: block; margin-left: 0;" />
+<img src="output/fire_ignition_maps.png" alt="California 01072025" width="2000" style="display: block; margin-left: 0;" />
+<br>
+
+## **Wildfire *Spread* Predictions:**
+
+<img src="output/fire_spread_maps.png" alt="California 01072025" width="2000" style="display: block; margin-left: 0;" />
+<br>
+
+## **Wildfire *Damage* Predictions:**
+
+<img src="output/fire_damage_maps.png" alt="California 01072025" width="2000" style="display: block; margin-left: 0;" />
 ---
 
 ## Next Steps / Potential Improvements
