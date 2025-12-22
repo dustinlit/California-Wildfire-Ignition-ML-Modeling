@@ -33,15 +33,18 @@ The goal of this project is to use machine learning to analyze how environmental
 - Compare several multi-classification modeling techniques with a focus on tree models like `XGBoost` and `Random Forest`.
 - Compare class balancing techniques like `RandomUnderSampler`, `SMOTE`, with unbalanced performance.
 - Utilize interpolation techniques to create geospatial visualizations that illustrate local and regional wildfire risk patterns and key factors as they evolve over time.
-- Use `SHAP` and `Feature Ablation` to Analyze and identify the most important relationships between wilfire severity and risk factors.
+- Use `SHAP` and `Feature Ablation` to Analyze and identify the most important relationships between wildfire severity and risk factors.
 
 ## Key Initial Insights
-- In the grid network, there were a total of **132,810** incidents of wildfires detected between 01/01/2018 and 12/31/2024 thoughout the state.
-- **24,890** of these were *high* risk incidents causing significant property damage or acreage burned.
-- The current tree‑based models, XGBoost and Random Forest, are achieving F1 scores of around 70%. This is a reasonable but modest level of performance, likely constrained by the coarse spatial resolution of the grid and the substantial regional variability in California’s climate.
-- Human factors weigh heavily in the models. Notably, `Population` and `Housing` density contribute substantially to the fire ignition models.
-- Regional factors like `WUI interface` and `WUI intermix` zones contribute reasonably as well.
-- Standalone weather variables appear to have a strong influence on fire spread and damage, but a comparatively smaller effect on ignition.
+- In the grid network spread over 6 years, there were a total of **608,880** datapoints represented. Of these:
+  - **538** grids detected wildfires that caused significant **property damage**.
+  - **21,802** grids detected wildfires that caused significant **acreage burns**. 
+  - **> 500,000** datapoints had no significant events
+
+- The current models, XGBoost and Random Forest, are achieving **macro F1 scores of around 70%** with the **ignition** and **spread** targets. This is a modest level of performance, likely constrained by the coarse spatial resolution of the sampling grid and the substantial regional variability in California’s climate.
+- The intersection of **human habitation** and **infrastructure** with **dense forests** weigh heavily in the models. Notably, areas where there are dense **power line** and **roads**. 
+- Weather features appear to have a stronger influence on fire spread and damage, and a slightly smaller effect on ignition.
+- Indicators for **drought**  and **dry fuel material** have the most effect among the climate factors.
 
 ## Early Results
 
@@ -57,12 +60,15 @@ The goal of this project is to use machine learning to analyze how environmental
 - **Spatial Granularity** - Current hardware limits the resolution at which regions can be analyzed. Overgeneralization of data, like slope and aspect, occurs frequently and makes widespread prediction more difficult.
 
 ## Personal Lessons Learned
-The main journey of this project has always been to learn more about spatial data science, practice and expand my `ArcGIS` skills, and get more practical `python` coding experience. While I have grown tremendously in all of these areas, there are some notable areas that i didnt anticipate when undertaking a project of this scale.  
-#### **Identifying and Preventing** ***Data Leakage***
+The main journey of this project has always been to learn more about spatial data science, practice and expand my `ArcGIS` skills, and get more practical `python` coding experience. While I have grown tremendously in all of these areas, there are some notable areas that i didnt anticipate when undertaking a project of this scale.
+  
+**Identifying and Preventing** ***Data Leakage***:
 I initially believed I understood how to avoid data leaks, but I have learned that they can be subtle and deceptive. I have learned to question those 'finally nailed it' moments. Often, these moments are followed by the sudden realization where an apparent leak may be hiding. Having learned my lesson, I now approach sudden performance bumps with caution and double check any feature engineering or introduction of new data.
-#### **Maintaining a Cohesive Project Structure**
+
+**Maintaining a Cohesive Project Structure**
 This project began as one notebook page, soon expanded to five, and has grown into 12+ modules, 4+ appendices, and multiple source files. As the project scales, handling and passing data throughout these modules has become more complex and sometimes bugs or changes became more difficult to trace and more time consuming. Consistent organization throughout modules along with clear communication of inputs and outputs are now essential to keeping the structure manageable and growing.
-#### **Knowing When to Document and Analyze Variables**
+
+**Knowing the Proper time to Document and Analyze Variables**
 There is no argument that documentation and analysis are crucial parts to a project. Ultimately, I have spent many hours documenting variables and structures that appeared complete, only to have to be completely rewritten or revised. I now document with simple headers and critical notes only, reserving more detailed documentation for when a module is closer to completion. This approach ensures I maintain clarity and speed throughout development.
 
 ### Version 4.0 Changelog
@@ -112,21 +118,37 @@ There is no argument that documentation and analysis are crucial parts to a proj
       <li>notebooks/
         <ul>
           <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/01_Data_Exploration.ipynb">01_Data_Exploration.ipynb</a></li>
-          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/02_Data_Merging.ipynb">02_Data_Merging.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/02_A_Weather_Data_Merging.ipynb">02_A_Weather_Data_Merging.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/02_B_Spatial_Join_Reservoirs.ipynb">02_B_Spatial_Join_Reservoirs.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/02_C_Spatial_Join_Fire_Data.ipynb">02_C_Spatial_Join_Fire_Data.ipynb</a></li>
           <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/03_Feature_Engineering.ipynb">03_Feature_Engineering.ipynb</a></li>
-          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_Variable_Selection.ipynb">04_Variable_Selection.ipynb</a></li>
-          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/05_%20Subset_and_Split.ipynb">05_Feature_Interaction_Analysis.ipynb</a></li>
-          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/06_Class_Balancing.ipynb">06_Class_Balancing.ipynb</a></li>
-          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/07_Modeling_and_Tuning.ipynb">07_Modeling_and_Tuning.ipynb</a></li>
-          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/08_Evaluation_and_Visualization.ipynb">08_Evaluation_and_Visualization.ipynb</a></li>
-          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/09_Full_Set_Validation.ipynb">09_Full_Set_Validation.ipynb</a></li>
-          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/10_Other_Models.ipynb">10_Other_Models.ipynb</a></li>
-          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/11_Feature_Ablation.ipynb">11_Feature_Ablation.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_A_Feature_Distributions.ipynb">04_A_Feature_Distributions.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_B_Class_Conditional_Feature_Distributions.ipynb ">04_B_Class_Conditional_Feature_Distributions.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_C_Feature_Correlation.ipynb ">04_C_Feature_Correlation.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/05_%20Subset_and_Split.ipynb">05_Subset_and_Split.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/06_A_Fire_Ignition_Tuning.ipynb">06_A_Fire_Ignition_Tuning.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/06_B_Fire_Spread_Tuning.ipynb">06_B_Fire_Spread_Tuning.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/06_C_Fire_Damage_Tuning.ipynb">06_C_Fire_Damage_Tuning.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/07_A_Fire_Ignition_Class_Balancing.ipynb">07_A_Fire_Ignition_Class_Balancing.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/07_B_Fire_Spread_Class_Balancing.ipynb">07_B_Fire_Spread_Class_Balancing.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/07_C_Fire_Damage_Class_Balancing.ipynb">07_C_Fire_Damage_Class_Balancing.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/08_A_Fire_Ignition.ipynb">08_A_Fire_Ignition.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/08_B_Fire_Ignition_Feature_Ablation.ipynb">08_B_Fire_Ignition_Feature_Ablation.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/09_A_Fire_Spread.ipynb">09_A_Fire_Spread.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/09_B_Fire_Spread_Feature_Ablation.ipynb">09_B_Fire_Spread_Feature_Ablation.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/10_A_Fire_Damage.ipynb">10_A_Fire_Damage.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/10_B_Fire_Damage_Feature_Ablation.ipynb">10_B_Fire_Damage_Feature_Ablation.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/11_Leakage_Check.ipynb">11_Leakage_Check.ipynb</a></li>
           <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/12_Final_Stats.ipynb">12_Final_Stats.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/13_Other_Models.ipynb">13_Other_Models.ipynb</a></li>
           <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/A_Appendix_Sampling_Grids.ipynb">A_Appendix_Sampling_Grids.ipynb</a></li>
           <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/B_Appendix_Wildfires.ipynb">B_Appendix_Wildfires.ipynb</a></li>
           <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/C_Appendix_Gridmet_Combination.ipynb">C_Appendix_Gridmet_Combination.ipynb</a></li>
           <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/D_Appendix_Gridmet_Extraction.ipynb">C_Appendix_Gridmet_Extraction.ipynb</a></li>
+         <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/E_Appendix_NDVI_extraction.ipynb">E_Appendix_NDVI_extraction.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/F_Appendix_Raster_Processing.ipynb">F_Appendix_Raster_Processing.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/G_Appendix_Raster_Combination.ipynb">G_Appendix_Raster_Combination.ipynb</a></li>
+          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/H_Appendix_Reservoir_Data.ipynb">H_Appendix_Reservoir_Data.ipynb</a></li>
         </ul>
       </li>
       <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/README.md">README.md</a></li>
@@ -144,18 +166,19 @@ There is no argument that documentation and analysis are crucial parts to a proj
 **Environmental Data**:
 
 - **Daily weather readings**: *gridMET* <https://www.climatologylab.org/gridmet.html>
-- **Land Cover**: *USGS* <https://data.cnra.ca.gov/dataset/nlcd-2021-land-cover-california-subset/resource/6dab6b30-88ae-4aec-af8c-c22d52593c75>
+- **Land cover**: *USGS* <https://data.cnra.ca.gov/dataset/nlcd-2021-land-cover-california-subset/resource/6dab6b30-88ae-4aec-af8c-c22d52593c75>
+- **Daily NDVI rasters**: *NOAA* <https://doi.org/10.25921/gakh-st76>
 
 **California Demographic Data** :
 
- - **Census Tract Data**: *U.S. Census Bureau, Department of Commerce* <https://catalog.data.gov/dataset/tiger-line-shapefile-2021-state-california-census-tracts>
- - **2024 American Community Survey 5 year Median Income Data** *U.S. Census Bureau, Department of Commerce* <https://data.census.gov/table/ACSST1Y2024.S1903?q=California+Income&g=010XX00US$1500000_040XX00US06$1400000,06$1500000>
+ - **Census tract and block data**: *U.S. Census Bureau, Department of Commerce* <https://catalog.data.gov/dataset/tiger-line-shapefile-2021-state-california-census-tracts>
+ - **2024 American Community Survey 5 year median income data** *U.S. Census Bureau, Department of Commerce* <https://data.census.gov/table/ACSST1Y2024.S1903?q=California+Income&g=010XX00US$1500000_040XX00US06$1400000,06$1500000>
 
 **Wildlife Urban Interface**: 
 
 - **WUI layer**: *California Department of Forestry and Fire Protection* <https://gis.data.ca.gov/datasets/CALFIRE-Forestry::wildland-urban-interface/explore?location=34.403601%2C-118.894358%2C9.95>
 - **CDFW regions**: *California Department of Fish and Wildlife* <https://data.ca.gov/dataset/cdfw-regions>
-- **Eco Regions** - *USDA Forestry Service* <https://data.fs.usda.gov/geodata/edw/datasets.php?dsetCategory=biota>
+- **Eco regions** - *USDA Forestry Service* <https://data.fs.usda.gov/geodata/edw/datasets.php?dsetCategory=biota>
 
 **Elevation**: 
 
@@ -163,7 +186,7 @@ There is no argument that documentation and analysis are crucial parts to a proj
 
 **Infrastructure**: 
 
-- **All Public Roads**: *CalTrans* <https://apps.nationalmap.gov/downloader/>
+- **All public roads**: *CalTrans* <https://apps.nationalmap.gov/downloader/>
 - **Transmission lines**: *California Energy Commission (CEC)* <https://www.arcgis.com/home/item.html?id=aaa6321660eb40bbb55755d5cfb64107>
 
 **Raw Data Processing in:**
@@ -171,6 +194,16 @@ There is no argument that documentation and analysis are crucial parts to a proj
 > - [*notebooks/B_Appendix_Wildfires.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/B_Appendix_Wildfires.ipynb)
 > - [*notebooks/C_Appendix_Gridmet_Combination.pynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/C_Appendix_Gridmet_Combination.ipynb_)
 > - [*notebooks/D_Appendix_Gridmet_Extraction.pynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/D_Appendix_Gridmet_Extraction.ipynb)
+> - [*notebooks/E_Appendix_NDVI_extraction.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/E_Appendix_NDVI_extraction.ipynb)
+> - [*notebooks/F_Appendix_Raster_Processing.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/F_Appendix_Raster_Processing.ipynb)
+> - [*notebooks/G_Appendix_Raster_Combination.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/G_Appendix_Raster_Combination.ipynb)
+> - [*notebooks/H_Appendix_Reservoir_Data.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/H_Appendix_Reservoir_Data.ipynb)
+
+**Data Exploration and Processing:**
+> - [*notebooks/01_Data_Exploration.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/01_Data_Exploration.ipynb)
+> - [*notebooks/02_A_Weather_Data_Merging.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/02_A_Weather_Data_Merging.ipynb)
+> - [*notebooks/2_B_Spatial_Join_Reservoirs.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/02_B_Spatial_Join_Reservoirs.ipynb)
+> - [*notebooks/02_C_Spatial_Join_Fire_Data.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/02_C_Spatial_Join_Fire_Data.ipynb)
 
 ## Key Features
 **Environmental / Weather Variables**:
@@ -186,6 +219,7 @@ There is no argument that documentation and analysis are crucial parts to a proj
 - `Burning_Index`	- Fire danger index derived from temperature, humidity, wind, and fuel moisture; higher values indicate higher fire potential
 - `Energy_Release_Component` - Estimated energy release per unit area (MJ/m²); relates to potential fire intensity
 - `Dead_Fuel_Moisture` - Moisture content of medium-size dead fuels (%) affecting fire spread
+- `NDVI_temperature` - a measure of a grids local mean from the statewide global mean.
 
 **Temporal and Spatial Variables**:
  - `Season`,`Year`,`Centroid Location`
@@ -198,9 +232,12 @@ There is no argument that documentation and analysis are crucial parts to a proj
 - `Land Cover` - Derived from California land cover raster
 - `Roads`,`Power Lines`
 
-**Data Exploration:**
-> - [*notebooks/01_Data_Exploration.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/01_Data_Exploration.ipynb)
-> - [*notebooks/02_Data_Merging.pynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/02_Data_Merging.ipynb)
+## Feature Engineering and Examination:
+*Located in:* 
+> - [*notebooks/03_Feature_Engineering.pynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/03_Feature_Engineering.ipynb)
+> - [*notebooks/04_A_Feature_Distributions.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_A_Feature_Distributions.ipynb)
+> - [*notebooks/04_B_Class_Conditional_Feature_Distributions.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_B_Class_Conditional_Feature_Distributions.ipynb)
+> - [*notebooks/04_C_Feature_Correlation.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_C_Feature_Correlation.ipynb)
 
 ## ArcGIS Sampling Grid
 
@@ -448,21 +485,35 @@ There is no argument that documentation and analysis are crucial parts to a proj
 </table>
 </div>
 
-## Feature Engineering
-*Located in:* 
-> - [*notebooks/03_Feature_Engineering.pynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/03_Feature_Engineering.ipynb)
-> - [*notebooks/04_Variable_Selection.pynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_Variable_Selection.ipynb)
-
-Engineered Data:
+**Engineered Data:**
 - `Santa_Ana_Score` - Winds x dryness score to represent the influence of these winds.
 - `Average_Fires_per_Month` - *Temporarily removed*
 - `7-day_Lagged_Weather` - Rolling 7 day average for key weather variables
 - `Wind Slope Interactions` - South-facing slopes dry faster, and strong winds drive flames uphill, intensifying wildfire spread.
 
+## Model Hypertuning
+*Located in:*
+> - [*notebooks/05_Subset_and_Split.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/05_%20Subset_and_Split.ipynb)
+> - [*notebooks/06_A_Fire_Ignition_Tuning.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/06_A_Fire_Ignition_Tuning.ipynb)
+> - [*notebooks/06_B_Fire_Spread_Tuning.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/06_B_Fire_Spread_Tuning.ipynb)
+> - [*notebooks/06_C_Fire_Damage_Tuning.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/06_C_Fire_Damage_Tuning.ipynb)
+
+Models are tuned automatically and the best performing models are selected for final evaluation and visualization. Paramater options are limited to those that maintain reasonable hardware performance.
+
+**Models tested:**
+- `Random Forest` from scikit-learn
+- `XGBoost` from XGBoost
+
+**Metrics evaluated:**
+`F1-score (macro-averaged)`
+`Confusion matrices`
+`K Fold Cross-validation`
 
 ## Class Balancing
 *Located in:* 
-> - [*notebooks/06_Class_Balancing.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/06_Class_Balancing.ipynb)
+> - [*notebooks/07_A_Fire_Ignition_Class_Balancing.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/07_A_Fire_Ignition_Class_Balancing.ipynb)
+> - [*notebooks/07_B_Fire_Spread_Class_Balancing.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/07_B_Fire_Spread_Class_Balancing.ipynb)
+> - [*notebooks/07_C_Fire_Damage_Class_Balancing.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/07_C_Fire_Damage_Class_Balancing.ipynb)
 
 **Targets:** **Wildfire Ignition Risk** and **Wildfire Spread Risk** are classified into three categories: **Low (0)**, **Moderate (1)**, and **High (2)**. Due to the smaller number of recorded events, **Wildfire Damage Risk** is modeled using a binary classification with **Low (0)** and **High (1)** 
 categories.
@@ -476,69 +527,52 @@ Balancing techniques tested:
 
 Automatic comparison and selection of class balancing strategies.
 
-## Modeling
-*Located in:*
-> - [*notebooks/07_modeling_And_Tuning.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/07_Modeling_and_Tuning.ipynb)
-
-Models are tuned automatically and the best performing models are selected for final evaluation and visualization. Paramater options are limited to those that maintain reasonable hardware performance.
-
-**Models tested:**
-- `Random Forest` from scikit-learn
-- `XGBoost` from XGBoost
-
-**Metrics evaluated:**
-`F1-score (macro-averaged)`
-`Confusion matrices`
-`K Fold Cross-validation`
-
-
 ## Model Metrics
+*Located in:* 
+> - [*notebooks/08_A_Fire_Ignition.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/08_A_Fire_Ignition.ipynb)
+> - [*notebooks/09_A_Fire_Spread.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/09_A_Fire_Spread.ipynb)
+> - [*notebooks/10_A_Fire_Damage.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/10_A_Fire_Damage.ipynb)
 
 **Key Findings:** 
 - All models are struggle distinguishing the **Moderate** severity class. The division of classes seems arbitrary and requires validation from subject experts to increase performance.
 
 
 ## SHAP Feature Influence:
+*Located in:* 
+> - [*notebooks/08_B_Fire_Ignition_Feature_Ablation.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/08_B_Fire_Ignition_Feature_Ablation.ipynb)
+> - [*notebooks/09_B_Fire_Spread_Feature_Ablation*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/09_B_Fire_Spread_Feature_Ablation.ipynb)
+> - [*notebooks/10_B_Fire_Damage_Feature_Ablation.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/10_B_Fire_Damage_Feature_Ablation.ipynb)
+
 
 <img src="output/SHAP_XGN.jpg" alt="Model Metrics for Case Study" width="800" style="display: block; margin-left: 0;" />
 <br>
 <br>
 <img src="output/SHAP_RF.jpg" alt="Model Metrics for Case Study" width="800" style="display: block; margin-left: 0;" />
 
-## Fire Damage:
-- **Wildland Urban Interface**, **Humans**, **Infrastructure** features contribute the most in both fire ignition models.
-- **1000-hour Dead Fuel Moisture** is the highest performing weather feature. Dryness is the driving factor for ignition.
+## Visualization:
 
-## Fire Spread:
-- **Wildland Urban Interface** and **Human** features are the main contributors to both models.
-- **Heat** and **Dryness** weather factors play key roles
-
-## Fire Damage:
-- The interaction of **Roads** and **Forests** has high signifigance in both models. May be due to fires started by cars in dry conditions. 
-- **Dryness** features are the top climate driver. 
-
-
-## Visualization
-*Located in:*
-> - [*notebooks/08_evaluation_and_visualization.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/08_Evaluation_and_Visualization.ipynb)
-
-- Maps using GeoPandas, Matplotlib, and Seaborn.
-- IDW interpolation for environmental variables in ArcGIS.
-
-## **Wildfire *Ignition* Predictions:**
+### **Wildfire *Ignition* Predictions:**
 
 <img src="output/fire_ignition_maps.png" alt="California 01072025" width="2000" style="display: block; margin-left: 0;" />
 <br>
 
-## **Wildfire *Spread* Predictions:**
+- **Wildland Urban Interface**, **Humans**, **Infrastructure** features contribute the most in both fire ignition models.
+- **1000-hour Dead Fuel Moisture** is the highest performing weather feature. Dryness is the driving factor for ignition.
+
+### **Wildfire *Spread* Predictions:**
 
 <img src="output/fire_spread_maps.png" alt="California 01072025" width="2000" style="display: block; margin-left: 0;" />
 <br>
 
-## **Wildfire *Damage* Predictions:**
+- **Wildland Urban Interface** and **Human** features are the main contributors to both models.
+- **Heat** and **Dryness** weather factors play key roles
+
+### **Wildfire *Damage* Predictions:**
 
 <img src="output/fire_damage_maps.png" alt="California 01072025" width="2000" style="display: block; margin-left: 0;" />
----
+
+- The interaction of **Roads** and **Forests** has high signifigance in both models. May be due to fires started by cars in dry conditions. 
+- **Dryness** features are the top climate driver. 
 
 ## Next Steps / Potential Improvements
 - Hot Spot analysis of daily NDVI raster data (in process)
