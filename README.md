@@ -537,7 +537,7 @@ Overall, `Random UnderSampler` has the most positive effect on performance. Whil
 > - [*notebooks/10_A_Fire_Damage.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/10_A_Fire_Damage.ipynb)
 
 **Key Findings:** 
-- All models are struggle distinguishing the **Moderate** severity class due to the division of classes being relatively arbitrary. They may require validation from subject experts to increase performance.
+- All models struggle to distinguish the **Moderate** severity class due to the division of classes being relatively arbitrary. They may require validation from subject experts to increase performance.
 
 
 ## SHAP Feature Influence:
