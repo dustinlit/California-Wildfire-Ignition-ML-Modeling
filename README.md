@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="notebooks/styles.css">
 
 <div class="title-wrap">
-  <h1 class="title-main" style="font-weight: bold; font-size: 2.05rem;margin-top: -.6rem;margin-bottom: 0.24rem;">
+  <h1 class="title-main" style="font-weight: bold; font-size: 2.05rem;margin-top: -.7rem;margin-bottom: 0.24rem;">
   Spatial Data Science Approaches to Wildfire Severity Modeling
 </h1>
 <h2 class="title-sub" style="font-style: italic; font-size: 1.1rem; margin-top: 0rem; margin-bottom: 0.5rem;">
