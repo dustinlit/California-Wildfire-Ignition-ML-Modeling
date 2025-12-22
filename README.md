@@ -41,10 +41,13 @@ The goal of this project is to use machine learning to analyze how environmental
   - **21,802** grids detected wildfires that caused significant **acreage burns**. 
   - **> 500,000** datapoints had no significant events
 
-- The current models, XGBoost and Random Forest, are achieving **macro F1 scores of around 70%** with the **ignition** and **spread** targets. This is a modest level of performance, likely constrained by the coarse spatial resolution of the sampling grid and the substantial regional variability in California’s climate.
-- The intersection of **human habitation** and **infrastructure** with **dense forests** weigh heavily in the models. Notably, areas where there are dense **power line** and **roads**. 
-- Weather features appear to have a stronger influence on fire spread and damage, and a slightly smaller effect on ignition.
-- Indicators for **drought**  and **dry fuel material** have the most effect among the climate factors.
+- The current models, XGBoost and Random Forest, are achieving **macro F1 scores of around 70%** with the **wildfire ignition** and **wildfire spread** targets. This is a modest level of performance, likely constrained by the coarse spatial resolution of the sampling grid and the substantial regional variability in California’s climate.
+- The models largely reinforce the common view of wildfire causes. 
+  - **Population density** in **wildland intermix zones** are the top drivers of the **XGB wildfire ignition** model. 
+  - Overall, the intersection of **human habitation** and **infrastructure** with **dense forests** weigh heavily in the models. Notably in areas where there are dense **power lines** and **roads**. 
+  - Indicators of **drought**  and **dry fuel materials** are the leading drivers among climate factors.
+  - Large scale **wind speed** features alone appear to be of limited predictive ability for wildfire spread and damage. However, when interacting with **slope** a moderate influence is observed. More detailed wind gust data with a higher resolution may be necessary to truly account for the winds effects.
+
 
 ## Early Results
 
@@ -53,20 +56,20 @@ The goal of this project is to use machine learning to analyze how environmental
 <br>
 
 ## Initial Project Challenges
-- **Dataset size** - Additional datasets and higher spatial granularity are leading to ***prohibitively large and unwieldy processor times*** on current hardware. It has become a balancing act to trim the dataset for efficient workflow without overly affecting model performance.
-- **Heavy Class Imbalance** - Damaging wildfire events are rare compared to days with no significant events. The low risk class composes **78%** of the total data points compared to the high risk class which is only **4%** of the data. `Undersampling` the majority class works best for balancing, while oversampling the minority class tends to *add too much noise* to the models.
-- **Messy Real World Data** - Data with large gaps, data without spatial fields or too low resolution, data in which you have to wrangle random mistakes. Some days feel like a rodeo, so many promising avenues become dead ends due to the potential time sink.
-- **Fire Complexity** - Damaging fires often persist for many days. Utilizing fire ignition dates alone is insufficient to predict the potential for damage.
-- **Spatial Granularity** - Current hardware limits the resolution at which regions can be analyzed. Overgeneralization of data, like slope and aspect, occurs frequently and makes widespread prediction more difficult.
+- **Dataset size** - As Additional data is added and overall spatial granularity is increased, ***processor times are becoming prohibitively large and unwieldy*** on current hardware. It has become a balancing act to subset the dataset for efficient workflow without overly affecting model performance.
+- **Heavy Class Imbalance** - Damaging wildfire events are rare compared to days with no significant events. The low risk class composes the overwhelming majority of the total data points. Moderate and high risk events only compose **3.6%**. In testing, `Undersampling` the majority class works best for balancing, while oversampling the minority class tends to *add too much noise* to the models.
+- **Messy Real World Data** - You dont ahve to wander to far of the path of nice cultivated datasets to realize the inherent messiness of real world data. While many agencies do a fantastic job wrangling the data for their needs, interconnecting this data can become a challenge. Data with large gaps, data without spatial fields or too low resolution, data in which you have to wrangle random mistakes. Some days feel like a rodeo, and many promising avenues become dead ends as sometimes the bull gets you.
+- **Fire Complexity** - Damaging fires often persist for many days and evolve at different rates and many databases lack consistent listings for file containment times. This makes utilizing ignition dates for spread and damage problematic. A time consuming auditing of multiple databases may be required.
+- **Spatial Resolution** - My current hardware limits the resolution at which the state can be analyzed. This creastes overgeneralization and neutralization of some data, like `slope` and `wind speed`.
 
 ## Personal Lessons Learned
 The main journey of this project has always been to learn more about spatial data science, practice and expand my `ArcGIS` skills, and get more practical `python` coding experience. While I have grown tremendously in all of these areas, there are some notable areas that i didnt anticipate when undertaking a project of this scale.
   
 **Identifying and Preventing** ***Data Leakage***:
-I initially believed I understood how to avoid data leaks, but I have learned that they can be subtle and deceptive. I have learned to question those 'finally nailed it' moments. Often, these moments are followed by the sudden realization where an apparent leak may be hiding. Having learned my lesson, I now approach sudden performance bumps with caution and double check any feature engineering or introduction of new data.
+I chalk this lesson up to being a classic rookie mistake. I initially believed I understood how to avoid data leaks, but I have learned that they can be subtle and deceptive. Often, moments where i feel 'finally nailed it' are followed by the sudden realization that there is liekly an apparent leak hiding somewhere. As a result, I now approach any sudden performance bumps with caution and double check any feature engineering or introduction of new data.
 
 **Maintaining a Cohesive Project Structure**
-This project began as one notebook page, soon expanded to five, and has grown into 12+ modules, 4+ appendices, and multiple source files. As the project scales, handling and passing data throughout these modules has become more complex and sometimes bugs or changes became more difficult to trace and more time consuming. Consistent organization throughout modules along with clear communication of inputs and outputs are now essential to keeping the structure manageable and growing.
+This project began as a simple Jupyter notebook page, soon expanded to five, and has now grown into 12+ modules, 4+ appendices, and multiple source files. As the project scales, handling and passing data throughout these modules has become more complex and sometimes bugs or changes became more difficult to trace and more time consuming. Consistent organization throughout modules along with clear communication of inputs and outputs are now essential to keeping the structure manageable and growing.
 
 **Knowing the Proper time to Document and Analyze Variables**
 There is no argument that documentation and analysis are crucial parts to a project. Ultimately, I have spent many hours documenting variables and structures that appeared complete, only to have to be completely rewritten or revised. I now document with simple headers and critical notes only, reserving more detailed documentation for when a module is closer to completion. This approach ensures I maintain clarity and speed throughout development.
@@ -279,7 +282,7 @@ There is no argument that documentation and analysis are crucial parts to a proj
       <td>Influence_Zone</td>
       <td>Influence Zone</td>
       <td>Double</td>
-      <td>Total amount io influence areas within each grid</td>
+      <td>Total amount of influence areas within each grid</td>
       <td>square meters</td>
       <td>WUI</td>
     </tr>
@@ -288,7 +291,7 @@ There is no argument that documentation and analysis are crucial parts to a proj
       <td>interface_zone</td>
       <td>Interface</td>
       <td>Double</td>
-      <td>Total amount io interface areas within each grid</td>
+      <td>Total amount of interface areas within each grid</td>
       <td>square meters</td>
       <td>WUI</td>
     </tr>
@@ -297,7 +300,7 @@ There is no argument that documentation and analysis are crucial parts to a proj
       <td>intermix_zone</td>
       <td>Intermix</td>
       <td>Double</td>
-      <td>Total amount io intermix areas within each grid</td>
+      <td>Total amount of intermix areas within each grid</td>
       <td>square meters</td>
       <td>WUI</td>
     </tr>
@@ -423,7 +426,7 @@ There is no argument that documentation and analysis are crucial parts to a proj
       <td>northness_mean</td>
       <td>Northness Mean</td>
       <td>Double</td>
-      <td>How strongly the slopes in the grid faces north (-1 to 1)</td>
+      <td>How strongly the slopes in the grid face north (-1 to 1)</td>
       <td>none</td>
       <td>Elevation</td>
     </tr>
@@ -432,7 +435,7 @@ There is no argument that documentation and analysis are crucial parts to a proj
       <td>eastness_mean</td>
       <td>Eastness Mean</td>
       <td>Double</td>
-      <td>How strongly the slopes in the grid faces east (-1 to 1)</td>
+      <td>How strongly the slopes in the grid face east (-1 to 1)</td>
       <td>none</td>
       <td>Elevation</td>
     </tr>
@@ -486,9 +489,9 @@ There is no argument that documentation and analysis are crucial parts to a proj
 </div>
 
 **Engineered Data:**
-- `Santa_Ana_Score` - Winds x dryness score to represent the influence of these winds.
+- `Santa_Ana_Score` - Winds x dryness score to represent the influence of these seasonal winds.
 - `Average_Fires_per_Month` - *Temporarily removed*
-- `7-day_Lagged_Weather` - Rolling 7 day average for key weather variables
+- `7-day_Lagged_Weather` - Rolling 7 day averages for key weather features.
 - `Wind Slope Interactions` - South-facing slopes dry faster, and strong winds drive flames uphill, intensifying wildfire spread.
 
 ## Model Hypertuning
@@ -525,7 +528,7 @@ Balancing techniques tested:
 - Random UnderSampler for the dominant "Low" class.
 - SMOTE for oversampling
 
-Automatic comparison and selection of class balancing strategies.
+Overall, `Random UnderSampler` has the most positive effect on performance. While `SMOTE` seems to add to much noise to the models.
 
 ## Model Metrics
 *Located in:* 
@@ -534,7 +537,7 @@ Automatic comparison and selection of class balancing strategies.
 > - [*notebooks/10_A_Fire_Damage.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/10_A_Fire_Damage.ipynb)
 
 **Key Findings:** 
-- All models are struggle distinguishing the **Moderate** severity class. The division of classes seems arbitrary and requires validation from subject experts to increase performance.
+- All models are struggle distinguishing the **Moderate** severity class due to the division of classes being relatively arbitrary. They may require validation from subject experts to increase performance.
 
 
 ## SHAP Feature Influence:
@@ -543,10 +546,14 @@ Automatic comparison and selection of class balancing strategies.
 > - [*notebooks/09_B_Fire_Spread_Feature_Ablation*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/09_B_Fire_Spread_Feature_Ablation.ipynb)
 > - [*notebooks/10_B_Fire_Damage_Feature_Ablation.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/10_B_Fire_Damage_Feature_Ablation.ipynb)
 
+<br>
+
+### XGBoost
 
 <img src="output/SHAP_XGN.jpg" alt="Model Metrics for Case Study" width="800" style="display: block; margin-left: 0;" />
 <br>
-<br>
+
+### Random Forest
 <img src="output/SHAP_RF.jpg" alt="Model Metrics for Case Study" width="800" style="display: block; margin-left: 0;" />
 
 ## Visualization:
@@ -575,10 +582,11 @@ Automatic comparison and selection of class balancing strategies.
 - **Dryness** features are the top climate driver. 
 
 ## Next Steps / Potential Improvements
+- Reevaluate damage model structure. Maybe change to regression with dollar amount.
 - Hot Spot analysis of daily NDVI raster data (in process)
-- Spatial correlation examination with Morans I.
+- Spatial correlation examination with Morans I. (in process)
 - ArcGIS online integration.
-- Incorporate emergency response times and reservoir data
+- Incorporate emergency response times and reservoir data (in process)
 - Time series maps to check models consistency over time
 - Seperate module for up to date processing of new information and real time predictions
 - Consult domain experts to validate assumptions and feature selection.
