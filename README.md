@@ -48,6 +48,24 @@ The goal of this project is to use machine learning to analyze how environmental
   - Indicators of **drought**  and **dry fuel materials** are the leading drivers among climate factors.
   - Large scale **wind speed** features alone appear to be of limited predictive ability for wildfire spread and damage. However, when interacting with **slope** a moderate influence is observed. More detailed wind gust data with a higher resolution may be necessary to truly account for the winds effects.
 
+## Methods
+**Data Preparation:**
+- All datasets collected from official state and federal sources
+- All ArcGIS layers are projected to a common CRS (EPSG 3310) and clipped to California state boundaries.
+<br>
+
+**Feature Engineering:**
+- Constructed a **relative NDVI hot spot index** comparing each grids mean to the global mean
+- Created **interaction features** focused on targeted combinations of weather features and the specific interactions of slope and wind.
+
+**Modeling:**
+- Trained tree based ML models to predict categorical **Damage**, **Spread**, and **Ignition** targets on individual pipelines.
+- Automatic hypertuning for optimal performance based on macro F1 scores.
+
+**Spatial Interpolation:**
+- Built a **custom ArcGIS Pro automation tool** to standardize output workflow and consistency.
+  - for a target date, runs kriging for the two prediction sets and one actual results set.
+  - clips all output rasters to California boundaries
 
 ## Top SHAP Feature Contributions:
 <img src="output/ignition_rf_top5.png" width="600">
