@@ -95,44 +95,6 @@ This project began as a simple Jupyter notebook page, soon expanded to five, and
 **Knowing the Proper time to Document and Analyze Variables**
 There is no argument that documentation and analysis are crucial parts to a project. Ultimately, I have spent many hours documenting variables and structures that appeared complete, only to have to be completely rewritten or revised. I now document with simple headers and critical notes only, reserving more detailed documentation for when a module is closer to completion. This approach ensures I maintain clarity and speed throughout development.
 
-### Version 4.0 Changelog
-> 1. Seperated targets into three main models, **Fire Ignition**, **Fire Spread**, and **Fire Damage**.
-> 2. New Datasets
->   - Detailed Elevation incorporated (slope, aspect, northness, eastness)
->   - Infrastructure data (road density, power line density)
->   - Land Cover raster data
-> 3. New refined and detailed ArcGIS worklow
-> 4. Changed samples from points to a raster grid structure to ensure even coverage of the state with minimal overlap.
-> 5. Removed the Neural Network due to consistent poor performance (may be due to hardware limitations)
-> 6. Incorporated interaction features modeling `Slope x Wind`, `Human x Environment`, `Wind Speed x Dryness`
-> 7. Added one hot encoding of regional and temporal fields. `Seasons`, `Eco Regions`
-> 8. Expanded the target to take into account the `Days Burned` of each fire, since fire spread and damage do not only take place on the day of ignition.
-
-### Version 3.0 Changelog
-
-> 1. Incorporated more accurate and complete raster weather data from **gridMET Climatology Lab**
-> 2. Integrated **Wildland Urban Interface** and **California Eco regions**.
-> 2. Replaced the `KNN` model with a `Neural Network` for a simpler data workflow.
-> 3. ArcGIS Pro integration for data preparation and prediction interpolation
-> 4. Added more accurate Census Block data. Population stats calculated as buffer zone around sampling points.
-
-
-### Version 2.0 Changelog
-
-> 1. Added Detailed fire damage data
->       - CALFIRE damage cost data added, 
->       - Estimation of damage directly from structures
-> 2. Expanded the dates for weather and damage data
->       - Expanded from 2018-2020 to 2018-2025
-> 3. New Features
->       - `Fire History` average fires per month for previous years
-> 4. Data Handling Optimization
->       - Simplified handling of case study data as references instead of storing separate databases
-> 5. Geographical and Temporal Integration
->       - in ArcGIS, constructed a mesh sampling grid in California to ensure even coverage
->       - Buffer spatial join for combining fire damage info with weather data
->       - Incorporated Regionality and Seasonality into models
-
 ## Project Structure
 
 <ul>
@@ -162,9 +124,6 @@ There is no argument that documentation and analysis are crucial parts to a proj
           <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/09_B_Fire_Spread_Feature_Ablation.ipynb">09_B_Fire_Spread_Feature_Ablation.ipynb</a></li>
           <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/10_A_Fire_Damage.ipynb">10_A_Fire_Damage.ipynb</a></li>
           <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/10_B_Fire_Damage_Feature_Ablation.ipynb">10_B_Fire_Damage_Feature_Ablation.ipynb</a></li>
-          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/11_Leakage_Check.ipynb">11_Leakage_Check.ipynb</a></li>
-          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/12_Final_Stats.ipynb">12_Final_Stats.ipynb</a></li>
-          <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/13_Other_Models.ipynb">13_Other_Models.ipynb</a></li>
           <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/A_Appendix_Sampling_Grids.ipynb">A_Appendix_Sampling_Grids.ipynb</a></li>
           <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/B_Appendix_Wildfires.ipynb">B_Appendix_Wildfires.ipynb</a></li>
           <li><a href="https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/C_Appendix_Gridmet_Combination.ipynb">C_Appendix_Gridmet_Combination.ipynb</a></li>
@@ -226,7 +185,7 @@ There is no argument that documentation and analysis are crucial parts to a proj
 **Data Exploration and Processing:**
 > - [*notebooks/01_Data_Exploration.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/01_Data_Exploration.ipynb)
 > - [*notebooks/02_A_Weather_Data_Merging.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/02_A_Weather_Data_Merging.ipynb)
-> - [*notebooks/2_B_Spatial_Join_Reservoirs.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/02_B_Spatial_Join_Reservoirs.ipynb)
+> - [*notebooks/02_B_Spatial_Join_Reservoirs.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/02_B_Spatial_Join_Reservoirs.ipynb)
 > - [*notebooks/02_C_Spatial_Join_Fire_Data.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/02_C_Spatial_Join_Fire_Data.ipynb)
 
 ## Key Features
@@ -623,6 +582,48 @@ Overall, `Random UnderSampler` has the most positive effect on performance. Whil
 - Time series maps to check models consistency over time
 - Seperate module for up to date processing of new information and real time predictions
 - Consult domain experts to validate assumptions and feature selection.
+
+## Changelog:
+
+### Version 4.0 Changelog
+> 1. Seperated targets into three main models, **Fire Ignition**, **Fire Spread**, and **Fire Damage**.
+> 2. New Datasets
+>   - Detailed Elevation incorporated (slope, aspect, northness, eastness)
+>   - Infrastructure data (road density, power line density)
+>   - Land Cover raster data
+> 3. New refined and detailed ArcGIS worklow
+> 4. Changed samples from points to a raster grid structure to ensure even coverage of the state with minimal overlap.
+> 5. Removed the Neural Network due to consistent poor performance (may be due to hardware limitations)
+> 6. Incorporated interaction features modeling `Slope x Wind`, `Human x Environment`, `Wind Speed x Dryness`
+> 7. Added one hot encoding of regional and temporal fields. `Seasons`, `Eco Regions`
+> 8. Expanded the target to take into account the `Days Burned` of each fire, since fire spread and damage do not only take place on the day of ignition.
+
+### Version 3.0 Changelog
+
+> 1. Incorporated more accurate and complete raster weather data from **gridMET Climatology Lab**
+> 2. Integrated **Wildland Urban Interface** and **California Eco regions**.
+> 2. Replaced the `KNN` model with a `Neural Network` for a simpler data workflow.
+> 3. ArcGIS Pro integration for data preparation and prediction interpolation
+> 4. Added more accurate Census Block data. Population stats calculated as buffer zone around sampling points.
+
+
+### Version 2.0 Changelog
+
+> 1. Added Detailed fire damage data
+>       - CALFIRE damage cost data added, 
+>       - Estimation of damage directly from structures
+> 2. Expanded the dates for weather and damage data
+>       - Expanded from 2018-2020 to 2018-2025
+> 3. New Features
+>       - `Fire History` average fires per month for previous years
+> 4. Data Handling Optimization
+>       - Simplified handling of case study data as references instead of storing separate databases
+> 5. Geographical and Temporal Integration
+>       - in ArcGIS, constructed a mesh sampling grid in California to ensure even coverage
+>       - Buffer spatial join for combining fire damage info with weather data
+>       - Incorporated Regionality and Seasonality into models.
+
+
 
 ## Installation
 To run the project locally:\
