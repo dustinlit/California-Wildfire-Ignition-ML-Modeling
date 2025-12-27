@@ -68,9 +68,10 @@ The goal of this project is to use machine learning to analyze how environmental
   - clips all output rasters to California boundaries
 
 ## Top SHAP Feature Contributions:
-<img src="output/ignition_rf_top5.png" width="600">
 <img src="output/spread_rf_top5.png" width="500">
 <img src="output/damage_rf_top5.png" width="500">
+
+<img src="output/ignition_rf_top5.png" width="600">
 
 <img src="data/maps/interpolation.jpg" width="1200">
 
