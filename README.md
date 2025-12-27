@@ -49,7 +49,7 @@ The goal of this project is to use machine learning to analyze how environmental
   - Large scale **wind speed** features alone appear to be of limited predictive ability for wildfire spread and damage. However, when interacting with **slope** a moderate influence is observed. More detailed wind gust data with a higher resolution may be necessary to truly account for the winds effects.
 
 
-## Early Results
+## Top SHAP Feature Contributions:
 <img src="output/ignition_rf_top5.png" width="600">
 <img src="output/spread_rf_top5.png" width="500">
 <img src="output/damage_rf_top5.png" width="500">
@@ -540,13 +540,25 @@ Overall, `Random UnderSampler` has the most positive effect on performance. Whil
 > - [*notebooks/10_A_Fire_Damage.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/10_A_Fire_Damage.ipynb)
 
 **Key Findings:** 
-- All models struggle to distinguish the **Moderate** severity class due to the division of classes being relatively arbitrary. They may require validation from subject experts to increase performance.
+- All models struggle to distinguish the **Moderate** severity classes due to the division of classes being relatively arbitrary. They may require validation from subject experts to increase performance.
 
+<img src="output/ignition_evaluation.png" alt="Model Metrics for Case Study" width="600" style="display: block; margin-left: 0;" />
+<br>
+<br>
+
+<img src="output/spread_evaluation.png" alt="Model Metrics for Case Study" width="600" style="display: block; margin-left: 0;" />
+<br>
+<br>
+
+<img src="output/damage_evaluation.png" alt="Model Metrics for Case Study" width="600" style="display: block; margin-left: 0;" />
+<br>
 
 ## SHAP Feature Influence:
 *Located in:* 
 > - [*notebooks/08_B_Fire_Ignition_Feature_Ablation.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/08_B_Fire_Ignition_Feature_Ablation.ipynb)
+
 > - [*notebooks/09_B_Fire_Spread_Feature_Ablation*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/09_B_Fire_Spread_Feature_Ablation.ipynb)
+
 > - [*notebooks/10_B_Fire_Damage_Feature_Ablation.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/10_B_Fire_Damage_Feature_Ablation.ipynb)
 
 <br>
