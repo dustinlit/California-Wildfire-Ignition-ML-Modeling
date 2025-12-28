@@ -1,0 +1,57 @@
+﻿Column,Type,Units,Min,Max,Source Agency,URL
+centroid_easting,Double,meters,100000,300000,USGS,https://www.usgs.gov
+centroid_northing,Double,meters,3500000,4300000,USGS,https://www.usgs.gov
+Influence_Zone,Double,square meters,0,1000000000,USGS,https://www.usgs.gov
+interface_zone,Double,square meters,0,1000000000,USGS,https://www.usgs.gov
+intermix_zone,Double,square meters,0,1000000000,USGS,https://www.usgs.gov
+dominant_province_percent,Double,none,0,100,USGS,https://www.usgs.gov
+sum_province_area,Double,square meters,0,10000000000,USGS,https://www.usgs.gov
+sum_section_area,Double,square meters,0,10000000000,USGS,https://www.usgs.gov
+dominant_section_percent,Double,none,0,100,USGS,https://www.usgs.gov
+forest_percent,Long,none,0,100,USGS NLCD,https://www.mrlc.gov
+developed_percent,Long,none,0,100,USGS NLCD,https://www.mrlc.gov
+other_percent,Long,none,0,100,USGS NLCD,https://www.mrlc.gov
+shrub_grass_percent,Long,none,0,100,USGS NLCD,https://www.mrlc.gov
+wetlands_percent,Long,none,0,100,USGS NLCD,https://www.mrlc.gov
+elevation_range,Double,meters,0,4000,USGS NED,https://www.usgs.gov
+elevation_mean,Double,meters,-100,4500,USGS NED,https://www.usgs.gov
+elevation_std,Double,meters,0,1500,USGS NED,https://www.usgs.gov
+slope_max,Double,degrees,0,90,USGS NED,https://www.usgs.gov
+slope_range,Double,degrees,0,90,USGS NED,https://www.usgs.gov
+slope_mean,Double,degrees,0,60,USGS NED,https://www.usgs.gov
+slope_std,Double,degrees,0,30,USGS NED,https://www.usgs.gov
+northness_mean,Double,none,-1,1,USGS,https://www.usgs.gov
+eastness_mean,Double,none,-1,1,USGS,https://www.usgs.gov
+median_income,Double,dollars,0,300000,U.S. Census Bureau,https://www.census.gov
+road_length_meters,Double,meters,0,1000000,US DOT,https://www.transportation.gov
+road_density,Double,1/meters,0,0.01,US DOT,https://www.transportation.gov
+power_line_meters,Double,meters,0,1000000,EIA,https://www.eia.gov
+power_line_density,Double,1/meters,0,0.01,EIA,https://www.eia.gov
+total_housing,Double,house,0,1000000,U.S. Census Bureau,https://www.census.gov
+total_population,Double,people,0,10000000,U.S. Census Bureau,https://www.census.gov
+housing_density,Double,house/square meter,0,0.1,U.S. Census Bureau,https://www.census.gov
+population_density,Double,people/square meter,0,1,U.S. Census Bureau,https://www.census.gov
+maximum_x,Double,degrees,-125,-113,USGS,https://www.usgs.gov
+minimum_y,Double,degrees,32,42,USGS,https://www.usgs.gov
+maximum_y,Double,degrees,32,42,USGS,https://www.usgs.gov
+minimum_x,Double,degrees,-125,-113,USGS,https://www.usgs.gov
+Daily Maximum Air Temperature,Float,Â°C,-10,58,NOAA NCEI,https://www.ncei.noaa.gov
+Daily Minimum Air Temperature,Float,Â°C,-43,35,NOAA NCEI,https://www.ncei.noaa.gov
+Vapor Pressure Deficit,Float,kPa,0,7,NOAA PSL,https://psl.noaa.gov
+Maximum Relative Humidity,Float,%,0,100,NOAA NCEI,https://www.ncei.noaa.gov
+Minimum Relative Humidity,Float,%,0,100,NOAA NCEI,https://www.ncei.noaa.gov
+Specific Humidity,Float,kg/kg,0,0.03,NOAA ESRL,https://www.esrl.noaa.gov
+Precipitation,Float,mm,0,657,NOAA NCEI,https://www.ncei.noaa.gov
+Wind Speed,Float,m/s,0,90,NOAA NWS,https://www.weather.gov
+Solar Radiation,Float,W/mÂ²,0,1400,NASA POWER,https://power.larc.nasa.gov
+Actual Evapotranspiration,Float,mm,0,15,FAO,https://www.fao.org
+Burning Index,Float,index,0,200,NIFC NFDRS,https://www.nifc.gov
+Energy Release Component,Float,MJ/mÂ²,0,200,NIFC NFDRS,https://www.nifc.gov
+100-hour Dead Fuel Moisture,Float,%,0,60,NIFC NFDRS,https://www.nifc.gov
+1000-hour Dead Fuel Moisture,Float,%,0,60,NIFC NFDRS,https://www.nifc.gov
+Standardized Precipitation Index 30-Day,Float,index,-5,5,NOAA NCEI,https://www.ncei.noaa.gov
+Standardized Precipitation Index 180-Day,Float,index,-5,5,NOAA NCEI,https://www.ncei.noaa.gov
+Standardized Precipitation Evapotranspiration Index 30-Day,Float,index,-5,5,NOAA NCEI,https://www.ncei.noaa.gov
+Standardized Precipitation Evapotranspiration Index 90-Day,Float,index,-5,5,NOAA NCEI,https://www.ncei.noaa.gov
+Standardized Precipitation Evapotranspiration Index 180-Day,Float,index,-5,5,NOAA NCEI,https://www.ncei.noaa.gov
+Palmer Drought Severity Index,Float,index,-10,10,NOAA NCEI,https://www.ncei.noaa.gov
