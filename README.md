@@ -77,12 +77,33 @@ The goal of this project is to use machine learning to analyze how environmental
 
 <br>
 
-## Initial Project Challenges
-- **Dataset size** - As Additional data is added and overall spatial granularity is increased, ***processor times are becoming prohibitively large and unwieldy*** on current hardware. It has become a balancing act to subset the dataset for efficient workflow without overly affecting model performance.
-- **Heavy Class Imbalance** - Damaging wildfire events are rare compared to days with no significant events. The low risk class composes the overwhelming majority of the total data points. Moderate and high risk events only compose **3.6%**. In testing, `Undersampling` the majority class works best for balancing, while oversampling the minority class tends to *add too much noise* to the models.
-- **Messy Real World Data** - You dont ahve to wander to far of the path of nice cultivated datasets to realize the inherent messiness of real world data. While many agencies do a fantastic job wrangling the data for their needs, interconnecting this data can become a challenge. Data with large gaps, data without spatial fields or too low resolution, data in which you have to wrangle random mistakes. Some days feel like a rodeo, and many promising avenues become dead ends as sometimes the bull gets you.
-- **Fire Complexity** - Damaging fires often persist for many days and evolve at different rates and many databases lack consistent listings for file containment times. This makes utilizing ignition dates for spread and damage problematic. A time consuming auditing of multiple databases may be required.
-- **Spatial Resolution** - My current hardware limits the resolution at which the state can be analyzed. This creastes overgeneralization and neutralization of some data, like `slope` and `wind speed`.
+## Project Philosophy
+
+#### Project Structure
+I use a structure that mirrors the organization of a book. Each module functions as a chapter, grouped by its high level purpose, for example, modeling fire damage, cleaning fire spread data, or engineering features.\
+<br>
+Within each chapter, I break the work into *paragraphs.* Each paragraph is a small, self contained section with a clear purpose. It typically includes a short markdown formatted header and high level explanation, and one to three code blocks. If a paragraph begins to grow too long, that’s a signal to rethink the structure and break it into smaller, more focused pieces.\
+<br>
+This approach keeps the entire codebase browsable and maintains a narrative structure. If I want to revisit how I compute lagged features, for example, I can go straight to the feature engineering chapter and find the relevant paragraph quickly.
+
+#### Abstraction
+I intentionally keep abstraction to a minimum. One level of abstraction is usually enough to keep the code efficient without obscuring underlying logic. In my experience, deeper abstraction tends to introduce unnecessary complexity, especially while the project is still growing. Refactoring highly abstracted functions often leads to cascading changes and unintended side effects and become a distraction. By keeping things simple and direct, I can modify and extend the project without getting overwhelmed.
+
+#### Function Arguments
+I don’t enforce a strict limit on the number of arguments a function can take, but I treat four or more as a warning sign. When a function starts accumulating parameters, it usually means I’m trying to make it do too much. At that point, I pause and ask myself what the function is really doing and whether my logic can be simplified or reorganized. This habit helps prevent complexity from creeping in unnoticed.
+
+### Functionality Over Speed
+Performance optimization is not my priority at this stage. My goal is to build the most accurate and conceptually sound wildfire risk model I can, and to use this project as a learning environment. I focus on clarity, correctness, and understanding rather than micro optimizations.\
+<br>
+One of my learning goals is to incorporate vectorized operations wherever possible. Python’s strength with large datasets comes from vectorization, and I want to grow more comfortable with it. I still rely on loops in many places because that’s where my foundational understanding comes from, but I occasionally take time to rewrite a loop in vectorized form to deepen my understanding. I don’t replace the original version until I fully grasp what the vectorized version is doing.\
+<br>
+This is why some parts of the project, especially the large buffered spatial joins, remain slow. Two modules currently account for about half of the total runtime. While I know there are more efficient approaches, I am intentionally leaving them as is until I understand the alternatives well enough to implement them.
+
+#### Assumptions
+I am not a formal climate scientist and wildfire modeling involves many potential subjective choices like buffer distances, lag windows, thresholds, and spatial resolutions. I try to document these assumptions at the point where they are introduced and used. I want each assumption to be visible and contextual to keep the project transparent and easier to review or revise later.
+
+#### Long Term Vision
+This project began as a portfolio piece, but it has grown into something more personal. I’m genuinely interested in wildfire modeling, and I want to continue improving the accuracy and sophistication of the models as my skills grow. My intention is for this project to evolve alongside me, a long term research effort rather than a static artifact.
 
 ## Personal Lessons Learned
 The main journey of this project has always been to learn more about spatial data science, practice and expand my `ArcGIS` skills, and get more practical `python` coding experience. While I have grown tremendously in all of these areas, there are some notable areas that i didnt anticipate when undertaking a project of this scale.
@@ -573,6 +594,13 @@ Overall, `Random UnderSampler` has the most positive effect on performance. Whil
 
 - The interaction of **Roads** and **Forests** has high signifigance in both models. May be due to fires started by cars in dry conditions. 
 - **Dryness** features are the top climate driver. 
+
+## Project Challenges
+- **Dataset size** - As Additional data is added and overall spatial granularity is increased, ***processor times are becoming prohibitively large and unwieldy*** on current hardware. It has become a balancing act to subset the dataset for efficient workflow without overly affecting model performance.
+- **Heavy Class Imbalance** - Damaging wildfire events are rare compared to days with no significant events. The low risk class composes the overwhelming majority of the total data points. Moderate and high risk events only compose **3.6%**. In testing, `Undersampling` the majority class works best for balancing, while oversampling the minority class tends to *add too much noise* to the models.
+- **Messy Real World Data** - You dont ahve to wander to far of the path of nice cultivated datasets to realize the inherent messiness of real world data. While many agencies do a fantastic job wrangling the data for their needs, interconnecting this data can become a challenge. Data with large gaps, data without spatial fields or too low resolution, data in which you have to wrangle random mistakes. Some days feel like a rodeo, and many promising avenues become dead ends as sometimes the bull gets you.
+- **Fire Complexity** - Damaging fires often persist for many days and evolve at different rates and many databases lack consistent listings for file containment times. This makes utilizing ignition dates for spread and damage problematic. A time consuming auditing of multiple databases may be required.
+- **Spatial Resolution** - My current hardware limits the resolution at which the state can be analyzed. This creastes overgeneralization and neutralization of some data, like `slope` and `wind speed`.
 
 ## Next Steps / Potential Improvements
 - Re-evaluate damage model structure. Maybe change to regression with dollar amount.
