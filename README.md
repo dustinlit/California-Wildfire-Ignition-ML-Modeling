@@ -35,18 +35,48 @@ The goal of this project is to use machine learning to analyze how environmental
 - Utilize interpolation techniques to create geospatial visualizations that illustrate local and regional wildfire risk patterns and key factors as they evolve over time.
 - Use `SHAP` and `Feature Ablation` to Analyze and identify the most important relationships between wildfire severity and risk factors.
 
-## Key Initial Insights
-- In the grid network spread over 6 years, there were a total of **608,880** datapoints represented. Of these:
-  - **538** grids detected wildfires that caused significant **property damage**.
-  - **21,802** grids detected wildfires that caused significant **acreage burns**. 
-  - **> 500,000** datapoints had no significant events
+## Data Sources
 
-- The current models, XGBoost and Random Forest, are achieving **macro F1 scores of around 70%** with the **wildfire ignition** and **wildfire spread** targets. This is a modest level of performance, likely constrained by the coarse spatial resolution of the sampling grid and the substantial regional variability in California’s climate.
-- The models largely reinforce the common view of wildfire causes. 
-  - **Population density** in **wildland intermix zones** are the top drivers of the **XGB wildfire ignition** model. 
-  - Overall, the intersection of **human habitation** and **infrastructure** with **dense forests** weigh heavily in the models. Notably in areas where there are dense **power lines** and **roads**. 
-  - Indicators of **drought**  and **dry fuel materials** are the leading drivers among climate factors.
-  - Large scale **wind speed** features alone appear to be of limited predictive ability for wildfire spread and damage. However, when interacting with **slope** a moderate influence is observed. More detailed wind gust data with a higher resolution may be necessary to truly account for the winds effects.
+**Fire Incident Data**:
+
+ - **Wildfire damage data**: *CAL FIRE Damage Inspection (DINS)* <https://data.ca.gov/dataset/cal-fire-damage-inspection-dins-data>'
+ - **Wildfire incidents**: *Calfire Incidents* <https://www.fire.ca.gov/incidents>
+
+**Environmental Data**:
+
+- **Daily weather readings**: *gridMET* <https://www.climatologylab.org/gridmet.html>
+- **Land cover**: *USGS* <https://data.cnra.ca.gov/dataset/nlcd-2021-land-cover-california-subset/resource/6dab6b30-88ae-4aec-af8c-c22d52593c75>
+- **Daily NDVI rasters**: *NOAA* <https://doi.org/10.25921/gakh-st76>
+
+**California Demographic Data** :
+
+ - **Census tract and block data**: *U.S. Census Bureau, Department of Commerce* <https://catalog.data.gov/dataset/tiger-line-shapefile-2021-state-california-census-tracts>
+ - **2024 American Community Survey 5 year median income data** *U.S. Census Bureau, Department of Commerce* <https://data.census.gov/table/ACSST1Y2024.S1903?q=California+Income&g=010XX00US$1500000_040XX00US06$1400000,06$1500000>
+
+**Wildlife Urban Interface**: 
+
+- **WUI layer**: *California Department of Forestry and Fire Protection* <https://gis.data.ca.gov/datasets/CALFIRE-Forestry::wildland-urban-interface/explore?location=34.403601%2C-118.894358%2C9.95>
+- **CDFW regions**: *California Department of Fish and Wildlife* <https://data.ca.gov/dataset/cdfw-regions>
+- **Eco regions** - *USDA Forestry Service* <https://data.fs.usda.gov/geodata/edw/datasets.php?dsetCategory=biota>
+
+**Elevation**: 
+
+- **1/3 arc-second DEMs**: *USGS National Map* <https://apps.nationalmap.gov/downloader/>
+
+**Infrastructure**: 
+
+- **All public roads**: *CalTrans* <https://apps.nationalmap.gov/downloader/>
+- **Transmission lines**: *California Energy Commission (CEC)* <https://www.arcgis.com/home/item.html?id=aaa6321660eb40bbb55755d5cfb64107>
+
+**Raw Data Processing in:**
+> - [*notebooks/A_Appendix_Sampling_Grids.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/A_Appendix_Sampling_Grids.ipynb)
+> - [*notebooks/B_Appendix_Wildfires.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/B_Appendix_Wildfires.ipynb)
+> - [*notebooks/C_Appendix_Gridmet_Combination.pynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/C_Appendix_Gridmet_Combination.ipynb_)
+> - [*notebooks/D_Appendix_Gridmet_Extraction.pynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/D_Appendix_Gridmet_Extraction.ipynb)
+> - [*notebooks/E_Appendix_NDVI_extraction.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/E_Appendix_NDVI_extraction.ipynb)
+> - [*notebooks/F_Appendix_Raster_Processing.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/F_Appendix_Raster_Processing.ipynb)
+> - [*notebooks/G_Appendix_Raster_Combination.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/G_Appendix_Raster_Combination.ipynb)
+> - [*notebooks/H_Appendix_Reservoir_Data.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/H_Appendix_Reservoir_Data.ipynb)
 
 ## Methods
 **Data Preparation:**
@@ -66,6 +96,19 @@ The goal of this project is to use machine learning to analyze how environmental
 - Built a **custom ArcGIS Pro automation tool** to standardize output workflow and consistency.
   - for a target date, runs kriging for the two prediction sets and one actual results set.
   - clips all output rasters to California boundaries
+
+## Key Initial Insights
+- In the grid network spread over 6 years, there were a total of **608,880** datapoints represented. Of these:
+  - **538** grids detected wildfires that caused significant **property damage**.
+  - **21,802** grids detected wildfires that caused significant **acreage burns**. 
+  - **> 500,000** datapoints had no significant events
+
+- The current models, XGBoost and Random Forest, are achieving **macro F1 scores of around 70%** with the **wildfire ignition** and **wildfire spread** targets. This is a modest level of performance, likely constrained by the coarse spatial resolution of the sampling grid and the substantial regional variability in California’s climate.
+- The models largely reinforce the common view of wildfire causes. 
+  - **Population density** in **wildland intermix zones** are the top drivers of the **XGB wildfire ignition** model. 
+  - Overall, the intersection of **human habitation** and **infrastructure** with **dense forests** weigh heavily in the models. Notably in areas where there are dense **power lines** and **roads**. 
+  - Indicators of **drought**  and **dry fuel materials** are the leading drivers among climate factors.
+  - Large scale **wind speed** features alone appear to be of limited predictive ability for wildfire spread and damage. However, when interacting with **slope** a moderate influence is observed. More detailed wind gust data with a higher resolution may be necessary to truly account for the winds effects.
 
 ## Top SHAP Feature Contributions:
 <img src="output/spread_rf_top5.png" width="500">
@@ -195,41 +238,6 @@ There is no argument that documentation and analysis are crucial parts to a proj
     </ul>
   </li>
 </ul>
-
-
-
-## Data Sources
-
-**Fire Incident Data**:
-
- - **Wildfire damage data**: *CAL FIRE Damage Inspection (DINS)* <https://data.ca.gov/dataset/cal-fire-damage-inspection-dins-data>'
- - **Wildfire incidents**: *Calfire Incidents* <https://www.fire.ca.gov/incidents>
-
-**Environmental Data**:
-
-- **Daily weather readings**: *gridMET* <https://www.climatologylab.org/gridmet.html>
-- **Land cover**: *USGS* <https://data.cnra.ca.gov/dataset/nlcd-2021-land-cover-california-subset/resource/6dab6b30-88ae-4aec-af8c-c22d52593c75>
-- **Daily NDVI rasters**: *NOAA* <https://doi.org/10.25921/gakh-st76>
-
-**California Demographic Data** :
-
- - **Census tract and block data**: *U.S. Census Bureau, Department of Commerce* <https://catalog.data.gov/dataset/tiger-line-shapefile-2021-state-california-census-tracts>
- - **2024 American Community Survey 5 year median income data** *U.S. Census Bureau, Department of Commerce* <https://data.census.gov/table/ACSST1Y2024.S1903?q=California+Income&g=010XX00US$1500000_040XX00US06$1400000,06$1500000>
-
-**Wildlife Urban Interface**: 
-
-- **WUI layer**: *California Department of Forestry and Fire Protection* <https://gis.data.ca.gov/datasets/CALFIRE-Forestry::wildland-urban-interface/explore?location=34.403601%2C-118.894358%2C9.95>
-- **CDFW regions**: *California Department of Fish and Wildlife* <https://data.ca.gov/dataset/cdfw-regions>
-- **Eco regions** - *USDA Forestry Service* <https://data.fs.usda.gov/geodata/edw/datasets.php?dsetCategory=biota>
-
-**Elevation**: 
-
-- **1/3 arc-second DEMs**: *USGS National Map* <https://apps.nationalmap.gov/downloader/>
-
-**Infrastructure**: 
-
-- **All public roads**: *CalTrans* <https://apps.nationalmap.gov/downloader/>
-- **Transmission lines**: *California Energy Commission (CEC)* <https://www.arcgis.com/home/item.html?id=aaa6321660eb40bbb55755d5cfb64107>
 
 **Raw Data Processing in:**
 > - [*notebooks/A_Appendix_Sampling_Grids.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/A_Appendix_Sampling_Grids.ipynb)
