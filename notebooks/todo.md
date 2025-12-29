@@ -1,4 +1,7 @@
 ## 12/06/2025 NOTES
+
+https://www.firescience.gov/ords/prd/jf_jfsp/r/jfspublic/research-search?session=17394184923356
+
 Background
 1. Examine the correlation and trend of Vapor pressure deficit and temperature to increasing wildfires. Background articles:
 - https://www.drought.gov/news/study-shows-climate-change-main-driver-increasing-fire-weather-western-us
