@@ -20,10 +20,7 @@
 ## Overview
 The goal of this project is to use machine learning to analyze how environmental, geographical, social, and temporal factors influence wildfire severity across California. Specifically, the project aims to model and predict wildfire ignition, spread, and damage, and to determine which factors contribute most to each stage of wildfire behavior.
 
-
 <img src="data/plots/wildfires.png" width="800">
-
-
 
 ## Objectives
 - Predict wildfire **ignition, spread, and damage** based on environmental, topographical, geographical and social data.
@@ -34,6 +31,10 @@ The goal of this project is to use machine learning to analyze how environmental
 - Compare class balancing techniques like `RandomUnderSampler`, `SMOTE`, with unbalanced performance.
 - Utilize interpolation techniques to create geospatial visualizations that illustrate local and regional wildfire risk patterns and key factors as they evolve over time.
 - Use `SHAP` and `Feature Ablation` to Analyze and identify the most important relationships between wildfire severity and risk factors.
+
+## Potential Applications
+- **Targeted deployment of firefighting and prevention resources** When conditions indicate a higher likelihood of large or damaging wildfires, agencies can focus personnel and equipment in the areas that need them most.
+- **Identifying high‑risk wildland–urban interface development zones** By estimating the potential financial impact of wildfire damage, proposed building sites can be compared and evaluated more effectively.
 
 ## Data Sources
 
@@ -85,7 +86,7 @@ The goal of this project is to use machine learning to analyze how environmental
 <br>
 
 **Feature Engineering:**
-- Constructed a **relative NDVI hot spot index** comparing each grids mean to the global mean
+- Constructed a **relative NDVI hot spot index** comparing each grids local mean to the global mean
 - Created **interaction features** focused on targeted combinations of weather features and the specific interactions of slope and wind.
 
 **Modeling:**
@@ -97,17 +98,21 @@ The goal of this project is to use machine learning to analyze how environmental
   - for a target date, runs kriging for the two prediction sets and one actual results set.
   - clips all output rasters to California boundaries
 
-## Key Initial Insights
-- In the grid network spread over 6 years, there were a total of **608,880** datapoints represented. Of these:
-  - **538** grids detected wildfires that caused significant **property damage**.
-  - **21,802** grids detected wildfires that caused significant **acreage burns**. 
-  - **> 500,000** datapoints had no significant events
+## Initial Insights
+- Key wildfire dataset figures:
+  - over **6 years of uninterupted** weather and wilfire data.
+  - **608,880** total grids analyzed.
+  -  over **100 million** datapoints represented. 
+  - **44,992** wildfire **ignitions**
+  - **21,263** wildfires with significant **acres burned**
+  - **6,961** wildfires that caused significant **property damage**.
+  - **> 500,000** grids that detected no significant wildfire events
 
-- The current models, XGBoost and Random Forest, are achieving **macro F1 scores of around 70%** with the **wildfire ignition** and **wildfire spread** targets. This is a modest level of performance, likely constrained by the coarse spatial resolution of the sampling grid and the substantial regional variability in California’s climate.
+- The current models, XGBoost and Random Forest, are achieving **macro F1 scores of around 70%** for **wildfire damage** and **wildfire spread** targets. This is a modest level of performance, likely constrained by the coarse spatial resolution of the sampling grid and the substantial regional variability in California’s climate.
 - The models largely reinforce the common view of wildfire causes. 
   - **Population density** in **wildland intermix zones** are the top drivers of the **XGB wildfire ignition** model. 
-  - Overall, the intersection of **human habitation** and **infrastructure** with **dense forests** weigh heavily in the models. Notably in areas where there are dense **power lines** and **roads**. 
-  - Indicators of **drought**  and **dry fuel materials** are the leading drivers among climate factors.
+  - Overall, the intersection of **human habitation** and **infrastructure** with **dense forests** weigh heavily in all models. Notably in areas where there are both dense **power lines** and **roads**. 
+  - Indicators of **drought** and **dry fuel materials** are the leading drivers among environmental factors.
   - Large scale **wind speed** features alone appear to be of limited predictive ability for wildfire spread and damage. However, when interacting with **slope** a moderate influence is observed. More detailed wind gust data with a higher resolution may be necessary to truly account for the winds effects.
 
 ## Top SHAP Feature Contributions:
@@ -123,42 +128,30 @@ The goal of this project is to use machine learning to analyze how environmental
 ## Project Philosophy
 
 #### Project Structure
-I use a structure that mirrors the organization of a book. Each module functions as a chapter, grouped by its high level purpose, for example, modeling fire damage, cleaning fire spread data, or engineering features.\
+I am attempting to structure this project in a way that mirrors the organization of a book. Each module is intended to function as a chapter, grouped by its high level purpose, for example, modeling fire damage, cleaning fire spread data, or engineering features.\
 <br>
-Within each chapter, I break the work into *paragraphs.* Each paragraph is a small, self contained section with a clear purpose. It typically includes a short markdown formatted header and high level explanation, and one to three code blocks. If a paragraph begins to grow too long, that’s a signal to rethink the structure and break it into smaller, more focused pieces.\
+Within each chapter, I break each coding section into *paragraphs.* Each paragraph is a small, self contained operation with a clear purpose. These typically include a short markdown formatted header and high level explanation, with one to three code blocks. If a paragraph begins to grow too long, that’s a is signal to rethink the structure and break it into smaller, more focused pieces.\
 <br>
-This approach keeps the entire codebase browsable and maintains a narrative structure. If I want to revisit how I compute lagged features, for example, I can go straight to the feature engineering chapter and find the relevant paragraph quickly.
+The idea of this approach is to keep the entire codebase browsable and maintain a narrative structure. If I want to revisit how I compute lagged features, for example, I can go straight to the feature engineering chapter and find the relevant paragraph quickly.
 
 #### Abstraction
-I intentionally keep abstraction to a minimum. One level of abstraction is usually enough to keep the code efficient without obscuring underlying logic. In my experience, deeper abstraction tends to introduce unnecessary complexity, especially while the project is still growing. Refactoring highly abstracted functions often leads to cascading changes and unintended side effects and become a distraction. By keeping things simple and direct, I can modify and extend the project without getting overwhelmed.
+I intentionally keep abstraction to a minimum. One level of abstraction is usually enough to keep the code efficient without obscuring underlying logic. In my experience, deeper abstraction tends to introduce unnecessary complexity, especially while the project is still growing. Refactoring highly abstracted functions often leads to cascading changes and unintended side effects that can quickly become a major distraction. By keeping things simple and direct, I can modify and extend the project without getting overwhelmed.
 
 #### Function Arguments
 I don’t enforce a strict limit on the number of arguments a function can take, but I treat four or more as a warning sign. When a function starts accumulating parameters, it usually means I’m trying to make it do too much. At that point, I pause and ask myself what the function is really doing and whether my logic can be simplified or reorganized. This habit helps prevent complexity from creeping in unnoticed.
 
 #### Functionality Over Speed
-Performance optimization is not my priority at this stage. My goal is to build the most accurate and conceptually sound wildfire risk model I can, and to use this project as a learning environment. I focus on clarity, correctness, and understanding rather than micro optimizations.\
+Performance optimization is not my priority at this stage. My goal is to build the most accurate and conceptually sound wildfire risk model I can, and to use this project as a learning environment. The focus is on clarity, correctness, and understanding rather than optimizations.\
 <br>
-One of my learning goals is to incorporate vectorized operations wherever possible. Python’s strength with large datasets comes from vectorization, and I want to grow more comfortable with it. I still rely on loops in many places because that’s where my foundational understanding comes from, but I occasionally take time to rewrite a loop in vectorized form to deepen my understanding. I don’t replace the original version until I fully grasp what the vectorized version is doing.\
+One of my major learning goals is to incorporate vectorized operations wherever possible. Python’s strength with large datasets comes from vectorization, and I want to grow more comfortable working with it. I still rely on loops in many places because that’s where my foundational programming stems from, but I occasionally take time to rewrite a loop in vectorized form to deepen my understanding. I don’t replace the original version until I fully grasp what the vectorized version is doing.\
 <br>
 This is why some parts of the project, especially the large buffered spatial joins, remain slow. Two modules currently account for about half of the total runtime. While I know there are more efficient approaches, I am intentionally leaving them as is until I understand the alternatives well enough to implement them.
 
 #### Assumptions
-I am not a formal climate scientist and wildfire modeling involves many potential subjective choices like buffer distances, lag windows, thresholds, and spatial resolutions. I try to document these assumptions at the point where they are introduced and used. I want each assumption to be visible and contextual to keep the project transparent and easier to review or revise later.
+I am not a formal climate scientist and wildfire modeling involves many potential subjective choices like wildfire buffer distances, lag windows, thresholds, and spatial resolutions. I try to document these assumptions at the point where they are introduced and used. I want each assumption to be visible and contextual to keep the project transparent and easier to review or revise later.
 
 #### Long Term Vision
 This project began as a portfolio piece, but it has grown into something more personal. I’m genuinely interested in wildfire modeling, and I want to continue improving the accuracy and sophistication of the models as my skills grow. My intention is for this project to evolve alongside me, a long term research effort rather than a static artifact.
-
-## Personal Lessons Learned
-The main journey of this project has always been to learn more about spatial data science, practice and expand my `ArcGIS` skills, and get more practical `python` coding experience. While I have grown tremendously in all of these areas, there are some notable areas that i didnt anticipate when undertaking a project of this scale.
-  
-**Identifying and Preventing** ***Data Leakage***:
-I chalk this lesson up to being a classic rookie mistake. I initially believed I understood how to avoid data leaks, but I have learned that they can be subtle and deceptive. Often, moments where i feel 'finally nailed it' are followed by the sudden realization that there is liekly an apparent leak hiding somewhere. As a result, I now approach any sudden performance bumps with caution and double check any feature engineering or introduction of new data.
-
-**Maintaining a Cohesive Project Structure**
-This project began as a simple Jupyter notebook page, soon expanded to five, and has now grown into 12+ modules, 4+ appendices, and multiple source files. As the project scales, handling and passing data throughout these modules has become more complex and sometimes bugs or changes became more difficult to trace and more time consuming. Consistent organization throughout modules along with clear communication of inputs and outputs are now essential to keeping the structure manageable and growing.
-
-**Knowing the Proper time to Document and Analyze Variables**
-There is no argument that documentation and analysis are crucial parts to a project. Ultimately, I have spent many hours documenting variables and structures that appeared complete, only to have to be completely rewritten or revised. I now document with simple headers and critical notes only, reserving more detailed documentation for when a module is closer to completion. This approach ensures I maintain clarity and speed throughout development.
 
 ## Project Structure
 
@@ -268,19 +261,20 @@ There is no argument that documentation and analysis are crucial parts to a proj
 **Fire Danger Indicators**:
 - `Burning_Index`	- Fire danger index derived from temperature, humidity, wind, and fuel moisture; higher values indicate higher fire potential
 - `Energy_Release_Component` - Estimated energy release per unit area (MJ/m²); relates to potential fire intensity
-- `Dead_Fuel_Moisture` - Moisture content of medium-size dead fuels (%) affecting fire spread
-- `NDVI_temperature` - a measure of a grids local mean from the statewide global mean.
+- `100 and 1000 Hour Dead_Fuel_Moisture` - Moisture content of medium-size dead fuels (%) affecting fire spread
+- `NDVI_temperature` - a measure of a grids local mean from the statewide global mean
 
-**Temporal and Spatial Variables**:
- - `Season`,`Year`,`Centroid Location`
-
-**Sampling Grid Data**:
-- `Interface`, `Intermix`, and `Influence` Areas - From WUI, average area of each zone within 36KM Buffer radius around sampling points
+**Temporal, Social, and Infrastructure Variables**:
+ - `Season`
+- `Roads`,`Power Lines` total length and densities
 - `Total_Population`,`Population_Density`,`Total_Housing`,`Housing_Density` - Population and housing statistics within 36KM Buffer radius around sampling points
+- `Median_Income` Serving as a rough proxy for localized firefighting and prevention resources
+
+**Land and Topographical Data**:
+- `Interface`, `Intermix`, and `Influence` Areas - From WUI, average area of each zone within 36KM Buffer radius around sampling points
 - `Eco_Regions` - regions generally representing the varied climate and vegetative regions in California
 - `Slope`,`Aspect` - Derived from high resolution USGS daily rasters 
 - `Land Cover` - Derived from California land cover raster
-- `Roads`,`Power Lines`
 
 ## Feature Engineering and Examination:
 *Located in:* 
@@ -290,7 +284,6 @@ There is no argument that documentation and analysis are crucial parts to a proj
 > - [*notebooks/04_C_Feature_Correlation.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_C_Feature_Correlation.ipynb)
 
 ## ArcGIS Sampling Grid
-
 
 <img src="data/maps/grids.png" width="500" style="display: block; margin-left: 0;" />
 
@@ -538,7 +531,7 @@ There is no argument that documentation and analysis are crucial parts to a proj
 **Engineered Data:**
 - `Santa_Ana_Score` - Winds x dryness score to represent the influence of these seasonal winds.
 - `Average_Fires_per_Month` - *Temporarily removed*
-- `7-day_Lagged_Weather` - Rolling 7 day averages for key weather features.
+- `3-Day,7-day, and 30 Day Lagged_Weather` - Rolling averages and sums for key weather features.
 - `Wind Slope Interactions` - South-facing slopes dry faster, and strong winds drive flames uphill, intensifying wildfire spread.
 
 ## Model Hypertuning
@@ -548,7 +541,10 @@ There is no argument that documentation and analysis are crucial parts to a proj
 > - [*notebooks/06_B_Fire_Spread_Tuning.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/06_B_Fire_Spread_Tuning.ipynb)
 > - [*notebooks/06_C_Fire_Damage_Tuning.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/06_C_Fire_Damage_Tuning.ipynb)
 
-Models are tuned automatically and the best performing models are selected for final evaluation and visualization. Paramater options are limited to those that maintain reasonable hardware performance.
+Currentyl, models are tuned automatically and the best performing models are selected for final evaluation and visualization. Parameter options are limited to those that maintain reasonable hardware performance.
+
+<img src="data/output/XGB_learning_rate.png" alt="Model Metrics for Case Study" width="400" style="display: block; margin-left: 0;" />
+<br>
 
 **Models tested:**
 - `Random Forest` from scikit-learn
@@ -565,17 +561,19 @@ Models are tuned automatically and the best performing models are selected for f
 > - [*notebooks/07_B_Fire_Spread_Class_Balancing.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/07_B_Fire_Spread_Class_Balancing.ipynb)
 > - [*notebooks/07_C_Fire_Damage_Class_Balancing.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/07_C_Fire_Damage_Class_Balancing.ipynb)
 
-**Targets:** **Wildfire Ignition Risk** and **Wildfire Spread Risk** are classified into three categories: **Low (0)**, **Moderate (1)**, and **High (2)**. Due to the smaller number of recorded events, **Wildfire Damage Risk** is modeled using a binary classification with **Low (0)** and **High (1)** 
-categories.
+**Targets:** **Wildfire Damage Risk** and **Wildfire Spread Risk** are classified into five categories: from **Low (0)** to **High (4)**. Due to the nature of **Wildfire Ignition Risk**, it is modeled using a binary classification with **Low (0)** and **High (1)** categories.
 
-**Issues:** Tn all three models, the majority class vastly outnumbers both other categories. Notably, high damaging wildfire events are severely underrepresented in the full dataset. 
+**Issues:** Tn all three models, the majority class *vastly* outnumbers both other categories. Notably, high damaging wildfire events are severely underrepresented in the full dataset. 
 
-Balancing techniques tested:
+**Balancing techniques tested**:
 - In method class balancing
-- Random UnderSampler for the dominant "Low" class.
+- Random UnderSampler (RUS) for the dominant "Low" class.
 - SMOTE for oversampling
 
 Overall, `Random UnderSampler` has the most positive effect on performance. While `SMOTE` seems to add to much noise to the models.
+
+<img src="data/output/class_balancing_Spread.png" width="300" style="display: block; margin-left: 0;" />
+<br>
 
 ## Model Metrics
 *Located in:* 
@@ -584,7 +582,9 @@ Overall, `Random UnderSampler` has the most positive effect on performance. Whil
 > - [*notebooks/10_A_Fire_Damage.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/10_A_Fire_Damage.ipynb)
 
 **Key Findings:** 
-- All models struggle to distinguish the **Moderate** severity classes due to the division of classes being relatively arbitrary. They may require validation from subject experts to increase performance.
+- Most of the models are quite good at reliably identifying **low‑risk** grids, largely because the patterns associated with 'no wildfire activity' are abundant, consistent, and easy for algorithms to learn.
+- The **Damage** and **Spread** models are also effective at recognizing the conditions that lead to the most destructive and largest wildfire events.
+- The damage and spread models struggle to distinguish the **Moderate** classes due to the division of classes being relatively arbitrary. Assumptions require validation from subject experts to increase performance.
 
 <img src="data/output/ignition_evaluation.png" alt="Model Metrics for Case Study" width="600" style="display: block; margin-left: 0;" />
 <br>
@@ -641,11 +641,23 @@ Overall, `Random UnderSampler` has the most positive effect on performance. Whil
 - **Dryness** features are the top climate driver. 
 
 ## Project Challenges
-- **Dataset size** - As Additional data is added and overall spatial granularity is increased, ***processor times are becoming prohibitively large and unwieldy*** on current hardware. It has become a balancing act to subset the dataset for efficient workflow without overly affecting model performance.
+- **Dataset size** - As Additional data is constantly added and overall spatial granularity is increased, ***processor times are becoming prohibitively large and unwieldy*** on current hardware. It has become a balancing act to subset the dataset for efficient workflow without overly affecting model performance.
 - **Heavy Class Imbalance** - Damaging wildfire events are rare compared to days with no significant events. The low risk class composes the overwhelming majority of the total data points. Moderate and high risk events only compose **3.6%**. In testing, `Undersampling` the majority class works best for balancing, while oversampling the minority class tends to *add too much noise* to the models.
-- **Messy Real World Data** - You dont ahve to wander to far of the path of nice cultivated datasets to realize the inherent messiness of real world data. While many agencies do a fantastic job wrangling the data for their needs, interconnecting this data can become a challenge. Data with large gaps, data without spatial fields or too low resolution, data in which you have to wrangle random mistakes. Some days feel like a rodeo, and many promising avenues become dead ends as sometimes the bull gets you.
-- **Fire Complexity** - Damaging fires often persist for many days and evolve at different rates and many databases lack consistent listings for file containment times. This makes utilizing ignition dates for spread and damage problematic. A time consuming auditing of multiple databases may be required.
-- **Spatial Resolution** - My current hardware limits the resolution at which the state can be analyzed. This creastes overgeneralization and neutralization of some data, like `slope` and `wind speed`.
+- **Messy Real World Data** - You don’t have to get far from clean, well‑curated datasets before you run into the real messiness of actual data. Agencies do solid work organizing what they need, but connecting all those pieces is another challenge. You end up dealing with big gaps, missing or low‑resolution spatial info, and the occasional random error that throws everything off. Some days it feels like a data rodeo and sometimes the bull wins.
+- **Fire Complexity** - Large, damaging fires can burn for days and grow at very different rates, and many datasets don’t consistently track containment times. Because of that, relying only on ignition dates makes it difficult to accurately model when fires spread or how much damage they ultimately cause.
+- **Spatial Resolution** - My current hardware limits how finely I can analyze the state. As a result, some variables, like slope and wind speed, get averaged out or flattened, leading to overgeneralization and loss of important detail.
+
+## Personal Challenges
+The primary journey of this project has always been to learn more about spatial data science, practice and expand `ArcGIS` skills, and get more valuable practical `python` coding experience. While I have grown tremendously in all of these areas, but taking on something this large also surfaced a few challenges I didn’t fully expect going in.
+  
+**Identifying and Preventing** ***Data Leakage***:
+I chalk this lesson up to being a classic rookie mistake. I initially believed I understood how to avoid data leaks, but I have learned that they can be subtle and deceptive. Often, moments where i feel 'finally nailed it' are followed by the sudden realization that there is liekly an apparent leak hiding somewhere. As a result, I now approach any sudden performance bumps with caution and double check any feature engineering or introduction of new data.
+
+**Maintaining a Cohesive Project Structure**
+This project began as a simple Jupyter notebook page, soon expanded to five, and has now grown into 12+ modules, 4+ appendices, and multiple source files. As the project scales, handling and passing data throughout these modules has become more complex and sometimes bugs or changes became more difficult to trace and more time consuming. Consistent organization throughout modules along with clear communication of inputs and outputs are now essential to keeping the structure manageable and growing.
+
+**Knowing the Proper time to Document and Analyze Variables**
+There is no argument that documentation and analysis are crucial parts to a project. Ultimately, I have spent many hours documenting variables and structures that appeared complete, only to have to be completely rewritten or revised. I now document with simple headers and critical notes only, reserving more detailed documentation for when a module is closer to completion. This approach ensures I maintain clarity and speed throughout development.
 
 ## Next Steps / Potential Improvements
 - Re-evaluate damage model structure. Maybe change to regression with dollar amount.
@@ -680,7 +692,6 @@ Overall, `Random UnderSampler` has the most positive effect on performance. Whil
 > 3. ArcGIS Pro integration for data preparation and prediction interpolation
 > 4. Added more accurate Census Block data. Population stats calculated as buffer zone around sampling points.
 
-
 ### Version 2.0 Changelog
 
 > 1. Added Detailed fire damage data
@@ -696,8 +707,6 @@ Overall, `Random UnderSampler` has the most positive effect on performance. Whil
 >       - in ArcGIS, constructed a mesh sampling grid in California to ensure even coverage
 >       - Buffer spatial join for combining fire damage info with weather data
 >       - Incorporated Regionality and Seasonality into models.
-
-
 
 ## Installation
 To run the project locally:\
