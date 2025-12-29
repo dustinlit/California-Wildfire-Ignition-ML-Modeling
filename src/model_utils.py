@@ -70,30 +70,18 @@ def kfold(X_train, y_train, model):
 
     return report_dicts
 
-def test_values(model, parameter, value_list, X_train, y_train, num_classes=3):
+def test_values(model, parameter, value_list, X_train, y_train, parameters, num_classes=5):
 
     F1_values = []
 
     # Perform k-fold cross-validation for each value
     for value in value_list:
         if model == 'RF':
-            rf_params = {
-                'n_estimators': 50, 
-                'max_depth': 10,
-                'min_samples_split': 10,
-                'max_features': 'sqrt',
-                'class_weight': 'balanced'
-            }
+            rf_params = parameters['Random Forest']
             rf_params[parameter] = value
             test_model  = RandomForestClassifier(**rf_params)
         elif model == 'XGB':
-            xgb_params = {
-                'objective': 'multi:softmax',  
-                'num_class': 3,                
-                'learning_rate': 0.05,
-                'max_depth': 4,
-                'n_estimators': 200
-            }
+            xgb_params = parameters['XGBoost']
             xgb_params[parameter] = value
             test_model  = xgb.XGBClassifier(**xgb_params)
                 
@@ -222,7 +210,7 @@ def gen_report_metric(reports, metric='macro_f1', num_classes = 3):
 
     return pd.DataFrame(data)
 
-def class_balancing(X_train, y_train, X_test, y_test, model, sampling_strategy='No_balance', num_classes=3):
+def class_balancing(X_train, y_train, X_test, y_test, model, parameters, sampling_strategy='No_balance', num_classes=5):
     
     if sampling_strategy == 'Undersampling':
         rus = RandomUnderSampler(sampling_strategy='auto', random_state=14)
@@ -232,7 +220,7 @@ def class_balancing(X_train, y_train, X_test, y_test, model, sampling_strategy='
         smote = SMOTE()
         X_train, y_train = smote.fit_resample(X_train, y_train)
           
-    reports = kfold(X_train, y_train, model)    
+    reports = kfold(X_train, y_train, model, parameters, num_classes)    
     Train_metrics = gen_report(reports,num_classes)
 
     # Retrain on full training set
