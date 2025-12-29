@@ -2,6 +2,10 @@ import pandas as pd
 import numpy as np
 from itertools import combinations
 from shapely.geometry import Point, Polygon
+from rich.console import Console
+from rich.table import Table
+from rich.columns import Columns
+
 
 def rank_variables_by_correlation(df, target_series):
 
@@ -65,3 +69,20 @@ def square_buffer(point, size):
         (x + size, y + size),
         (x + size, y - size)
     ])
+
+def make_table(title, series):
+    t = Table(title=title)
+    t.add_column("Index")
+    t.add_column("Value", justify="right")
+
+    for idx, val in series.items():
+        t.add_row(str(idx), str(val))
+
+    return table
+
+def display_values(ignition, spread, damage):
+    table1 = make_table("Ignition Value Counts", ignition.value_counts())
+    table2 = make_table("Spread Value Counts", spread.value_counts())
+    table3 = make_table("Damage Value Counts", damage.value_counts())
+
+    console.print(Columns([table1, table2, table3]))
