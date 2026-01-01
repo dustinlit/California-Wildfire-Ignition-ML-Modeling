@@ -20,7 +20,7 @@
 ## Overview
 The goal of this project is to use machine learning to analyze how environmental, geographical, social, and temporal factors influence wildfire severity across California. Specifically, the project aims to model and predict wildfire ignition, spread, and damage, and to determine which factors contribute most to each stage of wildfire behavior.
 
-<img src="data/plots/wildfires.png" width="800">
+<img src="reports/plots/wildfires.png" width="800">
 
 ## Objectives
 - Predict wildfire **ignition, spread, and damage** based on environmental, topographical, geographical and social data.
@@ -116,42 +116,14 @@ The goal of this project is to use machine learning to analyze how environmental
   - Large scale **wind speed** features alone appear to be of limited predictive ability for wildfire spread and damage. However, when interacting with **slope** a moderate influence is observed. More detailed wind gust data with a higher resolution may be necessary to truly account for the winds effects.
 
 ## Top SHAP Feature Contributions:
-<img src="data/output/spread_rf_top5.png" width="500">
-<img src="data/output/damage_rf_top5.png" width="500">
+**XGB Top 5 Contributing Weather Factors**
 
-<img src="data/output/ignition_rf_top5.png" width="600">
+<img src="reports/readme/xgb_top_5_weather_factors.png" width="800">
 
-<img src="data/maps/interpolation.jpg" width="1200">
+**RF Top 5 Contributing Weather Factors**
+<img src="reports/readme/rf_top_5_weather_factors.png" width="800">
 
 <br>
-
-## Project Philosophy
-
-#### Project Structure
-I am attempting to structure this project in a way that mirrors the organization of a book. Each module is intended to function as a chapter, grouped by its high level purpose, for example, modeling fire damage, cleaning fire spread data, or engineering features.\
-<br>
-Within each chapter, I break each coding section into *paragraphs.* Each paragraph is a small, self contained operation with a clear purpose. These typically include a short markdown formatted header and high level explanation, with one to three code blocks. If a paragraph begins to grow too long, that’s a is signal to rethink the structure and break it into smaller, more focused pieces.\
-<br>
-The idea of this approach is to keep the entire codebase browsable and maintain a narrative structure. If I want to revisit how I compute lagged features, for example, I can go straight to the feature engineering chapter and find the relevant paragraph quickly.
-
-#### Abstraction
-I intentionally keep abstraction to a minimum. One level of abstraction is usually enough to keep the code efficient without obscuring underlying logic. In my experience, deeper abstraction tends to introduce unnecessary complexity, especially while the project is still growing. Refactoring highly abstracted functions often leads to cascading changes and unintended side effects that can quickly become a major distraction. By keeping things simple and direct, I can modify and extend the project without getting overwhelmed.
-
-#### Function Arguments
-I don’t enforce a strict limit on the number of arguments a function can take, but I treat four or more as a warning sign. When a function starts accumulating parameters, it usually means I’m trying to make it do too much. At that point, I pause and ask myself what the function is really doing and whether my logic can be simplified or reorganized. This habit helps prevent complexity from creeping in unnoticed.
-
-#### Functionality Over Speed
-Performance optimization is not my priority at this stage. My goal is to build the most accurate and conceptually sound wildfire risk model I can, and to use this project as a learning environment. The focus is on clarity, correctness, and understanding rather than optimizations.\
-<br>
-One of my major learning goals is to incorporate vectorized operations wherever possible. Python’s strength with large datasets comes from vectorization, and I want to grow more comfortable working with it. I still rely on loops in many places because that’s where my foundational programming stems from, but I occasionally take time to rewrite a loop in vectorized form to deepen my understanding. I don’t replace the original version until I fully grasp what the vectorized version is doing.\
-<br>
-This is why some parts of the project, especially the large buffered spatial joins, remain slow. Two modules currently account for about half of the total runtime. While I know there are more efficient approaches, I am intentionally leaving them as is until I understand the alternatives well enough to implement them.
-
-#### Assumptions
-I am not a formal climate scientist and wildfire modeling involves many potential subjective choices like wildfire buffer distances, lag windows, thresholds, and spatial resolutions. I try to document these assumptions at the point where they are introduced and used. I want each assumption to be visible and contextual to keep the project transparent and easier to review or revise later.
-
-#### Long Term Vision
-This project began as a portfolio piece, but it has grown into something more personal. I’m genuinely interested in wildfire modeling, and I want to continue improving the accuracy and sophistication of the models as my skills grow. My intention is for this project to evolve alongside me, a long term research effort rather than a static artifact.
 
 ## Project Structure
 
@@ -232,15 +204,6 @@ This project began as a portfolio piece, but it has grown into something more pe
   </li>
 </ul>
 
-**Raw Data Processing in:**
-> - [*notebooks/A_Appendix_Sampling_Grids.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/A_Appendix_Sampling_Grids.ipynb)
-> - [*notebooks/B_Appendix_Wildfires.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/B_Appendix_Wildfires.ipynb)
-> - [*notebooks/C_Appendix_Gridmet_Combination.pynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/C_Appendix_Gridmet_Combination.ipynb_)
-> - [*notebooks/D_Appendix_Gridmet_Extraction.pynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/D_Appendix_Gridmet_Extraction.ipynb)
-> - [*notebooks/E_Appendix_NDVI_extraction.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/E_Appendix_NDVI_extraction.ipynb)
-> - [*notebooks/F_Appendix_Raster_Processing.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/F_Appendix_Raster_Processing.ipynb)
-> - [*notebooks/G_Appendix_Raster_Combination.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/G_Appendix_Raster_Combination.ipynb)
-> - [*notebooks/H_Appendix_Reservoir_Data.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/H_Appendix_Reservoir_Data.ipynb)
 
 **Data Exploration and Processing:**
 > - [*notebooks/01_Data_Exploration.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/01_Data_Exploration.ipynb)
@@ -276,12 +239,6 @@ This project began as a portfolio piece, but it has grown into something more pe
 - `Slope`,`Aspect` - Derived from high resolution USGS daily rasters 
 - `Land Cover` - Derived from California land cover raster
 
-## Feature Engineering and Examination:
-*Located in:* 
-> - [*notebooks/03_Feature_Engineering.pynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/03_Feature_Engineering.ipynb)
-> - [*notebooks/04_A_Feature_Distributions.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_A_Feature_Distributions.ipynb)
-> - [*notebooks/04_B_Class_Conditional_Feature_Distributions.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_B_Class_Conditional_Feature_Distributions.ipynb)
-> - [*notebooks/04_C_Feature_Correlation.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_C_Feature_Correlation.ipynb)
 
 ## ArcGIS Sampling Grid
 
@@ -528,6 +485,13 @@ This project began as a portfolio piece, but it has grown into something more pe
 </table>
 </div>
 
+## Feature Engineering and Examination:
+*Located in:* 
+> - [*notebooks/03_Feature_Engineering.pynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/03_Feature_Engineering.ipynb)
+> - [*notebooks/04_A_Feature_Distributions.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_A_Feature_Distributions.ipynb)
+> - [*notebooks/04_B_Class_Conditional_Feature_Distributions.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_B_Class_Conditional_Feature_Distributions.ipynb)
+> - [*notebooks/04_C_Feature_Correlation.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_C_Feature_Correlation.ipynb)
+
 **Engineered Data:**
 - `Santa_Ana_Score` - Winds x dryness score to represent the influence of these seasonal winds.
 - `Average_Fires_per_Month` - *Temporarily removed*
@@ -639,6 +603,34 @@ Overall, `Random UnderSampler` has the most positive effect on performance. Whil
 
 - The interaction of **Roads** and **Forests** has high signifigance in both models. May be due to fires started by cars in dry conditions. 
 - **Dryness** features are the top climate driver. 
+
+## Project Philosophy
+
+#### Project Structure
+I am attempting to structure this project in a way that mirrors the organization of a book. Each module is intended to function as a chapter, grouped by its high level purpose, for example, modeling fire damage, cleaning fire spread data, or engineering features.\
+<br>
+Within each chapter, I break each coding section into *paragraphs.* Each paragraph is a small, self contained operation with a clear purpose. These typically include a short markdown formatted header and high level explanation, with one to three code blocks. If a paragraph begins to grow too long, that’s a is signal to rethink the structure and break it into smaller, more focused pieces.\
+<br>
+The idea of this approach is to keep the entire codebase browsable and maintain a narrative structure. If I want to revisit how I compute lagged features, for example, I can go straight to the feature engineering chapter and find the relevant paragraph quickly.
+
+#### Abstraction
+I intentionally keep abstraction to a minimum. One level of abstraction is usually enough to keep the code efficient without obscuring underlying logic. In my experience, deeper abstraction tends to introduce unnecessary complexity, especially while the project is still growing. Refactoring highly abstracted functions often leads to cascading changes and unintended side effects that can quickly become a major distraction. By keeping things simple and direct, I can modify and extend the project without getting overwhelmed.
+
+#### Function Arguments
+I don’t enforce a strict limit on the number of arguments a function can take, but I treat four or more as a warning sign. When a function starts accumulating parameters, it usually means I’m trying to make it do too much. At that point, I pause and ask myself what the function is really doing and whether my logic can be simplified or reorganized. This habit helps prevent complexity from creeping in unnoticed.
+
+#### Functionality Over Speed
+Performance optimization is not my priority at this stage. My goal is to build the most accurate and conceptually sound wildfire risk model I can, and to use this project as a learning environment. The focus is on clarity, correctness, and understanding rather than optimizations.\
+<br>
+One of my major learning goals is to incorporate vectorized operations wherever possible. Python’s strength with large datasets comes from vectorization, and I want to grow more comfortable working with it. I still rely on loops in many places because that’s where my foundational programming stems from, but I occasionally take time to rewrite a loop in vectorized form to deepen my understanding. I don’t replace the original version until I fully grasp what the vectorized version is doing.\
+<br>
+This is why some parts of the project, especially the large buffered spatial joins, remain slow. Two modules currently account for about half of the total runtime. While I know there are more efficient approaches, I am intentionally leaving them as is until I understand the alternatives well enough to implement them.
+
+#### Assumptions
+I am not a formal climate scientist and wildfire modeling involves many potential subjective choices like wildfire buffer distances, lag windows, thresholds, and spatial resolutions. I try to document these assumptions at the point where they are introduced and used. I want each assumption to be visible and contextual to keep the project transparent and easier to review or revise later.
+
+#### Long Term Vision
+This project began as a portfolio piece, but it has grown into something more personal. I’m genuinely interested in wildfire modeling, and I want to continue improving the accuracy and sophistication of the models as my skills grow. My intention is for this project to evolve alongside me, a long term research effort rather than a static artifact.
 
 ## Project Challenges
 - **Dataset size** - As Additional data is constantly added and overall spatial granularity is increased, ***processor times are becoming prohibitively large and unwieldy*** on current hardware. It has become a balancing act to subset the dataset for efficient workflow without overly affecting model performance.
