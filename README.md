@@ -103,16 +103,16 @@ The goal of this project is to use machine learning to analyze how environmental
   - over **6 years of uninterupted** weather and wilfire data.
   - **608,880** total grids analyzed.
   -  over **100 million** datapoints represented. 
-  - **44,992** wildfire **ignitions**
-  - **21,263** wildfires with significant **acres burned**
-  - **6,961** wildfires that caused significant **property damage**.
+  - **44,992** wildfire ignitions
+  - **21,263** wildfires with significant acres burned
+  - **6,961** wildfires that caused significant property damage.
   - **> 500,000** grids that detected no significant wildfire events
 
-- The current models, XGBoost and Random Forest, are achieving **macro F1 scores of around 70%** for **wildfire damage** and **wildfire spread** targets. This is a modest level of performance, likely constrained by the coarse spatial resolution of the sampling grid and the substantial regional variability in California’s climate.
+- The current models, XGBoost and Random Forest, are achieving macro F1 scores of around 70% for *wildfire damage* and *wildfire spread* targets. This is a modest level of performance, likely constrained by the coarse spatial resolution of the sampling grid and the substantial regional variability in California’s climate.
 - The models largely reinforce the common view of wildfire causes. 
-  - **Population density** in **wildland intermix zones** are the top drivers of the **XGB wildfire ignition** model. 
+  - **Population density** in wildland intermix zones are the top drivers of the XGB wildfire ignition model. 
   - Overall, the intersection of **human habitation** and **infrastructure** with **dense forests** weigh heavily in all models. Notably in areas where there are both dense **power lines** and **roads**. 
-  - Indicators of **drought** and **dry fuel materials** are the leading drivers among environmental factors.
+  - Indicators of *drought* and *dry fuel materials* are the leading drivers among environmental factors.
   - Large scale **wind speed** features alone appear to be of limited predictive ability for wildfire spread and damage. However, when interacting with **slope** a moderate influence is observed. More detailed wind gust data with a higher resolution may be necessary to truly account for the winds effects.
 
 ## Top SHAP Feature Contributions:
