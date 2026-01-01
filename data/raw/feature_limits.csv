@@ -1,0 +1,51 @@
+﻿Column,Min_Limit,Max_Limit
+influence_zone,0,10000000000
+interface_zone,0,10000000000
+intermix_zone,0,10000000000
+dominant_province_percent,0,100
+sum_province_area,0,10000000000
+sum_section_area,0,10000000000
+dominant_section_percent,0,100
+forest_percent,0,100
+developed_percent,0,100
+other_percent,0,100
+shrub_grass_percent,0,100
+wetlands_percent,0,100
+elevation_range,0,3000
+elevation_mean,-100,4500
+elevation_std,0,1500
+slope_max,0,90
+slope_range,0,90
+slope_mean,0,60
+slope_std,0,30
+northness_mean,-1,1
+eastness_mean,-1,1
+median_income,0,300000
+road_length_meters,0,1000000
+road_density,0,0.01
+power_line_meters,0,500000
+power_line_density,0,0.01
+total_housing,0,100000
+total_population,0,500000
+housing_density,0,0.01
+population_density,0,0.05
+Daily Maximum Air Temperature,230,330
+Daily Minimum Air Temperature,200,320
+Vapor Pressure Deficit,0,5
+Maximum Relative Humidity,0,100
+Minimum Relative Humidity,0,100
+Specific Humidity,0,0.03
+Precipitation,0,500
+Wind Speed,0,50
+Solar Radiation,0,1200
+Actual Evapotranspiration,0,20
+Burning Index,0,200
+Energy Release Component,0,150
+100-hour Dead Fuel Moisture,1,60
+1000-hour Dead Fuel Moisture,1,80
+Standardized Precipitation Index 30-Day,-4,4
+Standardized Precipitation Index 180-Day,-4,4
+Standardized Precipitation Evapotranspiration Index 30-Day,-4,4
+Standardized Precipitation Evapotranspiration Index 90-Day,-4,4
+Standardized Precipitation Evapotranspiration Index 180-Day,-4,4
+Palmer Drought Severity Index,-6,6

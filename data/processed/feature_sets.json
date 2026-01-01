@@ -1,0 +1,196 @@
+{
+    "Water Demand": [
+        "Actual Evapotranspiration",
+        "Solar Radiation",
+        "Daily Minimum Air Temperature",
+        "Daily Maximum Air Temperature",
+        "Vapor Pressure Deficit",
+        "Wind Speed"
+    ],
+    "Water Supply": [
+        "log_Precipitation",
+        "Maximum Relative Humidity",
+        "Minimum Relative Humidity",
+        "Specific Humidity",
+        "100-hour Dead Fuel Moisture",
+        "1000-hour Dead Fuel Moisture"
+    ],
+    "Water Supply Indexes": [
+        "SPI 30-Day",
+        "SPI 180-Day",
+        "SPEI 30-Day",
+        "SPEI 90-Day",
+        "SPEI 180-Day",
+        "Palmer Drought Severity Index"
+    ],
+    "Fire Danger": [
+        "Burning Index",
+        "Energy Release Component",
+        "Santa_Ana_Score",
+        "fire_count"
+    ],
+    "Social": [
+        "log_total_housing",
+        "log_total_population",
+        "log_housing_density",
+        "log_population_density",
+        "median_income"
+    ],
+    "Infrastructure": [
+        "power_line_meters",
+        "power_line_density",
+        "road_length_meters",
+        "road_density"
+    ],
+    "Elevation": [
+        "elevation_range",
+        "elevation_mean",
+        "elevation_std",
+        "slope_max",
+        "slope_range",
+        "slope_mean",
+        "slope_std",
+        "northness_mean",
+        "eastness_mean"
+    ],
+    "WUI": [
+        "influence_zone",
+        "interface_zone",
+        "intermix_zone"
+    ],
+    "Ecoregion": [
+        "dominant_province_percent",
+        "sum_province_area",
+        "sum_section_area",
+        "dominant_section_percent"
+    ],
+    "Land Cover": [
+        "forest_percent",
+        "developed_percent",
+        "other_percent",
+        "shrub_grass_percent",
+        "wetlands_percent"
+    ],
+    "Interactions": [
+        "Wind Speed_x_100-hour Dead Fuel Moisture",
+        "Vapor Pressure Deficit_x_Solar Radiation",
+        "log_Precipitation_x_1000-hour Dead Fuel Moisture",
+        "northness_mean_x_Daily Maximum Air Temperature",
+        "road_density_x_forest_percent",
+        "power_line_density_x_log_total_housing"
+    ],
+    "Wind Slope": [
+        "Wind Speed_x_slope_mean",
+        "Wind Speed_x_slope_max",
+        "Wind Speed_x_northness_mean",
+        "Wind Speed_x_eastness_mean",
+        "Wind Speed_x_elevation_mean",
+        "Wind Speed_x_elevation_range",
+        "Wind Speed 7 Day Median_x_slope_mean",
+        "Wind Speed 7 Day Median_x_slope_max",
+        "Wind Speed 7 Day Median_x_northness_mean",
+        "Wind Speed 7 Day Median_x_eastness_mean",
+        "Wind Speed 7 Day Median_x_elevation_mean",
+        "Wind Speed 7 Day Median_x_elevation_range"
+    ],
+    "Others": [
+        "NDVI_mean_difference",
+        "NDVI_mean_difference_has_value",
+        "reservoir_count",
+        "log_total_reservoir_level",
+        "stations_missing_levels"
+    ],
+    "Coded Ecoregions": [
+        "dominant_province_description_American Semi-Desert and Desert",
+        "dominant_province_description_California Coastal Chaparral Forest and Shrub",
+        "dominant_province_description_California Coastal Range Open Woodland-Shrub-Coniferous Forest-Meadow",
+        "dominant_province_description_California Coastal Steppe-Mixed Forest-Redwood Forest",
+        "dominant_province_description_California Dry Steppe",
+        "dominant_province_description_Intermountain Semi-Desert",
+        "dominant_province_description_Intermountain Semi-Desert and Desert",
+        "dominant_province_description_Sierran Steppe-Mixed Forest-Coniferous Forest-Alpine Meadow",
+        "dominant_section_description_Central California Coast",
+        "dominant_section_description_Central Valley Coast Ranges",
+        "dominant_section_description_Colorado Desert",
+        "dominant_section_description_Great Valley",
+        "dominant_section_description_Klamath Mountains",
+        "dominant_section_description_Modoc Plateau",
+        "dominant_section_description_Mojave Desert",
+        "dominant_section_description_Mono",
+        "dominant_section_description_Northern California Coast",
+        "dominant_section_description_Northern California Coast Ranges",
+        "dominant_section_description_Northern California Interior Coast Ranges",
+        "dominant_section_description_Northwestern Basin and Range",
+        "dominant_section_description_Sierra Nevada",
+        "dominant_section_description_Sierra Nevada Foothills",
+        "dominant_section_description_Sonoran Desert",
+        "dominant_section_description_Southeastern Great Basin",
+        "dominant_section_description_Southern California Coast",
+        "dominant_section_description_Southern California Mountains and Valleys",
+        "dominant_section_description_Southern Cascades"
+    ],
+    "Coded Seasons": [
+        "Season_Spring",
+        "Season_Summer",
+        "Season_Fall",
+        "Season_Winter"
+    ],
+    "Spatial": [
+        "avg_dist_to_all_reservoirs_same_day",
+        "dist_to_reservoir_same_day",
+        "dist_to_fires_same_day",
+        "avg_dist_to_fires_same_day",
+        "days_since_last_fire"
+    ],
+    "Lag 3 Day Features": [
+        "Actual Evapotranspiration 3 Day Sum",
+        "Solar Radiation 3 Day Sum",
+        "Daily Minimum Air Temperature 3 Day Mean",
+        "Daily Maximum Air Temperature 3 Day Mean",
+        "Vapor Pressure Deficit 3 Day Mean",
+        "Wind Speed 3 Day Median",
+        "log_Precipitation 3 Day Sum",
+        "Maximum Relative Humidity 3 Day Mean",
+        "Minimum Relative Humidity 3 Day Mean",
+        "Specific Humidity 3 Day Mean",
+        "100-hour Dead Fuel Moisture 3 Day Median",
+        "1000-hour Dead Fuel Moisture 3 Day Median",
+        "Burning Index 3 Day Mean",
+        "Energy Release Component 3 Day Mean",
+        "fire_count 3 Day Sum"
+    ],
+    "Lag 7 Day Features": [
+        "Actual Evapotranspiration 7 Day Sum",
+        "Solar Radiation 7 Day Sum",
+        "Daily Minimum Air Temperature 7 Day Mean",
+        "Daily Maximum Air Temperature 7 Day Mean",
+        "Vapor Pressure Deficit 7 Day Mean",
+        "Wind Speed 7 Day Median",
+        "log_Precipitation 7 Day Sum",
+        "Maximum Relative Humidity 7 Day Mean",
+        "Minimum Relative Humidity 7 Day Mean",
+        "Specific Humidity 7 Day Mean",
+        "100-hour Dead Fuel Moisture 7 Day Median",
+        "1000-hour Dead Fuel Moisture 7 Day Median",
+        "Burning Index 7 Day Mean",
+        "Energy Release Component 7 Day Mean",
+        "fire_count 7 Day Sum"
+    ],
+    "Lag 30 Day Features": [
+        "Actual Evapotranspiration 30 Day Sum",
+        "Solar Radiation 30 Day Sum",
+        "Daily Minimum Air Temperature 30 Day Mean",
+        "Daily Maximum Air Temperature 30 Day Mean",
+        "Vapor Pressure Deficit 30 Day Mean",
+        "Wind Speed 30 Day Median",
+        "log_Precipitation 30 Day Sum",
+        "Maximum Relative Humidity 30 Day Mean",
+        "Minimum Relative Humidity 30 Day Mean",
+        "Specific Humidity 30 Day Mean",
+        "100-hour Dead Fuel Moisture 30 Day Median",
+        "1000-hour Dead Fuel Moisture 30 Day Median",
+        "Burning Index 30 Day Mean",
+        "Energy Release Component 30 Day Mean",
+        "fire_count 30 Day Sum"
+    ]
+}
