@@ -116,12 +116,13 @@ The goal of this project is to use machine learning to analyze how environmental
   - Large scale **wind speed** features alone appear to be of limited predictive ability for wildfire spread and damage. However, when interacting with **slope** a moderate influence is observed. More detailed wind gust data with a higher resolution may be necessary to truly account for the winds effects.
 
 ## Top SHAP Feature Contributions:
-**XGB Top 5 Contributing Weather Factors**
 
-<img src="reports/readme/xgb_top_5_weather_factors.png" width="800">
+### **XGB Top 5 Contributing Weather Factors**
 
-**RF Top 5 Contributing Weather Factors**
-<img src="reports/readme/rf_top_5_weather_factors.png" width="800">
+<img src="reports/readme/xgb_top_5_weather_factors.png" width="1200">
+
+### **RF Top 5 Contributing Weather Factors**
+<img src="reports/readme/rf_top_5_weather_factors.png" width="1200">
 
 <br>
 
@@ -507,7 +508,7 @@ The goal of this project is to use machine learning to analyze how environmental
 
 Currentyl, models are tuned automatically and the best performing models are selected for final evaluation and visualization. Parameter options are limited to those that maintain reasonable hardware performance.
 
-<img src="data/output/XGB_learning_rate.png" alt="Model Metrics for Case Study" width="400" style="display: block; margin-left: 0;" />
+<img src="reports/readme/xgb_learning_rate.png" alt="Model Metrics for Case Study" width="400" style="display: block; margin-left: 0;" />
 <br>
 
 **Models tested:**
@@ -536,7 +537,7 @@ Currentyl, models are tuned automatically and the best performing models are sel
 
 Overall, `Random UnderSampler` has the most positive effect on performance. While `SMOTE` seems to add to much noise to the models.
 
-<img src="data/output/class_balancing_Spread.png" width="300" style="display: block; margin-left: 0;" />
+<img src="reports/readme/class_balancing_Spread.png" width="300" style="display: block; margin-left: 0;" />
 <br>
 
 ## Model Metrics
@@ -550,15 +551,15 @@ Overall, `Random UnderSampler` has the most positive effect on performance. Whil
 - The **Damage** and **Spread** models are also effective at recognizing the conditions that lead to the most destructive and largest wildfire events.
 - The damage and spread models struggle to distinguish the **Moderate** classes due to the division of classes being relatively arbitrary. Assumptions require validation from subject experts to increase performance.
 
-<img src="data/output/ignition_evaluation.png" alt="Model Metrics for Case Study" width="600" style="display: block; margin-left: 0;" />
+<img src="reports/readme/ignition_evaluation.png" alt="Model Metrics for Case Study" width="600" style="display: block; margin-left: 0;" />
 <br>
 <br>
 
-<img src="data/output/spread_evaluation.png" alt="Model Metrics for Case Study" width="600" style="display: block; margin-left: 0;" />
+<img src="reports/readme/spread_evaluation.png" alt="Model Metrics for Case Study" width="600" style="display: block; margin-left: 0;" />
 <br>
 <br>
 
-<img src="data/output/damage_evaluation.png" alt="Model Metrics for Case Study" width="600" style="display: block; margin-left: 0;" />
+<img src="reports/readme/damage_evaluation.png" alt="Model Metrics for Case Study" width="600" style="display: block; margin-left: 0;" />
 <br>
 
 ## SHAP Feature Influence:
@@ -571,19 +572,20 @@ Overall, `Random UnderSampler` has the most positive effect on performance. Whil
 
 <br>
 
-### XGBoost
+### **Ignition Feature Importance**
+<img src="reports/readme/ignition_features.png"  width="800" style="display: block; margin-left: 0;" />
 
-<img src="data/output/SHAP_XGN.jpg" alt="Model Metrics for Case Study" width="800" style="display: block; margin-left: 0;" />
-<br>
+### **Spread Feature Importance**
+<img src="reports/readme/spread_features.png" width="1200" style="display: block; margin-left: 0;" />
 
-### Random Forest
-<img src="data/output/SHAP_RF.jpg" alt="Model Metrics for Case Study" width="800" style="display: block; margin-left: 0;" />
+### **Damage Feature Importance**
+<img src="reports/readme/damage_features.png"  width="1200" style="display: block; margin-left: 0;" />
 
 ## Visualization:
 
 ### **Wildfire *Ignition* Predictions:**
 
-<img src="data/output/fire_ignition_maps.png" alt="California 01072025" width="2000" style="display: block; margin-left: 0;" />
+<img src="reports/readme/ignition_predictions.png" alt="California 01072025" width="2000" style="display: block; margin-left: 0;" />
 <br>
 
 - **Wildland Urban Interface**, **Humans**, **Infrastructure** features contribute the most in both fire ignition models.
@@ -591,7 +593,7 @@ Overall, `Random UnderSampler` has the most positive effect on performance. Whil
 
 ### **Wildfire *Spread* Predictions:**
 
-<img src="data/output/fire_spread_maps.png" alt="California 01072025" width="2000" style="display: block; margin-left: 0;" />
+<img src="reports/readme/spread_predictions.png" alt="California 01072025" width="2000" style="display: block; margin-left: 0;" />
 <br>
 
 - **Wildland Urban Interface** and **Human** features are the main contributors to both models.
@@ -599,7 +601,7 @@ Overall, `Random UnderSampler` has the most positive effect on performance. Whil
 
 ### **Wildfire *Damage* Predictions:**
 
-<img src="data/output/fire_damage_maps.png" alt="California 01072025" width="2000" style="display: block; margin-left: 0;" />
+<img src="reports/readme/damage_predictions.png" alt="California 01072025" width="2000" style="display: block; margin-left: 0;" />
 
 - The interaction of **Roads** and **Forests** has high signifigance in both models. May be due to fires started by cars in dry conditions. 
 - **Dryness** features are the top climate driver. 
