@@ -122,12 +122,10 @@ Risk levels range from **0 (lowest) to 4 (highest)**. These values are based on 
 ## Top SHAP Feature Contributions:
 
 ### **XGB Top 5 Contributing Weather Factors**
-
 <img src="reports/readme/xgb_top_5_weather_factors.png" width="1200">
 
 ### **RF Top 5 Contributing Weather Factors**
 <img src="reports/readme/rf_top_5_weather_factors.png" width="1200">
-
 <br>
 
 ## Project Structure
