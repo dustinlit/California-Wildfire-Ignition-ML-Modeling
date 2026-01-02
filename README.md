@@ -242,11 +242,10 @@ The goal of this project is to use machine learning to analyze how environmental
 
 
 ## ArcGIS Sampling Grid
-The sampling grid serves as the spatial framework for analysis. Each grid captures in static features that remain relatively constant over the time period analyzed.
+The sampling grid serves as the spatial framework for analysis. Each grid captures static features (elevation, slope, population) that remain relatively constant over the time period analyzed.
 - Each sampling grid is 46,000Km x 46,000Km.
 - Some grid cells extend beyond the boundaries of the state. To ensure that all spatial metrics remain comparable across the study area, each relevant field is normalized by the proportion of the grid cell that lies within the state boundary.
-
-Weather features and NDVI values are extracted onto the centroid of each grid for each day. 
+- Daily weather features and NDVI values are extracted onto the centroid of each grid. 
 
 <img src="data/maps/grids.png" width="500" style="display: block; margin-left: 0;" />
 
