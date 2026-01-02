@@ -30,11 +30,15 @@ The goal of this project is to use machine learning to analyze how environmental
 - Compare several multi-classification modeling techniques with a focus on tree models like `XGBoost` and `Random Forest`.
 - Compare class balancing techniques like `RandomUnderSampler`, `SMOTE`, with unbalanced performance.
 - Utilize interpolation techniques to create geospatial visualizations that illustrate local and regional wildfire risk patterns and key factors as they evolve over time.
-- Use `SHAP` and `Feature Ablation` to Analyze and identify the most important relationships between wildfire severity and risk factors.
+- Use `SHAP` and `Feature Ablation` to analyze and identify the most important relationships between weather factors and wildfire severity.
 
-## Potential Applications
-- **Targeted deployment of firefighting and prevention resources** When conditions indicate a higher likelihood of large or damaging wildfires, agencies can focus personnel and equipment in the areas that need them most.
-- **Identifying high‑risk wildland–urban interface development zones** By estimating the potential financial impact of wildfire damage, proposed building sites can be compared and evaluated more effectively.
+## Model Targets
+### *Wildfire Ignition*
+Risk levels range from **0 (lowest) to 1 (highest)**. These targets are based on fire counts, where a value of 0 indicates grid cells with no recorded fires, and a value of 1 represents cells with more than one fire.
+### *Wildfire Spread*
+Risk levels range from **0 (lowest) to 4 (highest)**. These targets are derived from acres burned. A value of 0 corresponds to grid cells with no burned area, while the remaining levels (1–4) are assigned using quartile bins of burned acreage.
+### *Wildfire Damage*
+Risk levels range from **0 (lowest) to 4 (highest)**. These values are based on the total estimated damage cost, calculated from the number of structures damaged or destroyed, so no inflation adjustment is required. A score of 0 indicates grid cells with no recorded damage, while scores 1–4 represent increasing damage levels determined using quartile bins of total cost.
 
 ## Data Sources
 
@@ -100,15 +104,15 @@ The goal of this project is to use machine learning to analyze how environmental
 
 ## Initial Insights
 - Key wildfire dataset figures:
-  - over **6 years of uninterupted** weather and wilfire data.
+  - over **6 years of uninterupted** weather and wildfire data.
   - **608,880** total grids analyzed.
   -  over **100 million** datapoints represented. 
   - **44,992** wildfire ignitions
   - **21,263** wildfires with significant acres burned
   - **6,961** wildfires that caused significant property damage.
-  - **> 500,000** grids that detected no significant wildfire events
+  - **>500,000** grids that detected no significant wildfire events
 
-- The current models, XGBoost and Random Forest, are achieving macro F1 scores of around 70% for *wildfire damage* and *wildfire spread* targets. This is a modest level of performance, likely constrained by the coarse spatial resolution of the sampling grid and the substantial regional variability in California’s climate.
+- The current models, XGBoost and Random Forest, are achieving macro F1 scores of around 80%+ for *wildfire damage* and *wildfire spread* targets. This is a modest level of performance, likely constrained by the coarse spatial resolution of the sampling grid and the substantial regional variability in California’s climate.
 - The models largely reinforce the common view of wildfire causes. 
   - **Population density** in wildland intermix zones are the top drivers of the XGB wildfire ignition model. 
   - Overall, the intersection of **human habitation** and **infrastructure** with **dense forests** weigh heavily in all models. Notably in areas where there are both dense **power lines** and **roads**. 
@@ -226,16 +230,16 @@ The goal of this project is to use machine learning to analyze how environmental
 - `Burning_Index`	- Fire danger index derived from temperature, humidity, wind, and fuel moisture; higher values indicate higher fire potential
 - `Energy_Release_Component` - Estimated energy release per unit area (MJ/m²); relates to potential fire intensity
 - `100 and 1000 Hour Dead_Fuel_Moisture` - Moisture content of medium-size dead fuels (%) affecting fire spread
-- `NDVI_temperature` - a measure of a grids local mean from the statewide global mean
+- `NDVI_temperature` - a measure of a grids local mean difference from the statewide global mean
 
 ### Temporal, Social, and Infrastructure Variables
  - `Season`
-- `Roads`,`Power Lines` total length and densities
-- `Total_Population`,`Population_Density`,`Total_Housing`,`Housing_Density` - Population and housing statistics within 36KM Buffer radius around sampling points
+- `Roads`,`Power Lines` total length in meters and densities
+- `Total_Population`,`Population_Density`,`Total_Housing`,`Housing_Density` - Population and housing statistics within each samplign grid
 - `Median_Income` Serving as a rough proxy for localized firefighting and prevention resources
 
 ### Land and Topographical Data
-- `Interface`, `Intermix`, and `Influence` Areas - From WUI, average area of each zone within 36KM Buffer radius around sampling points
+- `Interface`, `Intermix`, and `Influence` Areas - From WUI, average area of each zone within each sampling grid
 - `Eco_Regions` - regions generally representing the varied climate and vegetative regions in California
 - `Slope`,`Aspect` - Derived from high resolution USGS daily rasters 
 - `Land Cover` - Derived from California land cover raster
@@ -490,17 +494,18 @@ The sampling grid serves as the spatial framework for analysis. Each grid captur
 </table>
 </div>
 
-## Feature Engineering and Examination:
+## Feature Engineering and Examination
 *Located in:* 
 > - [*notebooks/03_Feature_Engineering.pynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/03_Feature_Engineering.ipynb)
 > - [*notebooks/04_A_Feature_Distributions.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_A_Feature_Distributions.ipynb)
 > - [*notebooks/04_B_Class_Conditional_Feature_Distributions.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_B_Class_Conditional_Feature_Distributions.ipynb)
 > - [*notebooks/04_C_Feature_Correlation.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/04_C_Feature_Correlation.ipynb)
 
-### Engineered Data:
-- `Santa_Ana_Score` - Winds x dryness score to represent the influence of these seasonal winds.
-- `Average_Fires_per_Month` - *Temporarily removed*
+### Engineered Data
+- `Santa_Ana_Score` - A custom winds x dryness score to represent the influence of these dry and strong seasonal winds.
+- `fire_count 30 Day sum` - a lagged count of number of fires in a sampling grid for past month
 - `3-Day, 7-day, and 30 Day Lagged_Weather` - Rolling mean, median, or sum for key weather features.
+- `Interaction features` - custom feature interactions focused on combinations of weather, elevation, and infrastructure.
 - `Wind Slope Interactions` - South-facing slopes dry faster, and strong winds drive flames uphill, intensifying wildfire spread.
 
 ## Model Hypertuning
@@ -510,7 +515,7 @@ The sampling grid serves as the spatial framework for analysis. Each grid captur
 > - [*notebooks/06_B_Fire_Spread_Tuning.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/06_B_Fire_Spread_Tuning.ipynb)
 > - [*notebooks/06_C_Fire_Damage_Tuning.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/06_C_Fire_Damage_Tuning.ipynb)
 
-Currently, models are tuned automatically parameters that best balance model and hardware performance are selected for final evaluation and visualization.
+Currently, models fronm each wildfire sataset are tuned individually using k-fold cross validation. Automatic functions use the macro (F1) to determine best model performance. Ultimately, parameters are selected that best balance model and hardware performance.
 
 <img src="reports/readme/xgb_learning_rate.png" alt="Model Metrics for Case Study" width="400" style="display: block; margin-left: 0;" />
 <br>
@@ -529,16 +534,13 @@ Currently, models are tuned automatically parameters that best balance model and
 > - [*notebooks/07_B_Fire_Spread_Class_Balancing.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/07_B_Fire_Spread_Class_Balancing.ipynb)
 > - [*notebooks/07_C_Fire_Damage_Class_Balancing.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/07_C_Fire_Damage_Class_Balancing.ipynb)
 
-**Targets:** **Wildfire Damage Risk** and **Wildfire Spread Risk** are classified into five categories: from **Low (0)** to **High (4)**. Due to the nature of **Wildfire Ignition Risk**, it is modeled using a binary classification with **Low (0)** and **High (1)** categories.
+ In all three models, the majority class *vastly* outnumbers all other categories. Notably, high damaging wildfire events are extremely rare and are severely underrepresented in the full dataset. Multiple balancing techniques are tested to address this imbalance. These include:
 
-**Issues:** Tn all three models, the majority class *vastly* outnumbers both other categories. Notably, high damaging wildfire events are severely underrepresented in the full dataset. 
+- **RUS** (Random UnderSampler) for the dominant "Low" class.
+- **SMOTE** (Synthetic Minority Oversampling Technique) for oversampling
+- A manually constructed stratified subset combined with in‑method class balancing
 
-**Balancing techniques tested**:
-- In method class balancing
-- Random UnderSampler (RUS) for the dominant "Low" class.
-- SMOTE for oversampling
-
-Overall, `Random UnderSampler` has the most positive effect on performance. While `SMOTE` seems to add to much noise to the models.
+Overall, `Random UnderSampler` had a positive effect on performance and `SMOTE` seems to add to much noise and processing time to the models. The best method for hardware and model performance was determined to be manual subsetting along with in-method class balancing.
 
 <img src="reports/readme/class_balancing_Spread.png" width="300" style="display: block; margin-left: 0;" />
 <br>
@@ -565,7 +567,7 @@ Overall, `Random UnderSampler` has the most positive effect on performance. Whil
 <img src="reports/readme/damage_evaluation.png" alt="Model Metrics for Case Study" width="600" style="display: block; margin-left: 0;" />
 <br>
 
-## SHAP Feature Influence:
+## SHAP Feature Influence
 *Located in:* 
 > - [*notebooks/08_B_Fire_Ignition_Feature_Ablation.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/08_B_Fire_Ignition_Feature_Ablation.ipynb)
 
@@ -584,7 +586,7 @@ Overall, `Random UnderSampler` has the most positive effect on performance. Whil
 ### **Damage Feature Importance**
 <img src="reports/readme/damage_features.png"  width="1200" style="display: block; margin-left: 0;" />
 
-## Visualization:
+## Case Study Visualization
 
 ### **Wildfire *Ignition* Predictions:**
 
@@ -610,7 +612,7 @@ Overall, `Random UnderSampler` has the most positive effect on performance. Whil
 - **Dryness** features are the top climate driver. 
 
 ## Limitations
-### Derivation of Target Values:
+### Derivation of Target Values
 To maintain simplicity in the initial modeling framework, wildfire target variables are derived from single, outcome‑based metrics.
 
 - Ignition is modeled as a binary classification target, determined solely by whether at least one fire occurred within a grid cell on a given day.
@@ -674,6 +676,10 @@ This project began as a simple Jupyter notebook page, soon expanded to five, and
 #### Learning the Proper time to Document and Analyze Variables
 There is no argument that documentation and analysis are crucial parts to a project. Ultimately, I have spent many hours documenting variables and structures that appeared complete, only to have to be completely rewritten or revised. I now document with simple headers and critical notes only, reserving more detailed documentation for when a module is closer to completion. This approach ensures I maintain clarity and speed throughout development.
 
+## Potential Applications
+- **Targeted deployment of firefighting and prevention resources** When conditions indicate a higher likelihood of large or damaging wildfires, agencies can focus personnel and equipment in the areas that need them most.
+- **Identifying high‑risk wildland–urban interface development zones** By estimating the potential financial impact of wildfire damage, proposed building sites can be compared and evaluated more effectively.
+
 ## Next Steps / Potential Improvements
 - Re-evaluate damage model structure. Maybe change to regression with dollar amount.
 - Hot Spot analysis of daily NDVI raster data (in process)
@@ -684,7 +690,7 @@ There is no argument that documentation and analysis are crucial parts to a proj
 - Seperate module for up to date processing of new information and real time predictions
 - Consult domain experts to validate assumptions and feature selection.
 
-## Changelog:
+## Changelog
 
 ### Version 4.0 Changelog
 > 1. Seperated targets into three main models, **Fire Ignition**, **Fire Spread**, and **Fire Damage**.
