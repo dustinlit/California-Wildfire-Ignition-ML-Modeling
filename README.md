@@ -570,9 +570,7 @@ Overall, `Random UnderSampler` had a positive effect on performance and `SMOTE` 
 ## SHAP Feature Influence
 *Located in:* 
 > - [*notebooks/08_B_Fire_Ignition_Feature_Ablation.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/08_B_Fire_Ignition_Feature_Ablation.ipynb)
-
 > - [*notebooks/09_B_Fire_Spread_Feature_Ablation.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/09_B_Fire_Spread_Feature_Ablation.ipynb)
-
 > - [*notebooks/10_B_Fire_Damage_Feature_Ablation.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/10_B_Fire_Damage_Feature_Ablation.ipynb)
 
 <br>
