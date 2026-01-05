@@ -113,9 +113,7 @@ Risk levels range from **0 (lowest) to 1 (highest)**. These targets are based on
   - Overall, the intersection of **human habitation** and **infrastructure** with **dense forests** weigh heavily in all models. Notably in areas where there are both dense **power lines** and **roads**. 
   - Indicators of *drought* and *dry fuel materials* are the leading drivers among environmental factors.
 
-**Top 5 Contributing Weather Factors**
-<img src="reports/readme/top_5_weather.png" width="1200">
-
+<figure> <img src="reports/readme/top_5_weather.png" alt="A description" width="800"> <figcaption><em>Figure 1: Top 5 contributing weather features</em></figcaption> </figure>
 
 ## Project Structure
 
@@ -227,7 +225,7 @@ The sampling grid serves as the spatial framework for analysis. Each grid captur
 - Some grid cells extend beyond the boundaries of the state. To ensure that all spatial metrics remain comparable across the study area, each relevant field is normalized by the proportion of the grid cell that lies within the state boundary.
 - Daily weather features and NDVI values are extracted onto the centroid of each grid. 
 
-<img src="data/maps/grids.png" width="500" style="display: block; margin-left: 0;" />
+<figure> <img src="data/maps/grids.png" alt="A description" width="500"> <figcaption><em>ArcGIS Sampling Grids</em></figcaption> </figure>
 
 ### Key Fields in Grids
 <br>
@@ -489,8 +487,7 @@ The sampling grid serves as the spatial framework for analysis. Each grid captur
 
 To avoid temporal leakage, tuning is performed with a temporal split of data. Automatic functions use the macro (F1) to adjust for the best model performance. Ultimately, parameters are selected that best balance model and hardware performance.
 
-<img src="reports/readme/xgb_learning_rate.png" alt="Model Metrics for Case Study" width="400" style="display: block; margin-left: 0;" />
-<br>
+<figure> <img src="reports/readme/xgb_learning_rate.png" alt="A description" width="400"> <figcaption><em>XGBoost learining rate hypertuning</em></figcaption> </figure>
 
 **Models tested:**
 - `Random Forest` from scikit-learn
@@ -506,28 +503,20 @@ To avoid temporal leakage, tuning is performed with a temporal split of data. Au
 **Key Findings:** 
 - the models are quite good at reliably identifying **low‑risk** grids, largely because the patterns associated with 'no wildfire activity' are abundant, consistent, and easy for algorithms to learn.
 
-
-<img src="reports/readme/ignition_evaluation.png" alt="Model Metrics for Case Study" width="600" style="display: block; margin-left: 0;" />
-<br>
-<br>
-
+<figure> <img src="reports/readme/ignition_evaluation.png" alt="A description" width="600"> <figcaption><em>Model metrics of test set</em></figcaption> </figure>
 
 ## SHAP Feature Influence
 *Located in:* 
 > - [*notebooks/08_B_Fire_Ignition_Feature_Ablation.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/08_B_Fire_Ignition_Feature_Ablation.ipynb)
 
-<br>
-
-### **Ignition Feature Importance**
-<img src="reports/readme/ignition_features.png"  width="800" style="display: block; margin-left: 0;" />
+<figure> <img src="reports/readme/ignition_features.png" alt="A description" width="600"> <figcaption><em>Top feature importance rankings</em></figcaption> </figure>
 
 
 ## Case Study Visualization
 
 ### **Wildfire *Ignition* Predictions:**
 
-<img src="reports/readme/ignition_predictions.png" alt="California 01072025" width="2000" style="display: block; margin-left: 0;" />
-<br>
+<figure> <img src="reports/readme/ignition_predictions.png" alt="A description" width="600"> <figcaption><em>Tree model wildfire ignition predictions compared to target results</em></figcaption> </figure>
 
 - **Wildland Urban Interface**, **Humans**, **Infrastructure** features contribute the most in both fire ignition models.
 - **1000-hour Dead Fuel Moisture** is the highest performing weather feature. Dryness is the driving factor for ignition.
