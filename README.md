@@ -113,14 +113,9 @@ Risk levels range from **0 (lowest) to 1 (highest)**. These targets are based on
   - Overall, the intersection of **human habitation** and **infrastructure** with **dense forests** weigh heavily in all models. Notably in areas where there are both dense **power lines** and **roads**. 
   - Indicators of *drought* and *dry fuel materials* are the leading drivers among environmental factors.
 
-## Top SHAP Feature Contributions:
+**Top 5 Contributing Weather Factors**
+<img src="reports/readme/top_5_weather.png" width="1200">
 
-### **XGB Top 5 Contributing Weather Factors**
-<img src="reports/readme/xgb_top_5_weather_factors.png" width="1200">
-
-### **RF Top 5 Contributing Weather Factors**
-<img src="reports/readme/rf_top_5_weather_factors.png" width="1200">
-<br>
 
 ## Project Structure
 
