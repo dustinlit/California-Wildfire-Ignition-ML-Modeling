@@ -73,17 +73,21 @@ The goal of this project is to use machine learning to analyze how environmental
 - `Engineered Data` Santa Ana Score, 3 Day Averages, Interaction Features
 
 ## Methods
+
+### Data Wrangling
+- Cleaned multiple fire datasets from different California agencies
+- Eliminated outliers
+
 ### Feature Engineering
 - Constructed a **relative NDVI hot spot index** comparing each grids local mean to the global mean
 - Created **interaction features** focused on targeted combinations of weather features and social data
 
 ### Modeling
-To avoid temporal leakage, tuning is performed with a temporal split of data. Automatic functions use the macro (F1) metric to adjust for the best model performance. Ultimately, parameters are selected that best balance model and hardware performance.
 - Models used `Random Forest` from scikit-learn, `XGBoost` from XGBoost
 - Automatic hypertuning for optimal performance based on macro F1 scores
 - Metrics evaluated: `F1-score (macro-averaged)`
 
-<figure> <img src="reports/readme/xgb_learning_rate.png" alt="A description" width="400"> <figcaption><em>Figure 4: XGBoost learning rate hypertuning results</em></figcaption> </figure>
+<figure> <img src="reports/readme/xgb_learning_rate.png" alt="A description" width="250"> <figcaption><em>Figure 4: XGBoost learning rate hypertuning results</em></figcaption> </figure>
 
 ### Spatial Interpolation
 - Generated a sampling grid throughout California for demographic, terrain, and elevation data
