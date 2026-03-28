@@ -15,8 +15,7 @@
 **Author**: Dustin Littlefield\
 **Project Type**: `Spatial Data Science`, `Natural Resources`, `Wildfire Analysis`\
 **Technologies**: `ArcGIS` `Python` `Pandas` `Scikit-learn` `XGBoost` `Random Forest` `GeoPandas` `Matplotlib`\
-**Last Updated:** January 4, 2026\
-[Github Repository](https://github.com/dustinlit/California_Fire_Severity)
+**Last Updated:** March 28, 2026\
 
 ## Overview
 The goal of this project is to use machine learning to analyze how environmental, geographical, social, and temporal factors influence wildfire ignition across California.
