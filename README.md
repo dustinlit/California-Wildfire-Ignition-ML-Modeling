@@ -18,8 +18,6 @@
 **Last Updated:** January 4, 2026\
 [Github Repository](https://github.com/dustinlit/California_Fire_Severity)
 
-> **Disclaimer:** I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions.
-
 ## Overview
 The goal of this project is to use machine learning to analyze how environmental, geographical, social, and temporal factors influence wildfire ignition across California.
 
