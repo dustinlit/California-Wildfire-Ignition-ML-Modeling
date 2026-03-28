@@ -20,7 +20,7 @@
 ## Overview
 The goal of this project is to use machine learning to analyze how environmental, geographical, social, and temporal factors influence wildfire ignition across California.
 
-<figure> <img src="../reports/plots/wildfires.png"  alt="A description" width="800"> <figcaption><em>Figure 1: Damaging wildfires in California 01/01/2018 to 01/23/2025</em></figcaption> </figure>
+<figure> <img src="reports/plots/wildfires.png"  alt="A description" width="800"> <figcaption><em>Figure 1: Damaging wildfires in California 01/01/2018 to 01/23/2025</em></figcaption> </figure>
 
 ## Objectives
 - Predict and model wildfire **ignition** risk based on environmental, topographical, geographical and social data.
@@ -113,7 +113,7 @@ Risk levels range from **0 (lowest) to 1 (highest)**. These targets are based on
   - Overall, the intersection of **human habitation** and **infrastructure** with **dense forests** weigh heavily in all models. Notably in areas where there are both dense **power lines** and **roads**. 
   - Indicators of *drought* and *dry fuel materials* are the leading drivers among environmental factors.
 
-<figure> <img src="../reports/readme/top_5_weather.png" alt="A description" width="800"> <figcaption><em>Figure 2: Top 5 contributing weather features</em></figcaption> </figure>
+<figure> <img src="reports/readme/top_5_weather.png" alt="A description" width="800"> <figcaption><em>Figure 2: Top 5 contributing weather features</em></figcaption> </figure>
 
 ## Project Structure
 
@@ -225,7 +225,7 @@ The sampling grid serves as the spatial framework for analysis. Each grid captur
 - Some grid cells extend beyond the boundaries of the state. To ensure that all spatial metrics remain comparable across the study area, each relevant field is normalized by the proportion of the grid cell that lies within the state boundary.
 - Daily weather features and NDVI values are extracted onto the centroid of each grid. 
 
-<figure> <img src="../data/maps/grids.png" alt="A description" width="500"> <figcaption><em>Figure 3: ArcGIS Sampling Grids (EPGS 3310)</em></figcaption> </figure>
+<figure> <img src="maps/grids.png" alt="A description" width="500"> <figcaption><em>Figure 3: ArcGIS Sampling Grids (EPGS 3310)</em></figcaption> </figure>
 
 ### Key Fields in Grids
 <br>
@@ -487,7 +487,7 @@ The sampling grid serves as the spatial framework for analysis. Each grid captur
 
 To avoid temporal leakage, tuning is performed with a temporal split of data. Automatic functions use the macro (F1) metric to adjust for the best model performance. Ultimately, parameters are selected that best balance model and hardware performance.
 
-<figure> <img src="../reports/readme/xgb_learning_rate.png" alt="A description" width="400"> <figcaption><em>Figure 4: XGBoost learning rate hypertuning results</em></figcaption> </figure>
+<figure> <img src="reports/readme/xgb_learning_rate.png" alt="A description" width="400"> <figcaption><em>Figure 4: XGBoost learning rate hypertuning results</em></figcaption> </figure>
 
 **Models tested:**
 - `Random Forest` from scikit-learn
@@ -504,20 +504,20 @@ To avoid temporal leakage, tuning is performed with a temporal split of data. Au
 - the models are quite good at reliably identifying **low‑risk** grids, largely because the patterns associated with 'no wildfire activity' are abundant, consistent, and easy for algorithms to learn.
 - XGBoost currently overfitting the target value.
 
-<figure> <img src="../reports/readme/ignition_evaluation.png" alt="A description" width="800"> <figcaption><em>Figure 5: Model metrics of test set</em></figcaption> </figure>
+<figure> <img src="reports/readme/ignition_evaluation.png" alt="A description" width="800"> <figcaption><em>Figure 5: Model metrics of test set</em></figcaption> </figure>
 
 ## SHAP Feature Influence
 *Located in:* 
 > - [*notebooks/08_B_Fire_Ignition_Feature_Ablation.ipynb*](https://github.com/dustinlit/California_Fire_Severity/blob/main/notebooks/08_B_Fire_Ignition_Feature_Ablation.ipynb)
 
-<figure> <img src="../reports/readme/ignition_features.png" alt="A description" width="600"> <figcaption><em>Figure 6: Top feature importance rankings by model</em></figcaption> </figure>
+<figure> <img src="reports/readme/ignition_features.png" alt="A description" width="600"> <figcaption><em>Figure 6: Top feature importance rankings by model</em></figcaption> </figure>
 
 
 ## Case Study Visualization
 
 ### **Wildfire *Ignition* Predictions:**
 
-<figure> <img src="../reports/readme/ignition_predictions.png" alt="A description" width="1000"> <figcaption><em>Figure 7: Tree model wildfire ignition predictions compared to target results on 01/07/2025</em></figcaption> </figure>
+<figure> <img src="reports/readme/ignition_predictions.png" alt="A description" width="1000"> <figcaption><em>Figure 7: Tree model wildfire ignition predictions compared to target results on 01/07/2025</em></figcaption> </figure>
 
 - The intersection of **Wildland Urban Interface** and **Infrastructure** features contribute the most in both fire ignition models.
 - **1000-hour Dead Fuel Moisture** is the highest performing weather feature. Long term dryness is the main driving factor for ignition.

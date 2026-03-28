@@ -20,7 +20,7 @@
 ## Overview
 The goal of this project is to use machine learning to analyze how environmental, geographical, social, and temporal factors influence wildfire ignition across California.
 
-<figure> <img src="reports/plots/wildfires.png"  alt="A description" width="800"> <figcaption><em>Figure 1: Damaging wildfires in California 01/01/2018 to 01/23/2025</em></figcaption> </figure>
+<figure> <img src="images/wildfires.png"  alt="A description" width="800"> <figcaption><em>Figure 1: Damaging wildfires in California 01/01/2018 to 01/23/2025</em></figcaption> </figure>
 
 ## Objectives
 - Predict and model wildfire **ignition** risk based on environmental, topographical, geographical and social data
@@ -87,7 +87,7 @@ The goal of this project is to use machine learning to analyze how environmental
 - Automatic hypertuning for optimal performance based on macro F1 scores
 - Metrics evaluated: `F1-score (macro-averaged)`
 
-<figure> <img src="reports/readme/xgb_learning_rate.png" alt="A description" width="250"> <figcaption><em>Figure 4: XGBoost learning rate hypertuning results</em></figcaption> </figure>
+<figure> <img src="images/xgb_learning_rate.png" alt="A description" width="250"> <figcaption><em>Figure 4: XGBoost learning rate hypertuning results</em></figcaption> </figure>
 
 ### Spatial Interpolation
 - Generated a sampling grid throughout California for demographic, terrain, and elevation data
@@ -100,19 +100,19 @@ The goal of this project is to use machine learning to analyze how environmental
 - Indicators of *drought* and *dry fuel materials* are the leading drivers among environmental factors.
 
 ### Weather Influence
-<figure> <img src="reports/readme/top_5_weather.png" alt="A description" width="800"> <figcaption><em>Figure 2: Top 5 contributing weather features</em></figcaption> </figure>
+<figure> <img src="images/top_5_weather.png" alt="A description" width="800"> <figcaption><em>Figure 2: Top 5 contributing weather features</em></figcaption> </figure>
 
 ### Metrics 
-<figure> <img src="reports/readme/ignition_evaluation.png" alt="A description" width="800"> <figcaption><em>Figure 5: Model metrics of test set</em></figcaption> </figure>
+<figure> <img src="images/ignition_evaluation.png" alt="A description" width="800"> <figcaption><em>Figure 5: Model metrics of test set</em></figcaption> </figure>
 
 ### SHAP Feature Influence
-<figure> <img src="reports/readme/ignition_features.png" alt="A description" width="600"> <figcaption><em>Figure 6: Top feature importance rankings by model</em></figcaption> </figure>
+<figure> <img src="images/ignition_features.png" alt="A description" width="600"> <figcaption><em>Figure 6: Top feature importance rankings by model</em></figcaption> </figure>
 
 ## Case Study Visualization
 
 ### **Wildfire *Ignition* Predictions:**
 
-<figure> <img src="reports/readme/ignition_predictions.png" alt="A description" width="1000"> <figcaption><em>Figure 7: Tree model wildfire ignition predictions compared to target results on 01/07/2025</em></figcaption> </figure>
+<figure> <img src="images/ignition_predictions.png" alt="A description" width="1000"> <figcaption><em>Figure 7: Tree model wildfire ignition predictions compared to target results on 01/07/2025</em></figcaption> </figure>
 
 - The intersection of **Wildland Urban Interface** and **Infrastructure** features contribute the most in both fire ignition models.
 - **1000-hour Dead Fuel Moisture** is the highest performing weather feature. Long term dryness is the main driving factor for ignition.
