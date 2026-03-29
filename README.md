@@ -10,12 +10,14 @@
 </div>
 
 ![Status: Completed](https://img.shields.io/badge/Status-Completed-success)
-[![View Report](https://img.shields.io/badge/View-Full%20Report-blue?style=for-the-badge&logo=github)](https://dustinlit.github.io/California-Wildfire-Ignition-ML-Modeling/)
+[![View Report](https://img.shields.io/badge/View-Full%20Report-blue?style=for-the-badge&logo=github)](URL)
+[![Repository](https://img.shields.io/badge/GitHub-Repo-black?style=for-the-badge&logo=github)](URL)
 
-**Author**: Dustin Littlefield\
-**Project Type**: `Spatial Data Science`, `Natural Resources`, `Wildfire Analysis`\
-**Technologies**: `ArcGIS` `Python` `Pandas` `Scikit-learn` `XGBoost` `Random Forest` `GeoPandas` `Matplotlib`\
-**Last Updated:** March 28, 2026
+**Author:** Dustin Littlefield  
+**Portfolio:** https://github.com/dustinlit  
+**Project Type:** `Spatial Data Science` `Remote Sensing` `Wildfire Analysis`  
+**Technologies:** `Python` `ArcGIS` `GeoPandas` `Pandas` `Scikit-learn` `XGBoost`  
+**Last Updated:** March 2026
 
 ## Overview
 The goal of this project is to use machine learning to analyze how environmental, geographical, social, and temporal factors influence wildfire ignition across California.
