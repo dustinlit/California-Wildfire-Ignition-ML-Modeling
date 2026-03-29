@@ -9,11 +9,16 @@
 </h2>
 </div>
 
-**Author**: Dustin Littlefield\
-**Project Type**: `Spatial Data Science`, `Natural Resources`, `Wildfire Analysis`\
-**Technologies**: `ArcGIS` `Python` `Pandas` `Scikit-learn` `XGBoost` `Random Forest` `GeoPandas` `Matplotlib`\
-**Last Updated:** January 4, 2026\
-[Github Repository](https://github.com/dustinlit/California_Fire_Severity)
+![Status: Completed](https://img.shields.io/badge/Status-Completed-success)
+[![View Report](https://img.shields.io/badge/View-Full%20Report-blue?style=for-the-badge&logo=github)](URL)
+[![Repository](https://img.shields.io/badge/GitHub-Repo-black?style=for-the-badge&logo=github)](URL)
+
+**Author:** Dustin Littlefield  
+**Portfolio:** https://github.com/dustinlit  
+**Project Type:** `Spatial Data Science` `Remote Sensing` `Wildfire Analysis`  
+**Technologies:** `Python` `ArcGIS` `GeoPandas` `Scikit-learn` `XGBoost`  
+**Last Updated:** March 2026
+
 
 > **Disclaimer:** I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions.
 
