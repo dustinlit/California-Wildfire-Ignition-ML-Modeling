@@ -19,9 +19,6 @@
 **Technologies:** `Python` `ArcGIS` `GeoPandas` `Scikit-learn` `XGBoost`  
 **Last Updated:** March 2026
 
-
-> **Disclaimer:** I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions.
-
 ## Overview
 The goal of this project is to use machine learning to analyze how environmental, geographical, social, and temporal factors influence wildfire ignition across California.
 
@@ -522,25 +519,18 @@ To avoid temporal leakage, tuning is performed with a temporal split of data. Au
 
 ### **Wildfire *Ignition* Predictions:**
 
-<figure> <img src="reports/readme/ignition_predictions.png" alt="A description" width="1000"> <figcaption><em>Figure 7: Tree model wildfire ignition predictions compared to target results on 01/07/2025</em></figcaption> </figure>
+<figure> <img src="reports/readme/ignition_predictions.png" alt="A description" width="1000"> <figcaption><em>Figure 7: Tree model wildfire ignition predictions compared to target results on 01/07/2025</em></figcaption> </figure><br>
 
 - The intersection of **Wildland Urban Interface** and **Infrastructure** features contribute the most in both fire ignition models.
 - **1000-hour Dead Fuel Moisture** is the highest performing weather feature. Long term dryness is the main driving factor for ignition.
 
-
-## Limitations
-### Derivation of Target Values
-To maintain simplicity in the initial modeling framework, wildfire target variables are derived from single, outcome‑based metrics.
-
-- Ignition is modeled as a binary classification target, determined solely by whether at least one fire occurred within a grid cell on a given day.
-
-While these single‑variable targets provide a straightforward starting point, they do not capture the full complexity of wildfire behavior. Factors such as suppression efforts, fuel continuity, ignition source, topography, and meteorological interactions may influence each target in ways not reflected in these representations.
-
-### Unvalidated Features
-While all core features were retrieved from official sources, some engineered and interaction features used in the modelling process remain unvalidated by subject matter experts. For now, these may be introducing unintended bias but will be reviewed extensively in the future.
-
-### Personal Project
-This project is a personally developed learning effort and may contain statistical inaccuracies. While every attempt has been made to apply sound analytical practices, there are inevitably areas where my current knowledge is still developing. The goal is to refine these skills and improve methodological rigor as the project evolves.
+## Next Steps / Potential Improvements
+- Hot Spot analysis of daily NDVI raster data (in process)
+- Spatial correlation examination with Morans I. (in process)
+- ArcGIS online integration.
+- Time series maps to check models consistency over time
+- Seperate module for up to date processing of new information and real time predictions
+- Consult domain experts to validate assumptions and feature selection.
 
 ## Challenges
 ### Heavy Class Imbalance 
@@ -551,7 +541,7 @@ You don’t have to get far from clean, well‑curated datasets before you run i
 Large, damaging fires can burn for days and grow at very different rates, and many datasets don’t consistently track containment times. Because of that, relying only on ignition dates makes it difficult to accurately model factors like fire reignition, fires spreading, and how much damage they ultimately cause.
 ### Spatial Resolution
 My current hardware limits how finely I can analyze the state. As a result, some variables, like slope and wind speed, get averaged out or flattened, leading to overgeneralization and loss of important detail.
-### Identifying and Preventing ***Data Leakage***:
+### Identifying and Preventing Data Leakage
 I chalk this lesson up to being a classic rookie mistake. I initially believed I understood how to avoid data leaks, but I have learned that they can be subtle and deceptive. Often, moments where i feel 'finally nailed it' are followed by the sudden realization that there is liekly an apparent leak hiding somewhere. As a result, I now approach any sudden performance bumps with caution and double check any feature engineering or introduction of new data.
 ### Maintaining a Cohesive Project Structure
 This project began as a simple Jupyter notebook page, soon expanded to five, and has now grown into 12+ modules, 4+ appendices, and multiple source files. As the project scales, handling and passing data throughout these modules has become more complex and sometimes bugs or changes became more difficult to trace and more time consuming. Consistent organization throughout modules along with clear communication of inputs and outputs are now essential to keeping the structure manageable and growing.
@@ -583,13 +573,18 @@ I am not a formal climate scientist and wildfire modeling involves many potentia
 ### Long Term Vision
 This project began as a portfolio piece, but it has grown into something more personal. I’m genuinely interested in wildfire modeling, and I want to continue improving the accuracy and sophistication of the models as my skills grow. My intention is for this project to evolve alongside me, a long term research effort rather than a static artifact.
 
-## Next Steps / Potential Improvements
-- Hot Spot analysis of daily NDVI raster data (in process)
-- Spatial correlation examination with Morans I. (in process)
-- ArcGIS online integration.
-- Time series maps to check models consistency over time
-- Seperate module for up to date processing of new information and real time predictions
-- Consult domain experts to validate assumptions and feature selection.
+## Limitations and Disclaimer: 
+**Derivation of Target Values**:
+To maintain simplicity in the initial modeling framework, wildfire target variables are derived from single, outcome‑based metrics.
+- Ignition is modeled as a binary classification target, determined solely by whether at least one fire occurred within a grid cell on a given day.
+
+While these single‑variable targets provide a straightforward starting point, they do not capture the full complexity of wildfire behavior. Factors such as suppression efforts, fuel continuity, ignition source, topography, and meteorological interactions may influence each target in ways not reflected in these representations.
+
+**Unvalidated Features**: While all core features were retrieved from official sources, some engineered and interaction features used in the modelling process remain unvalidated by subject matter experts. For now, these may be introducing unintended bias but will be reviewed extensively in the future.
+
+**Personal Project**: This project is a personally developed learning effort and may contain statistical inaccuracies. While every attempt has been made to apply sound analytical practices, there are inevitably areas where my current knowledge is still developing. The goal is to refine these skills and improve methodological rigor as the project evolves.
+
+**Disclaimer**: I am not a climate scientist or wildfire expert. This project is intended to demonstrate data science, geospatial, and machine learning skills. It is not designed for operational use or policy decisions.
 
 ## Changelog
 ### Version 5.0 Changelog
