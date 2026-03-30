@@ -1,6 +1,6 @@
 title: "California Wildfire Ignition Modeling with Machine Learning"
 description: "Geospatial and remote sensing analysis of wildfire ignition patterns in California using machine learning."
-theme: jekyll-theme-minimal
+theme: jekyll-theme-cayman
 
 # Optional: hide the default header if your theme shows it
 show_downloads: false
