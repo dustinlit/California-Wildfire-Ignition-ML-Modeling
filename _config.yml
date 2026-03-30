@@ -1,0 +1,13 @@
+title: "California Wildfire Ignition Modeling with Machine Learning"
+description: "Geospatial and remote sensing analysis of wildfire ignition patterns in California using machine learning."
+theme: jekyll-theme-minimal
+
+# Optional: hide the default header if your theme shows it
+show_downloads: false
+
+# Optional: add a logo (if you want a map thumbnail)
+logo: assets/img/thumbnail.png
+
+# Optional: customize GitHub links
+github:
+  is_project_page: true
