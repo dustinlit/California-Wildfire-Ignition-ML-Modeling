@@ -1,13 +1,4 @@
-<link rel="stylesheet" href="notebooks/styles.css">
-
-<div class="title-wrap">
-  <h1 class="title-main" style="font-weight: bold; font-size: 2.05rem;margin-top: -.7rem;margin-bottom: 0.24rem;">
-  Spatial Data Science Approaches to Wildfire Severity Modeling
-</h1>
-<h2 class="title-sub" style="font-style: italic; font-size: 1.1rem; margin-top: 0rem; margin-bottom: 0.5rem;">
-  A GIS‑Driven, Tree‑Based Machine Learning Analysis of California Wildfires
-</h2>
-</div>
+#   Geospatial Machine Learning for Wildfire Ignition Risk in California
 
 ![Status: Completed](https://img.shields.io/badge/Status-Completed-success)
 [![View Report](https://img.shields.io/badge/View-Full%20Report-blue?style=for-the-badge&logo=github)](https://dustinlit.github.io/California-Wildfire-Ignition-ML-Modeling/)
